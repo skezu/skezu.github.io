@@ -1,1614 +1,716 @@
-<html>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Droit</title>
-    <style>
-        /* cspell:disable-file */
-        /* webkit printing magic: print all background colors */
-        html {
-            -webkit-print-color-adjust: exact;
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-print-color-adjust: exact;
-        }
-
-        html,
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Droit</title><style>
+    /* cspell:disable-file */
+    /* webkit printing magic: print all background colors */
+    html {
+        -webkit-print-color-adjust: exact;
+    }
+    * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    @media only screen {
         body {
-            margin: 0;
-            padding: 0;
+            margin: 2em auto;
+            max-width: 900px;
+            color: rgb(55, 53, 47);
         }
-
-        @media only screen {
-            body {
-                margin: 2em auto;
-                max-width: 900px;
-                color: rgb(55, 53, 47);
-            }
-        }
-
-        body {
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
-
-        a,
-        a.visited {
-            color: inherit;
-            text-decoration: underline;
-        }
-
-        .pdf-relative-link-path {
-            font-size: 80%;
-            color: #444;
-        }
-
-        h1,
-        h2,
-        h3 {
-            letter-spacing: -0.01em;
-            line-height: 1.2;
-            font-weight: 600;
-            margin-bottom: 0;
-        }
-
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 0.75em;
-        }
-
-        h1 {
-            font-size: 1.875rem;
-            margin-top: 1.875rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-            margin-top: 1.25rem;
-        }
-
-        .source {
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            padding: 1.5em;
-            word-break: break-all;
-        }
-
-        .callout {
-            border-radius: 3px;
-            padding: 1rem;
-        }
-
-        figure {
-            margin: 1.25em 0;
-            page-break-inside: avoid;
-        }
-
-        figcaption {
-            opacity: 0.5;
-            font-size: 85%;
-            margin-top: 0.5em;
-        }
-
-        mark {
-            background-color: transparent;
-        }
-
-        .indented {
-            padding-left: 1.5em;
-        }
-
-        hr {
-            background: transparent;
-            display: block;
-            width: 100%;
-            height: 1px;
-            visibility: visible;
-            border: none;
-            border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-        }
-
+    }
+    
+    body {
+        line-height: 1.5;
+        white-space: pre-wrap;
+    }
+    
+    a,
+    a.visited {
+        color: inherit;
+        text-decoration: underline;
+    }
+    
+    .pdf-relative-link-path {
+        font-size: 80%;
+        color: #444;
+    }
+    
+    h1,
+    h2,
+    h3 {
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.75em;
+    }
+    
+    h1 {
+        font-size: 1.875rem;
+        margin-top: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+    
+    .source {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 1.5em;
+        word-break: break-all;
+    }
+    
+    .callout {
+        border-radius: 3px;
+        padding: 1rem;
+    }
+    
+    figure {
+        margin: 1.25em 0;
+        page-break-inside: avoid;
+    }
+    
+    figcaption {
+        opacity: 0.5;
+        font-size: 85%;
+        margin-top: 0.5em;
+    }
+    
+    mark {
+        background-color: transparent;
+    }
+    
+    .indented {
+        padding-left: 1.5em;
+    }
+    
+    hr {
+        background: transparent;
+        display: block;
+        width: 100%;
+        height: 1px;
+        visibility: visible;
+        border: none;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    @media only print {
         img {
-            max-width: 100%;
-        }
-
-        @media only print {
-            img {
-                max-height: 100vh;
-                object-fit: contain;
-            }
-        }
-
-        @page {
-            margin: 1in;
-        }
-
-        .collection-content {
-            font-size: 0.875rem;
-        }
-
-        .column-list {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .column {
-            padding: 0 1em;
-        }
-
-        .column:first-child {
-            padding-left: 0;
-        }
-
-        .column:last-child {
-            padding-right: 0;
-        }
-
-        .table_of_contents-item {
-            display: block;
-            font-size: 0.875rem;
-            line-height: 1.3;
-            padding: 0.125rem;
-        }
-
-        .table_of_contents-indent-1 {
-            margin-left: 1.5rem;
-        }
-
-        .table_of_contents-indent-2 {
-            margin-left: 3rem;
-        }
-
-        .table_of_contents-indent-3 {
-            margin-left: 4.5rem;
-        }
-
-        .table_of_contents-link {
-            text-decoration: none;
-            opacity: 0.7;
-            border-bottom: 1px solid rgba(55, 53, 47, 0.18);
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid rgba(55, 53, 47, 0.09);
-            border-collapse: collapse;
-        }
-
-        table {
-            border-left: none;
-            border-right: none;
-        }
-
-        th,
-        td {
-            font-weight: normal;
-            padding: 0.25em 0.5em;
-            line-height: 1.5;
-            min-height: 1.5em;
-            text-align: left;
-        }
-
-        th {
-            color: rgba(55, 53, 47, 0.6);
-        }
-
-        ol,
-        ul {
-            margin: 0;
-            margin-block-start: 0.6em;
-            margin-block-end: 0.6em;
-        }
-
-        li>ol:first-child,
-        li>ul:first-child {
-            margin-block-start: 0.6em;
-        }
-
-        ul>li {
-            list-style: disc;
-        }
-
-        ul.to-do-list {
-            padding-inline-start: 0;
-        }
-
-        ul.to-do-list>li {
-            list-style: none;
-        }
-
-        .to-do-children-checked {
-            text-decoration: line-through;
-            opacity: 0.375;
-        }
-
-        ul.toggle>li {
-            list-style: none;
-        }
-
-        ul {
-            padding-inline-start: 1.7em;
-        }
-
-        ul>li {
-            padding-left: 0.1em;
-        }
-
-        ol {
-            padding-inline-start: 1.6em;
-        }
-
-        ol>li {
-            padding-left: 0.2em;
-        }
-
-        .mono ol {
-            padding-inline-start: 2em;
-        }
-
-        .mono ol>li {
-            text-indent: -0.4em;
-        }
-
-        .toggle {
-            padding-inline-start: 0em;
-            list-style-type: none;
-        }
-
-        /* Indent toggle children */
-        .toggle>li>details {
-            padding-left: 1.7em;
-        }
-
-        .toggle>li>details>summary {
-            margin-left: -1.1em;
-        }
-
-        .selected-value {
-            display: inline-block;
-            padding: 0 0.5em;
-            background: rgba(206, 205, 202, 0.5);
-            border-radius: 3px;
-            margin-right: 0.5em;
-            margin-top: 0.3em;
-            margin-bottom: 0.3em;
-            white-space: nowrap;
-        }
-
-        .collection-title {
-            display: inline-block;
-            margin-right: 1em;
-        }
-
-        .simple-table {
-            margin-top: 1em;
-            font-size: 0.875rem;
-            empty-cells: show;
-        }
-
-        .simple-table td {
-            height: 29px;
-            min-width: 120px;
-        }
-
-        .simple-table th {
-            height: 29px;
-            min-width: 120px;
-        }
-
-        .simple-table-header-color {
-            background: rgb(247, 246, 243);
-            color: black;
-        }
-
-        .simple-table-header {
-            font-weight: 500;
-        }
-
-        time {
-            opacity: 0.5;
-        }
-
-        .icon {
-            display: inline-block;
-            max-width: 1.2em;
-            max-height: 1.2em;
-            text-decoration: none;
-            vertical-align: text-bottom;
-            margin-right: 0.5em;
-        }
-
-        img.icon {
-            border-radius: 3px;
-        }
-
-        .user-icon {
-            width: 1.5em;
-            height: 1.5em;
-            border-radius: 100%;
-            margin-right: 0.5rem;
-        }
-
-        .user-icon-inner {
-            font-size: 0.8em;
-        }
-
-        .text-icon {
-            border: 1px solid #000;
-            text-align: center;
-        }
-
-        .page-cover-image {
-            display: block;
-            object-fit: cover;
-            width: 100%;
-            max-height: 30vh;
-        }
-
-        .page-header-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .page-header-icon-with-cover {
-            margin-top: -0.72em;
-            margin-left: 0.07em;
-        }
-
-        .page-header-icon img {
-            border-radius: 3px;
-        }
-
-        .link-to-page {
-            margin: 1em 0;
-            padding: 0;
-            border: none;
-            font-weight: 500;
-        }
-
-        p>.user {
-            opacity: 0.5;
-        }
-
-        td>.user,
-        td>time {
-            white-space: nowrap;
-        }
-
-        input[type="checkbox"] {
-            transform: scale(1.5);
-            margin-right: 0.6em;
-            vertical-align: middle;
-        }
-
-        p {
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
-        }
-
-        .image {
-            border: none;
-            margin: 1.5em 0;
-            padding: 0;
-            border-radius: 0;
-            text-align: center;
-        }
-
-        .code,
-        code {
-            background: rgba(135, 131, 120, 0.15);
-            border-radius: 3px;
-            padding: 0.2em 0.4em;
-            border-radius: 3px;
-            font-size: 85%;
-            tab-size: 2;
-        }
-
-        code {
-            color: #eb5757;
-        }
-
-        .code {
-            padding: 1.5em 1em;
-        }
-
-        .code-wrap {
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        .code>code {
-            background: none;
-            padding: 0;
-            font-size: 100%;
-            color: inherit;
-        }
-
-        blockquote {
-            font-size: 1.25em;
-            margin: 1em 0;
-            padding-left: 1em;
-            border-left: 3px solid rgb(55, 53, 47);
-        }
-
-        .bookmark {
-            text-decoration: none;
-            max-height: 8em;
-            padding: 0;
-            display: flex;
-            width: 100%;
-            align-items: stretch;
-        }
-
-        .bookmark-title {
-            font-size: 0.85em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            height: 1.75em;
-            white-space: nowrap;
-        }
-
-        .bookmark-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bookmark-info {
-            flex: 4 1 180px;
-            padding: 12px 14px 14px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .bookmark-image {
-            width: 33%;
-            flex: 1 1 180px;
-            display: block;
-            position: relative;
-            object-fit: cover;
-            border-radius: 1px;
-        }
-
-        .bookmark-description {
-            color: rgba(55, 53, 47, 0.6);
-            font-size: 0.75em;
-            overflow: hidden;
-            max-height: 4.5em;
-            word-break: break-word;
-        }
-
-        .bookmark-href {
-            font-size: 0.75em;
-            margin-top: 0.25em;
-        }
-
-        .sans {
-            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-
-        .code {
-            font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace;
-        }
-
-        .serif {
-            font-family: Lyon-Text, Georgia, ui-serif, serif;
-        }
-
-        .mono {
-            font-family: iawriter-mono, Nitti, Menlo, Courier, monospace;
-        }
-
-        .pdf .sans {
-            font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP';
-        }
-
-        .pdf:lang(zh-CN) .sans {
-            font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC';
-        }
-
-        .pdf:lang(zh-TW) .sans {
-            font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC';
-        }
-
-        .pdf:lang(ko-KR) .sans {
-            font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR';
-        }
-
-        .pdf .code {
-            font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP';
-        }
-
-        .pdf:lang(zh-CN) .code {
-            font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC';
-        }
-
-        .pdf:lang(zh-TW) .code {
-            font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC';
-        }
-
-        .pdf:lang(ko-KR) .code {
-            font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR';
-        }
-
-        .pdf .serif {
-            font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP';
-        }
-
-        .pdf:lang(zh-CN) .serif {
-            font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC';
-        }
-
-        .pdf:lang(zh-TW) .serif {
-            font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC';
-        }
-
-        .pdf:lang(ko-KR) .serif {
-            font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR';
-        }
-
-        .pdf .mono {
-            font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP';
-        }
-
-        .pdf:lang(zh-CN) .mono {
-            font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC';
-        }
-
-        .pdf:lang(zh-TW) .mono {
-            font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC';
-        }
-
-        .pdf:lang(ko-KR) .mono {
-            font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR';
-        }
-
-        .highlight-default {
-            color: rgba(55, 53, 47, 1);
-        }
-
-        .highlight-gray {
-            color: rgba(120, 119, 116, 1);
-            fill: rgba(120, 119, 116, 1);
-        }
-
-        .highlight-brown {
-            color: rgba(159, 107, 83, 1);
-            fill: rgba(159, 107, 83, 1);
-        }
-
-        .highlight-orange {
-            color: rgba(217, 115, 13, 1);
-            fill: rgba(217, 115, 13, 1);
-        }
-
-        .highlight-yellow {
-            color: rgba(203, 145, 47, 1);
-            fill: rgba(203, 145, 47, 1);
-        }
-
-        .highlight-teal {
-            color: rgba(68, 131, 97, 1);
-            fill: rgba(68, 131, 97, 1);
-        }
-
-        .highlight-blue {
-            color: rgba(51, 126, 169, 1);
-            fill: rgba(51, 126, 169, 1);
-        }
-
-        .highlight-purple {
-            color: rgba(144, 101, 176, 1);
-            fill: rgba(144, 101, 176, 1);
-        }
-
-        .highlight-pink {
-            color: rgba(193, 76, 138, 1);
-            fill: rgba(193, 76, 138, 1);
-        }
-
-        .highlight-red {
-            color: rgba(212, 76, 71, 1);
-            fill: rgba(212, 76, 71, 1);
-        }
-
-        .highlight-gray_background {
-            background: rgba(241, 241, 239, 1);
-        }
-
-        .highlight-brown_background {
-            background: rgba(244, 238, 238, 1);
-        }
-
-        .highlight-orange_background {
-            background: rgba(251, 236, 221, 1);
-        }
-
-        .highlight-yellow_background {
-            background: rgba(251, 243, 219, 1);
-        }
-
-        .highlight-teal_background {
-            background: rgba(237, 243, 236, 1);
-        }
-
-        .highlight-blue_background {
-            background: rgba(231, 243, 248, 1);
-        }
-
-        .highlight-purple_background {
-            background: rgba(244, 240, 247, 0.8);
-        }
-
-        .highlight-pink_background {
-            background: rgba(249, 238, 243, 0.8);
-        }
-
-        .highlight-red_background {
-            background: rgba(253, 235, 236, 1);
-        }
-
-        .block-color-default {
-            color: inherit;
-            fill: inherit;
-        }
-
-        .block-color-gray {
-            color: rgba(120, 119, 116, 1);
-            fill: rgba(120, 119, 116, 1);
-        }
-
-        .block-color-brown {
-            color: rgba(159, 107, 83, 1);
-            fill: rgba(159, 107, 83, 1);
-        }
-
-        .block-color-orange {
-            color: rgba(217, 115, 13, 1);
-            fill: rgba(217, 115, 13, 1);
-        }
-
-        .block-color-yellow {
-            color: rgba(203, 145, 47, 1);
-            fill: rgba(203, 145, 47, 1);
-        }
-
-        .block-color-teal {
-            color: rgba(68, 131, 97, 1);
-            fill: rgba(68, 131, 97, 1);
-        }
-
-        .block-color-blue {
-            color: rgba(51, 126, 169, 1);
-            fill: rgba(51, 126, 169, 1);
-        }
-
-        .block-color-purple {
-            color: rgba(144, 101, 176, 1);
-            fill: rgba(144, 101, 176, 1);
-        }
-
-        .block-color-pink {
-            color: rgba(193, 76, 138, 1);
-            fill: rgba(193, 76, 138, 1);
-        }
-
-        .block-color-red {
-            color: rgba(212, 76, 71, 1);
-            fill: rgba(212, 76, 71, 1);
-        }
-
-        .block-color-gray_background {
-            background: rgba(241, 241, 239, 1);
-        }
-
-        .block-color-brown_background {
-            background: rgba(244, 238, 238, 1);
-        }
-
-        .block-color-orange_background {
-            background: rgba(251, 236, 221, 1);
-        }
-
-        .block-color-yellow_background {
-            background: rgba(251, 243, 219, 1);
-        }
-
-        .block-color-teal_background {
-            background: rgba(237, 243, 236, 1);
-        }
-
-        .block-color-blue_background {
-            background: rgba(231, 243, 248, 1);
-        }
-
-        .block-color-purple_background {
-            background: rgba(244, 240, 247, 0.8);
-        }
-
-        .block-color-pink_background {
-            background: rgba(249, 238, 243, 0.8);
-        }
-
-        .block-color-red_background {
-            background: rgba(253, 235, 236, 1);
-        }
-
-        .select-value-color-pink {
-            background-color: rgba(245, 224, 233, 1);
-        }
-
-        .select-value-color-purple {
-            background-color: rgba(232, 222, 238, 1);
-        }
-
-        .select-value-color-green {
-            background-color: rgba(219, 237, 219, 1);
-        }
-
-        .select-value-color-gray {
-            background-color: rgba(227, 226, 224, 1);
-        }
-
-        .select-value-color-translucentGray {
-            background-color: rgba(255, 255, 255, 0.0375);
-        }
-
-        .select-value-color-orange {
-            background-color: rgba(250, 222, 201, 1);
-        }
-
-        .select-value-color-brown {
-            background-color: rgba(238, 224, 218, 1);
-        }
-
-        .select-value-color-red {
-            background-color: rgba(255, 226, 221, 1);
-        }
-
-        .select-value-color-yellow {
-            background-color: rgba(253, 236, 200, 1);
-        }
-
-        .select-value-color-blue {
-            background-color: rgba(211, 229, 239, 1);
-        }
-
-        .checkbox {
-            display: inline-flex;
-            vertical-align: text-bottom;
-            width: 16;
-            height: 16;
-            background-size: 16px;
-            margin-left: 2px;
-            margin-right: 5px;
-        }
-
-        .checkbox-on {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
-        }
-
-        .checkbox-off {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
-        }
-    </style>
-</head>
-
-<body>
-    <article id="c4940741-f36f-43ce-bbc1-d8ed192c8c6a" class="page sans">
-        <header><img class="page-cover-image"
-                src="https://www.notion.so/images/page-cover/rijksmuseum_jan_lievens_1627.jpg"
-                style="object-position:center 60%" />
-            <div class="page-header-icon page-header-icon-with-cover"><span class="icon">⚖️</span></div>
-            <h1 class="page-title">Droit</h1>
-            
-        </header>
-        <div class="page-body">
-            <figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex"
-                id="66256018-a6e2-4d93-8fe0-31d670678ae6">
-                <div style="font-size:1.5em"><span class="icon">📌</span></div>
-                <div style="width:100%">Voici les informations nécessaires pour remplir votre TD</div>
-            </figure>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Introduction</summary>
-                <div class="indented">
-                    <p id="509bf851-cad4-4a9d-8f8c-f1c72e7217ab" class="">Le droit du travail est un <strong>ensemble de
-                            règles et de lois </strong>qui <strong>régissent </strong>les relations entre les
-                        <strong>employés </strong>et les <strong>employeurs</strong>.
-                        Il vise à <strong>établir </strong>un <strong>cadre juridique </strong><mark
-                            class="highlight-red">équitable </mark>et <mark class="highlight-red">équilibré </mark>pour
-                        garantir le respect des droits des travailleurs et la protection de leurs intérêts.</p>
-                    <hr id="1a7df057-eef1-45f1-ab5e-2795842eb602" />
-                    <p id="981be15c-6710-4f59-b840-d359160729b6" class="">Les objectifs du droit du travail sont
-                        multiples.
-                        Tout d&#x27;abord, il cherche à <strong>assurer des conditions de travail décentes</strong>, en
-                        fixant des normes minimales en termes de rémunération, de durée du travail, de congés, de santé
-                        et de sécurité au travail, entre autres.
-                        Il vise également à <strong>promouvoir l&#x27;égalité de traitement </strong>entre les
-                        travailleurs, en luttant contre toute forme de discrimination ou de traitement injuste.</p>
-                    <hr id="2ca05a74-4375-4ec4-850d-2395a78ed123" />
-                    <p id="dc90974c-ac59-4200-a444-5955f0cfb601" class="">Le droit du travail joue un rôle essentiel
-                        dans la société en <strong>garantissant la stabilité et la justice </strong>dans les relations
-                        professionnelles.
-                        Il <strong>favorise un équilibre </strong>entre les intérêts des employés et des employeurs, en
-                        établissant des droits et des obligations clairs pour chaque partie.
-                        En outre, il contribue à <strong>prévenir les abus </strong>et les pratiques injustes, et
-                        favorise la résolution des conflits de manière légale et équitable.</p>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Différents salaires</summary>
-                <div class="indented">
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Salaire net moyen en France en
-                            2019 (ramené à un ETP)</summary>
-                        <div class="indented">
-                            <div id="37fb6d5b-0ad0-46b7-88bd-5bc422d9c52a" class="column-list">
-                                <div id="5e513e9b-7373-4f0c-aad8-42bfed5a95f5" style="width:100%" class="column">
-                                    <ul id="3d290000-3454-4ef2-aab9-1bfd5f95a46d" class="bulleted-list">
-                                        <li style="list-style-type:disc">Ensemble: 2424€</li>
-                                    </ul>
-                                    <ul id="0861102b-1b43-4eba-ab70-17af41c6702a" class="bulleted-list">
-                                        <li style="list-style-type:disc">Femmes: 2181€</li>
-                                    </ul>
-                                    <ul id="2f1953f9-3dba-4cda-a168-d296b2ec6b3d" class="bulleted-list">
-                                        <li style="list-style-type:disc">Hommes: 2597€ soit +19% que les Femmes</li>
-                                    </ul>
-                                    <p id="00fd15f5-9fa3-4b65-b826-d128a8dfe783" class="">
-                                    </p>
-                                </div>
-                                <div id="62b8b9af-1807-486a-beeb-8915c4dd5f25" style="width:100%" class="column">
-                                    <figure class="block-color-gray_background callout"
-                                        style="white-space:pre-wrap;display:flex"
-                                        id="026333d0-178a-4ab8-af90-5c5c57f3eb7a">
-                                        <div style="font-size:1.5em"><span class="icon">📌</span></div>
-                                        <div style="width:100%"><mark class="highlight-red"><strong>ETP</strong></mark>:
-                                            <mark class="highlight-red">E</mark>quivalent <mark
-                                                class="highlight-red">T</mark>emps <mark
-                                                class="highlight-red">P</mark>lein
-                                            <strong>35h/semaine</strong> | <strong>151,67 h/mois</strong>
-                                            1 ETP = 1 employé à temps plein
-                                            0.5 ETP = 1 employé à mi-temps
-                                            1.5 ETP = 1 temps plein + 1 mi-temps
-                                            <mark class="highlight-red"><strong><em>Données rapportés d’après
-                                                        l’INSEE</em></strong></mark>
-                                        </div>
-                                    </figure>
-                                </div>
-                            </div>
-                            <p id="50dc5693-8850-4f1a-8de2-64d7e224169b" class=""><mark
-                                    class="highlight-red"><strong>Salaire net :</strong></mark><strong> </strong>Montant
-                                perçu après déduction des cotisations sociales et des impôts.</p>
-                            <p id="042d0514-b963-4b35-8ef0-198bf7b25a6d" class="">
-                            </p>
-                        </div>
-                    </details>
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Salaire moyen brut en France
-                            en 2019 (amené à un ETP) </summary>
-                        <div class="indented">
-                            <ul id="be331ef3-aae6-45e0-9340-0d0bd62423e1" class="bulleted-list">
-                                <li style="list-style-type:disc">Ensemble: 3183€</li>
-                            </ul>
-                            <p id="88989f2b-8ca9-4e0a-b46f-3a4f961bff6a" class=""><strong><mark
-                                        class="highlight-red">Salaire brut :</mark></strong> Montant avant déduction des
-                                cotisations sociales.</p>
-                        </div>
-                    </details>
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Salaire super-brut en France
-                        </summary>
-                        <div class="indented">
-                            <div id="6921aa8e-b46d-412d-8641-5527ee80a22e" class="column-list">
-                                <div id="81ac760f-cc37-43a5-ab6c-218b83af0397" style="width:100%" class="column">
-                                    <p id="30b3f708-8e58-409e-907f-a2c79d93f325" class=""><mark
-                                            class="highlight-red"><strong>Salaire super-brut :</strong></mark> Terme non
-                                        couramment utilisé en France, mais peut se référer au salaire total incluant les
-                                        cotisations sociales employeur.</p>
-                                </div>
-                                <div id="ba7e98e2-3c23-42e3-8ba6-3a4922ccd35b" style="width:100%" class="column">
-                                    <figure class="block-color-gray_background callout"
-                                        style="white-space:pre-wrap;display:flex"
-                                        id="db365400-13c7-45be-8b90-0fdf8ec3416f">
-                                        <div style="font-size:1.5em"><span class="icon">📌</span></div>
-                                        <div style="width:100%"><mark class="highlight-red"><strong>Salaire
-                                                    super-brut</strong></mark>:
-                                            Salaire net de l’employé
-                                            + charges salariales
-                                            <strong>+ charges patronales
-                                            </strong>+ cotisations sociales salariales et patronales
-                                            <strong>Somme totale payée par l’employeur pour un salarié</strong>
-                                        </div>
-                                    </figure>
-                                    <p id="71a18501-a69d-462c-86fa-20b2942b416c" class="">
-                                    </p>
-                                </div>
-                            </div>
-                            <p id="d13698dc-2161-4cd7-b958-1fb1e2e1e544" class="">
-                            </p>
-                        </div>
-                    </details>
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Le salaire est versé au moins
-                            une fois par mois. Il peut comporter </summary>
-                        <div class="indented">
-                            <ul id="d146d582-fa8e-4ba0-b791-d748020fae21" class="bulleted-list">
-                                <li style="list-style-type:disc"><strong>Partie fixe : </strong>Salaire de base régulier
-                                    et constant versé chaque mois sans variation</li>
-                            </ul>
-                            <ul id="c1c1adbb-80f5-4e37-b346-0a3228dac129" class="bulleted-list">
-                                <li style="list-style-type:disc"><strong>Partie variable : </strong>Primes liées aux
-                                    performances </li>
-                            </ul>
-                            <ul id="61f8d6cd-6c27-4708-9fd6-822e8d1cba0a" class="bulleted-list">
-                                <li style="list-style-type:disc"><strong>Majorations prévues par la loi ou accords
-                                        collectifs</strong></li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Salaire minimum</summary>
-                <div class="indented">
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Smic mensuel brut pour un ETP
-                        </summary>
-                        <div class="indented">
-                            <figure class="block-color-gray_background callout"
-                                style="white-space:pre-wrap;display:flex" id="e6d31655-f82c-4f11-956c-74dd68c38762">
-                                <div style="font-size:1.5em"><span class="icon">📌</span></div>
-                                <div style="width:100%"><mark class="highlight-red"><strong>SMIC</strong></mark>: <mark
-                                        class="highlight-red">S</mark>alaire <mark class="highlight-red">M</mark>inimum
-                                    <mark class="highlight-red">I</mark>nterprofessionnel de <mark
-                                        class="highlight-red">C</mark>roissance
-                                    🚫 les apprenti·es
-                                    🚫 les moins de 18 ans
-                                    🚫 les prisonnier·es
-                                    🚫 les travailleur·ses handicapé·es</div>
-                            </figure>
-                            <table id="a3ef69a5-ade9-4d66-90e9-19e534953210" class="simple-table">
-                                <thead class="simple-table-header">
-                                    <tr id="4b1cdbd5-2356-4b2b-997a-4edbf4b5d1a9">
-                                        <th id="@~vM" class="block-color-blue_background simple-table-header"
-                                            style="width:165px"></th>
-                                        <th id="@]Nr" class="block-color-blue_background simple-table-header"
-                                            style="width:167px"><strong>Brut /h</strong></th>
-                                        <th id=";=Kr" class="block-color-blue_background simple-table-header"
-                                            style="width:167px"><strong>Brut /mois</strong></th>
-                                        <th id="F@sI" class="block-color-blue_background simple-table-header"
-                                            style="width:127px"><strong>Net /mois</strong></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="4337bc69-4025-42d5-8a64-5dd07182d443">
-                                        <th id="@~vM" class="block-color-blue_background simple-table-header"
-                                            style="width:165px"><strong>01 jan 2019</strong></th>
-                                        <td id="@]Nr" class="" style="width:167px">10.03</td>
-                                        <td id=";=Kr" class="" style="width:167px">1521.22</td>
-                                        <td id="F@sI" class="" style="width:127px">1204,18</td>
-                                    </tr>
-                                    <tr id="61beda00-a849-4f41-8e71-bc1d6255fbb0">
-                                        <th id="@~vM" class="block-color-blue_background simple-table-header"
-                                            style="width:165px"><strong>01 jan 2023</strong></th>
-                                        <td id="@]Nr" class="" style="width:167px">11.27</td>
-                                        <td id=";=Kr" class="" style="width:167px">1709.28</td>
-                                        <td id="F@sI" class="" style="width:127px">1356,09</td>
-                                    </tr>
-                                    <tr id="3c883f36-8485-4e7b-95a5-9bbad43bdc0a">
-                                        <th id="@~vM" class="block-color-blue_background simple-table-header"
-                                            style="width:165px"><strong>01 mai 2023</strong></th>
-                                        <td id="@]Nr" class="" style="width:167px">11.52</td>
-                                        <td id=";=Kr" class="" style="width:167px">1747.20</td>
-                                        <td id="F@sI" class="" style="width:127px">1383.08</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </details>
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Revalorisation : augmentation
-                            égale ou supérieure à l’inflation</summary>
-                        <div class="indented">
-                            <div id="e0f476ae-7c0b-46be-8f68-6d6f0196f26b" class="column-list">
-                                <div id="d09833d4-d776-490b-803b-f07a81e1817a" style="width:87.5%" class="column">
-                                    <ul id="e3e71004-f292-4116-900a-0d73b1999fac" class="bulleted-list">
-                                        <li style="list-style-type:disc">Chaque 1er janvier
-                                            <strong>ou </strong>si l’inflation est supérieure à 2 % depuis janvier
-                                        </li>
-                                    </ul>
-                                    <ul id="359a14ae-fdc6-4768-a2b1-023e1ac9c146" class="bulleted-list">
-                                        <li style="list-style-type:disc">En pratique, les augmentations sont les mêmes
-                                            depuis 2007</li>
-                                    </ul>
-                                    <ul id="9e49fcf2-48a3-4e8c-be12-7cf43a1d60ff" class="bulleted-list">
-                                        <li style="list-style-type:disc">+ 6,6 % entre janvier 2022 et janvier 2023</li>
-                                    </ul>
-                                </div>
-                                <div id="cbc33dc8-d30b-4720-b62e-0783d912a056" style="width:112.5%" class="column">
-                                    <figure class="block-color-gray_background callout"
-                                        style="white-space:pre-wrap;display:flex"
-                                        id="ac46fc1c-29bc-4399-b4fc-ecce92f61fd7">
-                                        <div style="font-size:1.5em"><span class="icon">📌</span></div>
-                                        <div style="width:100%"><strong><mark class="highlight-red">Revalorisation
-                                                    :</mark></strong>
-                                            Augmentation ou ajustement du SMIC</div>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </details>
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Montants pris en compte dans
-                            le calcul du SMIC</summary>
-                        <div class="indented">
-                            <ul id="28ab545f-cb3f-4ed5-9fee-7fb5be8a2a66" class="toggle">
-                                <li>
-                                    <details open="">
-                                        <summary>Calcul du SMIC </summary>
-                                        <ul id="063834ab-2fd1-4fe3-b15c-16dd9bb12ecf" class="bulleted-list">
-                                            <li style="list-style-type:disc">Taux horaire du SMIC : Ex: Le taux est a
-                                                10€ ⇒ chaque h est rémunérée 10€</li>
-                                        </ul>
-                                        <ul id="f0e23850-73f9-4e2e-937a-820248a393ab" class="bulleted-list">
-                                            <li style="list-style-type:disc">Durée légale du travail : En France, 35h
-                                                par semaine</li>
-                                        </ul>
-                                        <ul id="0f77a91f-b88b-4038-a80b-5ad6e11a5f02" class="bulleted-list">
-                                            <li style="list-style-type:disc">Périodicité de paiement : Si le salaire est
-                                                versé mensuellement, il est calculé sur une base mensuelle</li>
-                                        </ul>
-                                    </details>
-                                </li>
-                            </ul>
-                            <ul id="fc24a443-4719-4253-92e5-67bc74d04aa4" class="toggle">
-                                <li>
-                                    <details open="">
-                                        <summary>Montants pris en compte</summary>
-                                        <ul id="b183b888-771c-464d-a391-6ed7dd90eed3" class="bulleted-list">
-                                            <li style="list-style-type:disc">Avantages en nature</li>
-                                        </ul>
-                                        <ul id="0eb31ac9-3cab-4635-bbd2-41601008045e" class="bulleted-list">
-                                            <li style="list-style-type:disc">Primes liées à la productivité</li>
-                                        </ul>
-                                        <figure class="block-color-gray_background callout"
-                                            style="white-space:pre-wrap;display:flex"
-                                            id="39588192-2784-424c-85b8-64d86ac1a2bb">
-                                            <div style="font-size:1.5em"><span class="icon">✅</span></div>
-                                            <div style="width:100%">À titre de tolérance, lorsque l’employeur rémunère
-                                                mensuellement ses salariés sur la base de 151,67 heures donc d’1 ETP, le
-                                                Smic annuel pris en compte peut être établi sur la base de 12 fois cette
-                                                valeur, soit : 12 × 151,67 heures × Smic horaire.</div>
-                                        </figure>
-                                    </details>
-                                </li>
-                            </ul>
-                            <p id="da67d498-6df8-44ca-9e1a-2447b866d289" class="">
-                            </p>
-                            <p id="3d29e55e-033b-47b0-ab80-87d297e7dc77" class=""><strong><mark
-                                        class="highlight-red">Données rapportées d’après l’Urssaf</mark></strong></p>
-                        </div>
-                    </details>
-                    <details open="">
-                        <summary style="font-weight:600;font-size:1.25em;line-height:1.3">Les montants non-pris en
-                            compte dans le calcul du Smic :</summary>
-                        <div class="indented">
-                            <ul id="ba1fe081-0cf9-4e5b-8bb9-6a0b84b76f53" class="bulleted-list">
-                                <li style="list-style-type:disc"><strong>Primes et indemnités spécifiques :</strong>
-                                    <mark class="highlight-teal">ex: </mark>participation, ancienneté, assiduité<mark
-                                        class="highlight-teal"> ex:</mark> Insalubrité, danger, pénibilité…</li>
-                            </ul>
-                            <ul id="fdb5e278-5784-4669-a9f0-2acc865a6e14" class="bulleted-list">
-                                <li style="list-style-type:disc"><del><strong>Heures supplémentaires</strong></del></li>
-                            </ul>
-                            <ul id="1da6e705-b7d7-466d-9429-88837e2cf92b" class="bulleted-list">
-                                <li style="list-style-type:disc"><strong>Remboursements de frais</strong></li>
-                            </ul>
-                            <p id="f9bf88e4-458c-43dd-8bd4-567b1f1809e9" class=""><mark
-                                    class="highlight-red"><strong>Données rapportées d’après Ooreka et
-                                        Indeed</strong></mark></p>
-                        </div>
-                    </details>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Pour les apprenti.es</summary>
-                <div class="indented">
-                    <p id="b1936ff2-d3aa-4a3f-8e13-0bce85b724ac" class="">Dans le cadre de son contrat d’apprentissage
-                        (contrat de travail), l’apprenti·e perçoit un salaire qui correspond au minimum à un pourcentage
-                        du SMIC.</p>
-                    <table id="e17c9531-c7c1-49a9-b87a-7f60a798c039" class="simple-table">
-                        <thead class="simple-table-header">
-                            <tr id="479fb30a-7f5a-4429-9e53-1180a2f33fb4">
-                                <th id="o&lt;|b" class="block-color-purple_background simple-table-header">Situation
-                                </th>
-                                <th id="bPZR" class="block-color-purple_background simple-table-header"
-                                    style="width:90px">16-17 ans</th>
-                                <th id="=TON" class="block-color-purple_background simple-table-header"
-                                    style="width:107px">18-20 ans</th>
-                                <th id="h]s}" class="block-color-purple_background simple-table-header"
-                                    style="width:182.85000610351562px">21-25 ans</th>
-                                <th id="JxZk" class="block-color-purple_background simple-table-header"
-                                    style="width:159px">26 ans et plus</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="01bffc40-6bff-47f0-ac41-826e2790bd40">
-                                <th id="o&lt;|b" class="block-color-purple_background simple-table-header">1ʳᵉ année du
-                                    contrat</th>
-                                <td id="bPZR" class="" style="width:90px">27% du Smic
-                                    <strong>⇒ 461,57 €</strong>
-                                </td>
-                                <td id="=TON" class="" style="width:107px">43% du Smic
-                                    <strong>⇒ 735 €</strong>
-                                </td>
-                                <td id="h]s}" class="" style="width:182.85000610351562px">Salaire le + élevé entre
-                                    <strong>53% du Smic ⇒ 905,92€ </strong>
-                                    et
-                                    53% du salaire minimum conventionnel correspondant à l’emploi occupé pendant le
-                                    contrat d’apprentissage </td>
-                                <td id="JxZk" class="" style="width:159px">//</td>
-                            </tr>
-                            <tr id="bfb477c5-c9e1-4cd1-a155-82103ed42d5d">
-                                <th id="o&lt;|b" class="block-color-purple_background simple-table-header">2ᵉ année du
-                                    contrat</th>
-                                <td id="bPZR" class="" style="width:90px">39% du Smic
-                                    <strong>⇒ 666,62 €</strong>
-                                </td>
-                                <td id="=TON" class="" style="width:107px">51% du Smic
-                                    <strong>⇒ 871,73 €</strong>
-                                </td>
-                                <td id="h]s}" class="" style="width:182.85000610351562px">Salaire le + élevé entre
-                                    <strong>61% du Smic ⇒ 1042,66€</strong>
-                                    et
-                                    61% du salaire minimum conventionnel correspondant à l’emploi occupé pendant le
-                                    contrat d’apprentissage </td>
-                                <td id="JxZk" class="" style="width:159px"><strong>100% du Smic
-                                        ⇒ 1709,26€ </strong>
-                                    Salaire le + élevé entre le Smic et le salaire minimum conventionnel correspondant à
-                                    l’emploi occupé pendant le contrat d’apprentissage</td>
-                            </tr>
-                            <tr id="7ca886db-d2a6-431b-b060-4d0091351fd0">
-                                <th id="o&lt;|b" class="block-color-purple_background simple-table-header">3ᵉ année du
-                                    contrat</th>
-                                <td id="bPZR" class="" style="width:90px">55% du Smic
-                                    <strong>⇒ 940,10 €</strong>
-                                </td>
-                                <td id="=TON" class="" style="width:107px">67% du Smic
-                                    <strong>⇒ 1145,22 €</strong>
-                                </td>
-                                <td id="h]s}" class="" style="width:182.85000610351562px">Salaire le + élevé entre
-                                    <strong>78% du Smic ⇒ 1309,24€</strong>
-                                    et
-                                    78% du salaire minimum conventionnel correspondant à l’emploi occupé pendant le
-                                    contrat d’apprentissage </td>
-                                <td id="JxZk" class="" style="width:159px">//</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex"
-                        id="5c138f7b-e451-488d-8d4e-e0ea611f855a">
-                        <div style="font-size:1.5em"><span class="icon">💡</span></div>
-                        <div style="width:100%">Le salaire que l&#x27;apprenti reçoit est exempté d&#x27;impôt sur le
-                            revenu tant qu&#x27;il ne dépasse pas le montant annuel du SMIC.</div>
-                    </figure>
-                    <figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex"
-                        id="196a761c-a8f1-4f75-90f6-ae2819d3ffa2">
-                        <div style="font-size:1.5em"><span class="icon">💡</span></div>
-                        <div style="width:100%">Un apprenti qui prépare une licence professionnelle en un an recevra une
-                            rémunération équivalente à celle d&#x27;un apprenti en deuxième année de contrat.</div>
-                    </figure>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Les accords collectifs</summary>
-                <div class="indented">
-                    <figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex"
-                        id="0b1cf5c5-7c87-4eb9-a593-eac9dc5ac90d">
-                        <div style="font-size:1.5em"><span class="icon">📔</span></div>
-                        <div style="width:100%"><mark class="highlight-red"><strong>Accord collectif:</strong></mark>
-                            Accord conclu entre un employeur ou des représentants d’employeurs et une ou plusieurs
-                            organisations syndicales ou des représentants de salariés, ou dans certains cas, à la suite
-                            de la consultation des salariés, en respectant des règles de validité issues du code du
-                            travail.
-                            Il peut être conclu à plusieurs niveaux : branche professionnelle, groupe, entreprise,
-                            établissement...
-                            L’accord collectif concerne un ou plusieurs thèmes contrairement à la convention collective
-                            qui traite de l’ensemble des conditions d’emploi, de travail et de formation professionnelle
-                            et des garanties sociales des salariés.
-                            <strong><mark class="highlight-red">D’après code.travail.gouv.fr</mark></strong>
-                        </div>
-                    </figure>
-                    <p id="156ac9e8-6335-4adc-aff1-05ee2ac2c380" class="">Enfaite, des <mark
-                            class="highlight-red">accords </mark>sont <mark class="highlight-red">conclus </mark>entre
-                        les <mark class="highlight-red">organisations patronales </mark>et les <mark
-                            class="highlight-red">organisations salariales</mark>, et ces accords peuvent <strong>varier
-                        </strong>en termes de <strong>terminologie </strong>et de <strong>portée</strong>.
-                        <strong><mark class="highlight-red">En cas de conflit, l&#x27;accord le plus favorable pour les
-                                travailleurs est appliqué.</mark></strong>
-                    </p>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">Les modifications du contrat de travail
-                </summary>
-                <div class="indented">
-                    <p id="0fdf5033-0d89-41e9-81fa-18dde099f9b4" class="">Les <strong>éléments essentiels</strong> du
-                        contrat de travail ne peuvent pas être modifiés sans l’<mark class="highlight-red">accord du
-                            salariée</mark>.</p>
-                    <p id="75dc6c18-e7ce-43e1-a708-c9369130ac56" class=""><strong>Les éléments essentiels comprend
-                            :</strong>
-                    <div class="indented">
-                        <ul id="1e52be81-1fab-401c-943b-91a790244c2c" class="bulleted-list">
-                            <li style="list-style-type:disc">la durée du travail</li>
-                        </ul>
-                        <ul id="17abc9e5-2d03-400d-b92a-f7c5d843aa4f" class="bulleted-list">
-                            <li style="list-style-type:disc">la rémunération</li>
-                        </ul>
-                        <ul id="91c4abdd-2379-421d-840b-bd0a44d77c0b" class="bulleted-list">
-                            <li style="list-style-type:disc">la qualification</li>
-                        </ul>
-                        <ul id="3bbacb4d-519e-47cc-9593-ecac59d00533" class="bulleted-list">
-                            <li style="list-style-type:disc">les attributions du salarié</li>
-                        </ul>
-                    </div>
-                    </p>
-                    <hr id="c322ee54-75ba-4cd4-ad00-545aecc82740" />
-                    <p id="5c918c2d-12ac-48c8-82d0-6e7df373e70d" class="">Les modifications simples (conditions de
-                        travail) peuvent être imposées par l’employeur (sauf motifs discriminatoires) :
-                    <div class="indented">
-                        <ul id="7fbd817d-0270-4c0c-b680-837ea25b310a" class="bulleted-list">
-                            <li style="list-style-type:disc"><strong>l&#x27;organisation de l&#x27;entreprise</strong>
-                                <ul id="a3ca2bc6-3e7b-4fce-86b9-f7beafd4e0e9" class="bulleted-list">
-                                    <li style="list-style-type:circle"><strong>Modification</strong> des horaires de
-                                        travail, des équipes de travail, des lieux de travail, etc.<p
-                                            id="a0488ea3-54c5-4a77-b922-1ab3a0b6b3b1" class="">Ces modifications doivent
-                                            être <mark class="highlight-red">justifiées</mark> par des <strong>motifs
-                                                légitimes</strong>.</p>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul id="15d5d318-78d5-4d26-b635-e7e685dcedd2" class="bulleted-list">
-                            <li style="list-style-type:disc"><strong>obligations légales et réglementaires</strong>
-                                <ul id="a2d85f32-a9f6-4a6d-9f59-2f268ebdd34e" class="bulleted-list">
-                                    <li style="list-style-type:circle">si des <strong>modifications sont
-                                            nécessaires</strong> pour se conformer à ces <strong>obligations</strong>,
-                                        l&#x27;employeur peut les <mark class="highlight-red">imposer</mark>, dans la
-                                        mesure où elles sont <strong>raisonnables et proportionnées</strong></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    </p>
-                    <p id="7e018843-2f78-42ce-827f-7c050a1dfcef" class="">Si le salarié <strong>refuse</strong> les
-                        modification simples, il peut avoir un <mark class="highlight-red">licenciement
-                            disciplinaire</mark>.</p>
-                    <hr id="95d867d3-f447-4b55-91dc-95d443b736bd" />
-                    <ul id="c79170e6-4acf-41cc-be0a-2f8471610796" class="toggle">
-                        <li>
-                            <details open="">
-                                <summary><strong>Les obligations générales des salarié :</strong></summary>
-                                <ul id="ac42ebfa-17ed-4496-b15d-037d097c7327" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Respect des règles de
-                                            discipline et directives de l’employeur</mark>
-                                        <ul id="80b8ec78-97f0-4f81-917e-2d162bb99c21" class="bulleted-list">
-                                            <li style="list-style-type:circle">(<mark class="highlight-teal">ex:</mark>
-                                                horaire, exécution du travail, règle d’hygiène, règlement intérieur,
-                                                etc.)</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul id="89751f98-e4ff-464a-acd0-e2a4b597d47f" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Devoir de correction et
-                                            obligation de réserve</mark>
-                                        <ul id="ca76f34c-96da-47f7-962c-4037c819db51" class="bulleted-list">
-                                            <li style="list-style-type:circle">comportement correct du salarié (<mark
-                                                    class="highlight-teal">ex:</mark> pas d’injures, propos
-                                                diffamatoires, etc.)</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul id="4baa26df-a67d-4f80-b633-8f2ba0ec80c0" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Obligation de
-                                            non-concurrence</mark>
-                                        <ul id="73d599cd-763e-4a37-966d-d601bf9eb26f" class="bulleted-list">
-                                            <li style="list-style-type:circle">Ne doit pas faire de concurrence déloyale
-                                                à son employeur<em> (découle de l’obligation de loyauté)</em></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul id="35a53e3f-2610-4a7e-b5cd-61506484ce3c" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Obligation de
-                                            loyauté</mark>
-                                        <ul id="78b75ab2-5558-4ef2-83d1-e378b2fa7162" class="bulleted-list">
-                                            <li style="list-style-type:circle">“Le salarié doit exécuter son contrat de
-                                                travail de bonne foi et de manière loyale. Il ne doit pas adopter de
-                                                comportements répréhensibles, commettre des agissements sanctionnables,
-                                                nuire ou accomplir des actes contraires à l’intérêt de l’entreprise.”
-                                                <figure class="block-color-gray_background callout"
-                                                    style="white-space:pre-wrap;display:flex"
-                                                    id="1d17e9bf-a491-45c4-8ff3-7e76cdadd870">
-                                                    <div style="font-size:1.5em"><span class="icon">⚖️</span></div>
-                                                    <div style="width:100%"><em>Articles 1135 du Code Civil et L 1222-1
-                                                            du Code du Travail.</em></div>
-                                                </figure>
-                                                <p id="06f2bc01-c887-4174-a64b-c343e6faaf5a" class="">(<mark
-                                                        class="highlight-teal">ex:</mark> Détournement de fonds,
-                                                    Exercice d’une activité concurrente à celle de l’employeur, Vol de
-                                                    matériel de l’entreprise, etc.)</p>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul id="81a45cce-d483-40c6-b9e5-f10e84cf8368" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Obligation de
-                                            discrétion, confidentialité, secret professionnel</mark>
-                                        <ul id="73007850-feec-48e7-8f20-8d284cf94caa" class="bulleted-list">
-                                            <li style="list-style-type:circle">Obligation générale de discrétion et de
-                                                confidentialité à l’égard des informations aux quelles il a accès.<p
-                                                    id="a33074cd-832a-4f96-b30e-806a22a480e0" class="">Punissable
-                                                    d&#x27;un emprisonnement de 2 ans et d&#x27;une amende de 30 000
-                                                    euros</p>
-                                                <figure class="block-color-gray_background callout"
-                                                    style="white-space:pre-wrap;display:flex"
-                                                    id="9268d4ab-e7b2-4c62-bd9a-6c4a9d798659">
-                                                    <div style="font-size:1.5em"><span class="icon">⚖️</span></div>
-                                                    <div style="width:100%">A<em>rticle L 1227-1 du Code du
-                                                            Travail.</em></div>
-                                                </figure>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </details>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">Santé et sécurité</summary>
-                <div class="indented">
-                    <p id="5cb3b485-3271-4627-80a5-2bc9d3afa936" class="">L’employeur a l’<strong>obligation</strong>
-                        d’assurer la sécurité et la santé
-                        des salariés.</p>
-                    <p id="0b543100-6390-4f83-be38-1cef20dd4d87" class="">Pour cela, il doit :
-                    <div class="indented">
-                        <ul id="7acafca9-2b36-4b16-bb59-616f11306fc7" class="bulleted-list">
-                            <li style="list-style-type:disc">mettre en place des <strong>actions de prévention,
-                                    d&#x27;information et de formation</strong></li>
-                        </ul>
-                        <ul id="6f45bbc9-9206-499e-90ff-3a9d30a5b983" class="bulleted-list">
-                            <li style="list-style-type:disc">évaluer les <strong>risques professionnels</strong> sur
-                                chaque poste de travail</li>
-                        </ul>
-                        <ul id="aa5f4c07-112f-4b42-9212-9129533de605" class="bulleted-list">
-                            <li style="list-style-type:disc">Donnée des <strong>Instructions générales et
-                                    particulières</strong> <mark class="highlight-red">à respecter </mark></li>
-                        </ul>
-                    </div>
-                    </p>
-                    <hr id="7cc00e9b-638c-4ef3-91c7-1ad974af91f7" />
-                    <p id="9526489f-3f99-44c5-b576-0c699989f6ab" class="">De plus, le salarié a le droit, et même
-                        l’<mark class="highlight-red">obligation</mark>, de participer à une <strong>visite médicale
-                            d&#x27;information et de prévention</strong> <strong>(VMIP)</strong>:
-                    <div class="indented">
-                        <ul id="e2f7c595-50d4-49c5-ac78-860075aac902" class="bulleted-list">
-                            <li style="list-style-type:disc">Évaluer la <strong>compatibilité</strong> entre
-                                <strong>l&#x27;état de santé du salarié</strong> et son poste de travail.</li>
-                        </ul>
-                        <ul id="c6c170be-5056-4b74-bd8e-fd2339e2959d" class="bulleted-list">
-                            <li style="list-style-type:disc">Identifier les <mark class="highlight-red">risques
-                                    professionnels</mark> auxquels le salarié est exposé et proposer des <strong>mesures
-                                    de prévention adaptées</strong>.</li>
-                        </ul>
-                        <ul id="f3e2274a-f193-4557-b45c-effaef46bbe3" class="bulleted-list">
-                            <li style="list-style-type:disc">Informer le salarié sur les<mark class="highlight-red">
-                                    risques liés à son poste</mark> de travail et les <strong>mesures de prévention à
-                                    adopter</strong>.</li>
-                        </ul>
-                        <ul id="dcee335b-ef84-48fb-ba44-5d314e8ff4ed" class="bulleted-list">
-                            <li style="list-style-type:disc">Échanger avec le salarié sur s<strong>a santé et son
-                                    travail</strong>, et répondre à ses <strong>éventuelles questions</strong>.</li>
-                        </ul>
-                    </div>
-                    </p>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">Formation continue</summary>
-                <div class="indented">
-                    <p id="8a3b8475-4b38-41c4-988f-db4f2cd30f70" class="">La formation professionnelle continue permet
-                        d’<strong>acquérir de nouvelles compétences</strong> durant sa vie active pour le <strong>retour
-                            ou le maintien dans l’emploi</strong> et pour <strong>sécuriser ou optimiser les parcours
-                            professionnels</strong> :</p>
-                    <ul id="8a00a490-7d9c-4c47-a045-c20334a4938c" class="bulleted-list">
-                        <li style="list-style-type:disc">constitue une <mark class="highlight-red">obligation
-                                nationale</mark></li>
-                    </ul>
-                    <figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex"
-                        id="694b1f11-d3c9-48c6-a12a-a6f9884f3d1a">
-                        <div style="font-size:1.5em"><span class="icon">⚖️</span></div>
-                        <div style="width:100%"><em>l&#x27;article L6311-1 du Code du Travail</em></div>
-                    </figure>
-                    <ul id="b159bec7-55de-49db-ad48-94fc4f8f72e2" class="bulleted-list">
-                        <li style="list-style-type:disc">nécessite le <strong>financement de la
-                                formation</strong> elle-même et la <mark
-                                class="highlight-red">rémunération ou l’indemnisation</mark> de la personne durant cette
-                            formation</li>
-                    </ul>
-                    <p id="63f539b1-bf04-40d3-bd5a-9239ea4659ed" class="">Le salarié dispose également du <strong>Compte
-                            Personnel de Formation (CPF)</strong></p>
-                    <p id="48ca3e19-b30b-4e19-8ffa-6c6a73cd1b85" class="">permet à chaque actif de cumuler des droits à
-                        la formation tout au long de sa carrière professionnelle, afin de financer des actions de
-                        formation pour développer ses compétences</p>
-                    <p id="613ee127-cb88-4e9f-a195-059d7e8f7374" class=""><strong>plusieurs caractéristique à savoir sur
-                            le CPF :</strong></p>
-                    <ul id="dac91010-1757-49e9-80fe-188f23e033eb" class="bulleted-list">
-                        <li style="list-style-type:disc"><strong>500 € par an</strong> pour un travail à <strong>temps
-                                plein</strong>, cumulables jusqu&#x27;à<strong> 5000 €</strong> (800 € – 8000 € max
-                            pour les personnes peu ou pas qualifiées)</li>
-                    </ul>
-                    <ul id="56a99657-9bc0-461e-a52c-ddf1cb1e4862" class="bulleted-list">
-                        <li style="list-style-type:disc"><strong>l&#x27;accord des concernés</strong> est impératif pour
-                            les utiliser</li>
-                    </ul>
-                    <ul id="ec9ebbed-24cf-4c3e-8c35-f6141090fc0e" class="bulleted-list">
-                        <li style="list-style-type:disc"><strong>la rémunération est maintenue</strong> pendant la
-                            formation</li>
-                    </ul>
-                    <ul id="b3be4b9f-2691-4a20-9214-0d7b08da4bdb" class="bulleted-list">
-                        <li style="list-style-type:disc">En CDI, droit après 1 an d&#x27;ancienneté et en CDD, après 4
-                            mois d&#x27;ancienneté</li>
-                    </ul>
-                </div>
-            </details>
-            <details open="">
-                <summary style="font-weight:600;font-size:1.5em;line-height:1.3">Les restrictions des droits et libertés
-                </summary>
-                <div class="indented">
-                    <ul id="6d46b163-2380-4fbf-884d-4ceba532f02b" class="toggle">
-                        <li>
-                            <details open="">
-                                <summary><strong>Liberté d’expression :</strong></summary>
-                                <p id="ae55289c-c246-4da8-9aaf-589e43e18fa1" class="">Un employeur <mark
-                                        class="highlight-red">ne peut pas interdire</mark> à un salarié, quel que soit
-                                    sont statut dans l’entreprise, de <strong>s’exprimer librement </strong>sur des
-                                    questions <strong>politiques, religieuses ou de vie privée.</strong></p>
-                            </details>
-                        </li>
-                    </ul>
-                    <ul id="221837dc-94b2-42da-82fe-badbf965b545" class="toggle">
-                        <li>
-                            <details open="">
-                                <summary><strong>Vie privée :</strong></summary>
-                                <p id="b24e6f7b-76ba-4dff-9c83-805e77dbbbd6" class="">Chaque salarié à la
-                                    <strong>possibilité</strong> de protéger ce qui relève de <mark
-                                        class="highlight-red">son intimité</mark>.</p>
-                            </details>
-                        </li>
-                    </ul>
-                    <ul id="743b2770-d434-4685-a299-9008813e265b" class="toggle">
-                        <li>
-                            <details open="">
-                                <summary><strong>Grève :</strong></summary>
-                                <p id="b6773e6c-41ae-4b7e-9924-f6b01c462933" class="">Les salariés ont le droit de se
-                                    <strong>mettre en grève</strong> pour <strong>défendre leurs intérêts
-                                        professionnels</strong>.</p>
-                                <p id="969d7a12-9cb9-4062-a373-c8fe8f4b938d" class=""><strong>plusieurs conditions
-                                        :</strong></p>
-                                <ul id="d47bb1a0-bfec-4e54-ac4b-51ea8b5089c2" class="bulleted-list">
-                                    <li style="list-style-type:disc">Collective</li>
-                                </ul>
-                                <ul id="7e56af20-6bca-4fb7-b6db-6f3851242ae2" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Arrêt totale</mark> du
-                                        travail</li>
-                                </ul>
-                                <ul id="191663be-f761-434b-aae3-197b99254f8a" class="bulleted-list">
-                                    <li style="list-style-type:disc">Donner un <strong>préavis</strong> à leur employeur
-                                    </li>
-                                </ul>
-                                <ul id="98198ab2-88b8-4432-a825-8f405486b413" class="bulleted-list">
-                                    <li style="list-style-type:disc">Ne pas avoir pour objectif de <mark
-                                            class="highlight-red">désorganiser l’entreprise</mark></li>
-                                </ul>
-                                <ul id="8ba3aa02-fc6b-47b6-9b28-e015fdf3ba29" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Suspension</mark> de la
-                                        rémunération</li>
-                                </ul>
-                                <ul id="f2e170e4-a829-499e-b279-874a6b07f4cb" class="bulleted-list">
-                                    <li style="list-style-type:disc">Pas de durée limité</li>
-                                </ul>
-                                <p id="da61be31-a1e6-49a8-9cd5-cf7bac5bcbbb" class="">Les entreprises<mark
-                                        class="highlight-red"> ne peuvent pas</mark> avoir recours aux
-                                    <strong>CCD</strong> pour remplacer les grévistes, remplacement possible pour les
-                                    <strong>internes</strong> et <mark class="highlight-red">interdiction des
-                                        discriminations</mark>, plus précisément des primes aux non grévistes.</p>
-                            </details>
-                        </li>
-                    </ul>
-                    <ul id="8a0b9032-ecc3-4219-bd9f-1a081f11cffd" class="toggle">
-                        <li>
-                            <details open="">
-                                <summary><strong>Liberté syndicale :</strong></summary>
-                                <p id="9240fd79-3de4-4ed8-a257-702f3dad2a8c" class=""><mark
-                                        class="highlight-red">principe fondamental</mark> qui garantit aux travailleurs
-                                    le <strong>droit de se syndiquer</strong>, c&#x27;est-à-dire de <strong>former ou de
-                                        rejoindre un syndicat</strong> de leur choix, et de participer à des
-                                    <strong>activités syndicales</strong> sans <mark
-                                        class="highlight-red">discrimination</mark> de la part des <strong>employeurs ou
-                                        des autorités publiques</strong>.</p>
-                                <p id="098bfdce-353f-4e61-9b28-1bb85631411f" class=""><em>(syndicat = association de
-                                        personnes dont le but est la défense d&#x27;intérêts professionnels
-                                        communs)</em></p>
-                            </details>
-                        </li>
-                    </ul>
-                    <ul id="1419b71a-edba-4555-9232-8c22c57dcce9" class="toggle">
-                        <li>
-                            <details open="">
-                                <summary><strong>Apparence physique :</strong></summary>
-                                <p id="e19b0539-cc44-44c1-9933-704bf7701daa" class=""><mark
-                                        class="highlight-red">Interdiction</mark> de la prise en compte de
-                                    <strong>l’apparence physique</strong>, ce qui inclue <strong>vêtements, bijoux,
-                                        signe religieux, etc.</strong>, pendant le <strong>recrutement et dans la
-                                        relation de travail</strong>. Possible d’avoir des <strong>exigences</strong> si
-                                    leur finalité est <strong>légitime</strong> et qu&#x27;elles sont
-                                    <strong>nécessaires</strong>.</p>
-                            </details>
-                        </li>
-                    </ul>
-                    <ul id="d69ddab9-9ce0-4a5d-b245-7b3164440bc6" class="toggle">
-                        <li>
-                            <details open="">
-                                <summary><strong>Grossesse :</strong></summary>
-                                <p id="e0900938-f979-490f-88ac-eef22c3bf106" class="">Il existe des <strong>mesures de
-                                        protection spécifiques</strong> pour garantir la <strong>santé et la
-                                        sécurité</strong> de la femme enceinte au travail :</p>
-                                <ul id="05871d4f-f1a1-442f-97a6-05d96460d6a0" class="bulleted-list">
-                                    <li style="list-style-type:disc"><mark class="highlight-red">Pas d&#x27;obligation
-                                            d&#x27;informer l&#x27;employeur</mark></li>
-                                </ul>
-                                <ul id="2e045f10-9dd3-4132-a11b-169ede1b50ec" class="bulleted-list">
-                                    <li style="list-style-type:disc"><strong>Si l’employeur est informé :</strong>
-                                        <ul id="b224f4d7-058e-4614-bdc5-39b751729737" class="bulleted-list">
-                                            <li style="list-style-type:circle"><mark class="highlight-red">ne peut pas
-                                                    vous licencié</mark></li>
-                                        </ul>
-                                        <ul id="13d4a98a-c058-44ac-8b64-680bfcb637c3" class="bulleted-list">
-                                            <li style="list-style-type:circle">possible de <strong>refuser</strong> les
-                                                tâches <mark class="highlight-red">dangereuses</mark></li>
-                                        </ul>
-                                        <ul id="7323d604-a1e1-4eef-a30b-1a8ef6e8273d" class="bulleted-list">
-                                            <li style="list-style-type:circle"><strong>absences justifiable</strong> si
-                                                examens médicaux obligatoires</li>
-                                        </ul>
-                                        <ul id="164523ec-7b3c-4363-9590-5c9e505ea45e" class="bulleted-list">
-                                            <li style="list-style-type:circle"><strong>aucune réduction de durée de
-                                                    travail</strong>, sauf si indiquée dans la convention collective
-                                            </li>
-                                        </ul>
-                                        <p id="32660c56-879f-4da2-85b1-4195e779b68d" class="">
-                                        </p>
-                                    </li>
-                                </ul>
-                            </details>
-                        </li>
-                    </ul>
-                </div>
-            </details>
-        </div>
-    </article>
-</body>
-
-</html>
+            max-height: 100vh;
+            object-fit: contain;
+        }
+    }
+    
+    @page {
+        margin: 1in;
+    }
+    
+    .collection-content {
+        font-size: 0.875rem;
+    }
+    
+    .column-list {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .column {
+        padding: 0 1em;
+    }
+    
+    .column:first-child {
+        padding-left: 0;
+    }
+    
+    .column:last-child {
+        padding-right: 0;
+    }
+    
+    .table_of_contents-item {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.3;
+        padding: 0.125rem;
+    }
+    
+    .table_of_contents-indent-1 {
+        margin-left: 1.5rem;
+    }
+    
+    .table_of_contents-indent-2 {
+        margin-left: 3rem;
+    }
+    
+    .table_of_contents-indent-3 {
+        margin-left: 4.5rem;
+    }
+    
+    .table_of_contents-link {
+        text-decoration: none;
+        opacity: 0.7;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+    }
+    
+    table,
+    th,
+    td {
+        border: 1px solid rgba(55, 53, 47, 0.09);
+        border-collapse: collapse;
+    }
+    
+    table {
+        border-left: none;
+        border-right: none;
+    }
+    
+    th,
+    td {
+        font-weight: normal;
+        padding: 0.25em 0.5em;
+        line-height: 1.5;
+        min-height: 1.5em;
+        text-align: left;
+    }
+    
+    th {
+        color: rgba(55, 53, 47, 0.6);
+    }
+    
+    ol,
+    ul {
+        margin: 0;
+        margin-block-start: 0.6em;
+        margin-block-end: 0.6em;
+    }
+    
+    li > ol:first-child,
+    li > ul:first-child {
+        margin-block-start: 0.6em;
+    }
+    
+    ul > li {
+        list-style: disc;
+    }
+    
+    ul.to-do-list {
+        padding-inline-start: 0;
+    }
+    
+    ul.to-do-list > li {
+        list-style: none;
+    }
+    
+    .to-do-children-checked {
+        text-decoration: line-through;
+        opacity: 0.375;
+    }
+    
+    ul.toggle > li {
+        list-style: none;
+    }
+    
+    ul {
+        padding-inline-start: 1.7em;
+    }
+    
+    ul > li {
+        padding-left: 0.1em;
+    }
+    
+    ol {
+        padding-inline-start: 1.6em;
+    }
+    
+    ol > li {
+        padding-left: 0.2em;
+    }
+    
+    .mono ol {
+        padding-inline-start: 2em;
+    }
+    
+    .mono ol > li {
+        text-indent: -0.4em;
+    }
+    
+    .toggle {
+        padding-inline-start: 0em;
+        list-style-type: none;
+    }
+    
+    /* Indent toggle children */
+    .toggle > li > details {
+        padding-left: 1.7em;
+    }
+    
+    .toggle > li > details > summary {
+        margin-left: -1.1em;
+    }
+    
+    .selected-value {
+        display: inline-block;
+        padding: 0 0.5em;
+        background: rgba(206, 205, 202, 0.5);
+        border-radius: 3px;
+        margin-right: 0.5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        white-space: nowrap;
+    }
+    
+    .collection-title {
+        display: inline-block;
+        margin-right: 1em;
+    }
+    
+    .simple-table {
+        margin-top: 1em;
+        font-size: 0.875rem;
+        empty-cells: show;
+    }
+    .simple-table td {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table th {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table-header-color {
+        background: rgb(247, 246, 243);
+        color: black;
+    }
+    .simple-table-header {
+        font-weight: 500;
+    }
+    
+    time {
+        opacity: 0.5;
+    }
+    
+    .icon {
+        display: inline-block;
+        max-width: 1.2em;
+        max-height: 1.2em;
+        text-decoration: none;
+        vertical-align: text-bottom;
+        margin-right: 0.5em;
+    }
+    
+    img.icon {
+        border-radius: 3px;
+    }
+    
+    .user-icon {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+    }
+    
+    .user-icon-inner {
+        font-size: 0.8em;
+    }
+    
+    .text-icon {
+        border: 1px solid #000;
+        text-align: center;
+    }
+    
+    .page-cover-image {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        max-height: 30vh;
+    }
+    
+    .page-header-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .page-header-icon-with-cover {
+        margin-top: -0.72em;
+        margin-left: 0.07em;
+    }
+    
+    .page-header-icon img {
+        border-radius: 3px;
+    }
+    
+    .link-to-page {
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+        font-weight: 500;
+    }
+    
+    p > .user {
+        opacity: 0.5;
+    }
+    
+    td > .user,
+    td > time {
+        white-space: nowrap;
+    }
+    
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 0.6em;
+        vertical-align: middle;
+    }
+    
+    p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    
+    .image {
+        border: none;
+        margin: 1.5em 0;
+        padding: 0;
+        border-radius: 0;
+        text-align: center;
+    }
+    
+    .code,
+    code {
+        background: rgba(135, 131, 120, 0.15);
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 85%;
+        tab-size: 2;
+    }
+    
+    code {
+        color: #eb5757;
+    }
+    
+    .code {
+        padding: 1.5em 1em;
+    }
+    
+    .code-wrap {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    
+    .code > code {
+        background: none;
+        padding: 0;
+        font-size: 100%;
+        color: inherit;
+    }
+    
+    blockquote {
+        font-size: 1.25em;
+        margin: 1em 0;
+        padding-left: 1em;
+        border-left: 3px solid rgb(55, 53, 47);
+    }
+    
+    .bookmark {
+        text-decoration: none;
+        max-height: 8em;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
+    
+    .bookmark-title {
+        font-size: 0.85em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 1.75em;
+        white-space: nowrap;
+    }
+    
+    .bookmark-text {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .bookmark-info {
+        flex: 4 1 180px;
+        padding: 12px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .bookmark-image {
+        width: 33%;
+        flex: 1 1 180px;
+        display: block;
+        position: relative;
+        object-fit: cover;
+        border-radius: 1px;
+    }
+    
+    .bookmark-description {
+        color: rgba(55, 53, 47, 0.6);
+        font-size: 0.75em;
+        overflow: hidden;
+        max-height: 4.5em;
+        word-break: break-word;
+    }
+    
+    .bookmark-href {
+        font-size: 0.75em;
+        margin-top: 0.25em;
+    }
+    
+    .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+    .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+    .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+    .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+    .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+    .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+    .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+    .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+    .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+    .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+    .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+    .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+    .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .highlight-default {
+        color: rgba(55, 53, 47, 1);
+    }
+    .highlight-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .highlight-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .highlight-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .highlight-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .highlight-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .highlight-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .highlight-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .highlight-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .highlight-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .highlight-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .highlight-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .highlight-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .highlight-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .highlight-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .highlight-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .highlight-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .highlight-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .highlight-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .block-color-default {
+        color: inherit;
+        fill: inherit;
+    }
+    .block-color-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .block-color-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .block-color-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .block-color-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .block-color-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .block-color-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .block-color-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .block-color-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .block-color-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .block-color-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .block-color-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .block-color-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .block-color-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .block-color-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .block-color-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .block-color-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .block-color-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .block-color-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+    .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+    .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+    .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+    .select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+    .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+    .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+    .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+    .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+    .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+    
+    .checkbox {
+        display: inline-flex;
+        vertical-align: text-bottom;
+        width: 16;
+        height: 16;
+        background-size: 16px;
+        margin-left: 2px;
+        margin-right: 5px;
+    }
+    
+    .checkbox-on {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+    
+    .checkbox-off {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+        
+    </style></head><body><article id="c4940741-f36f-43ce-bbc1-d8ed192c8c6a" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/rijksmuseum_jan_lievens_1627.jpg" style="object-position:center 60%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">⚖️</span></div><h1 class="page-title">Droit</h1><table class="properties"><tbody><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>Course code</th><td></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>Prof</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>Year</th><td><span class="selected-value select-value-color-default">2023</span></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><path d="M13.1475 10.5869V3.72363C13.1475 3.25195 12.833 2.93066 12.3477 2.93066H5.48438C5.02637 2.93066 4.70508 3.27246 4.70508 3.67578C4.70508 4.07227 5.05371 4.40039 5.46387 4.40039H7.89746L10.8438 4.30469L9.59961 5.39844L3.08496 11.9199C2.92773 12.0771 2.8457 12.2686 2.8457 12.46C2.8457 12.8564 3.20801 13.2256 3.61816 13.2256C3.80957 13.2256 3.99414 13.1504 4.15137 12.9932L10.6729 6.47168L11.7803 5.22754L11.6641 8.05762V10.6074C11.6641 11.0176 11.9922 11.373 12.4023 11.373C12.8057 11.373 13.1475 11.0312 13.1475 10.5869Z"></path></svg></span>Homework</th><td></td></tr></tbody></table></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="66256018-a6e2-4d93-8fe0-31d670678ae6"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Voici les informations nécessaires pour remplir votre TD</div></figure><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Introduction</summary><div class="indented"><p id="509bf851-cad4-4a9d-8f8c-f1c72e7217ab" class="">Le droit du travail est un <strong>ensemble de règles et de lois </strong>qui <strong>régissent </strong>les relations entre les <strong>employés </strong>et les <strong>employeurs</strong>. 
+    Il vise à <strong>établir </strong>un <strong>cadre juridique </strong><mark class="highlight-red">équitable </mark>et <mark class="highlight-red">équilibré </mark>pour garantir le respect des droits des travailleurs et la protection de leurs intérêts.</p><hr id="1a7df057-eef1-45f1-ab5e-2795842eb602"/><p id="981be15c-6710-4f59-b840-d359160729b6" class="">Les objectifs du droit du travail sont multiples. 
+    Tout d&#x27;abord, il cherche à <strong>assurer des conditions de travail décentes</strong>, en fixant des normes minimales en termes de rémunération, de durée du travail, de congés, de santé et de sécurité au travail, entre autres. 
+    Il vise également à <strong>promouvoir l&#x27;égalité de traitement </strong>entre les travailleurs, en luttant contre toute forme de discrimination ou de traitement injuste.</p><hr id="2ca05a74-4375-4ec4-850d-2395a78ed123"/><p id="dc90974c-ac59-4200-a444-5955f0cfb601" class="">Le droit du travail joue un rôle essentiel dans la société en <strong>garantissant la stabilité et la justice </strong>dans les relations professionnelles. 
+    Il <strong>favorise un équilibre </strong>entre les intérêts des employés et des employeurs, en établissant des droits et des obligations clairs pour chaque partie. 
+    En outre, il contribue à <strong>prévenir les abus </strong>et les pratiques injustes, et favorise la résolution des conflits de manière légale et équitable.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Différents salaires</summary><div class="indented"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Salaire net moyen en France en 2019 (ramené à un ETP)</summary><div class="indented"><div id="37fb6d5b-0ad0-46b7-88bd-5bc422d9c52a" class="column-list"><div id="5e513e9b-7373-4f0c-aad8-42bfed5a95f5" style="width:100%" class="column"><ul id="3d290000-3454-4ef2-aab9-1bfd5f95a46d" class="bulleted-list"><li style="list-style-type:disc">Ensemble: 2424€</li></ul><ul id="0861102b-1b43-4eba-ab70-17af41c6702a" class="bulleted-list"><li style="list-style-type:disc">Femmes: 2181€</li></ul><ul id="2f1953f9-3dba-4cda-a168-d296b2ec6b3d" class="bulleted-list"><li style="list-style-type:disc">Hommes: 2597€ soit +19% que les Femmes</li></ul><p id="00fd15f5-9fa3-4b65-b826-d128a8dfe783" class="">
+    </p></div><div id="62b8b9af-1807-486a-beeb-8915c4dd5f25" style="width:100%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="026333d0-178a-4ab8-af90-5c5c57f3eb7a"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><mark class="highlight-red"><strong>ETP</strong></mark>: <mark class="highlight-red">E</mark>quivalent <mark class="highlight-red">T</mark>emps <mark class="highlight-red">P</mark>lein
+        <strong>35h/semaine</strong> | <strong>151,67 h/mois</strong>
+    1 ETP = 1 employé à temps plein
+    0.5 ETP = 1 employé à mi-temps
+    1.5 ETP = 1 temps plein + 1 mi-temps
+    <mark class="highlight-red"><strong><em>Données rapportés d’après l’INSEE</em></strong></mark></div></figure></div></div><p id="50dc5693-8850-4f1a-8de2-64d7e224169b" class=""><mark class="highlight-red"><strong>Salaire net :</strong></mark><strong> </strong>Montant perçu après déduction des cotisations sociales et des impôts.</p><p id="042d0514-b963-4b35-8ef0-198bf7b25a6d" class="">
+    </p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Salaire moyen brut en France en 2019 (amené à un ETP) </summary><div class="indented"><ul id="be331ef3-aae6-45e0-9340-0d0bd62423e1" class="bulleted-list"><li style="list-style-type:disc">Ensemble: 3183€</li></ul><p id="88989f2b-8ca9-4e0a-b46f-3a4f961bff6a" class=""><strong><mark class="highlight-red">Salaire brut :</mark></strong> Montant avant déduction des cotisations sociales.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Salaire super-brut en France</summary><div class="indented"><div id="6921aa8e-b46d-412d-8641-5527ee80a22e" class="column-list"><div id="81ac760f-cc37-43a5-ab6c-218b83af0397" style="width:100%" class="column"><p id="30b3f708-8e58-409e-907f-a2c79d93f325" class=""><mark class="highlight-red"><strong>Salaire super-brut :</strong></mark> Terme non couramment utilisé en France, mais peut se référer au salaire total incluant les cotisations sociales employeur.</p></div><div id="ba7e98e2-3c23-42e3-8ba6-3a4922ccd35b" style="width:100%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="db365400-13c7-45be-8b90-0fdf8ec3416f"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><mark class="highlight-red"><strong>Salaire super-brut</strong></mark>: 
+    Salaire net de l’employé 
+    + charges salariales 
+    <strong>+ charges patronales 
+    </strong>+ cotisations sociales salariales et patronales 
+    <strong>Somme totale payée par l’employeur pour un salarié</strong></div></figure><p id="71a18501-a69d-462c-86fa-20b2942b416c" class="">
+    </p></div></div><p id="d13698dc-2161-4cd7-b958-1fb1e2e1e544" class="">
+    </p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Le salaire est versé au moins une fois par mois. Il peut comporter </summary><div class="indented"><ul id="d146d582-fa8e-4ba0-b791-d748020fae21" class="bulleted-list"><li style="list-style-type:disc"><strong>Partie fixe : </strong>Salaire de base régulier et constant versé chaque mois sans variation</li></ul><ul id="c1c1adbb-80f5-4e37-b346-0a3228dac129" class="bulleted-list"><li style="list-style-type:disc"><strong>Partie variable : </strong>Primes liées aux performances </li></ul><ul id="61f8d6cd-6c27-4708-9fd6-822e8d1cba0a" class="bulleted-list"><li style="list-style-type:disc"><strong>Majorations prévues par la loi ou accords collectifs</strong></li></ul></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Salaire minimum</summary><div class="indented"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Smic mensuel brut pour un ETP</summary><div class="indented"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e6d31655-f82c-4f11-956c-74dd68c38762"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><mark class="highlight-red"><strong>SMIC</strong></mark>: <mark class="highlight-red">S</mark>alaire <mark class="highlight-red">M</mark>inimum <mark class="highlight-red">I</mark>nterprofessionnel de <mark class="highlight-red">C</mark>roissance
+    🚫 les apprenti·es 
+    🚫 les moins de 18 ans
+    🚫 les prisonnier·es
+    🚫 les travailleur·ses handicapé·es</div></figure><table id="a3ef69a5-ade9-4d66-90e9-19e534953210" class="simple-table"><thead class="simple-table-header"><tr id="4b1cdbd5-2356-4b2b-997a-4edbf4b5d1a9"><th id="@~vM" class="block-color-blue_background simple-table-header" style="width:165px"></th><th id="@]Nr" class="block-color-blue_background simple-table-header" style="width:167px"><strong>Brut /h</strong></th><th id=";=Kr" class="block-color-blue_background simple-table-header" style="width:167px"><strong>Brut /mois</strong></th><th id="F@sI" class="block-color-blue_background simple-table-header" style="width:127px"><strong>Net /mois</strong></th></tr></thead><tbody><tr id="4337bc69-4025-42d5-8a64-5dd07182d443"><th id="@~vM" class="block-color-blue_background simple-table-header" style="width:165px"><strong>01 jan 2019</strong></th><td id="@]Nr" class="" style="width:167px">10.03</td><td id=";=Kr" class="" style="width:167px">1521.22</td><td id="F@sI" class="" style="width:127px">1204,18</td></tr><tr id="61beda00-a849-4f41-8e71-bc1d6255fbb0"><th id="@~vM" class="block-color-blue_background simple-table-header" style="width:165px"><strong>01 jan 2023</strong></th><td id="@]Nr" class="" style="width:167px">11.27</td><td id=";=Kr" class="" style="width:167px">1709.28</td><td id="F@sI" class="" style="width:127px">1356,09</td></tr><tr id="3c883f36-8485-4e7b-95a5-9bbad43bdc0a"><th id="@~vM" class="block-color-blue_background simple-table-header" style="width:165px"><strong>01 mai 2023</strong></th><td id="@]Nr" class="" style="width:167px">11.52</td><td id=";=Kr" class="" style="width:167px">1747.20</td><td id="F@sI" class="" style="width:127px">1383.08</td></tr></tbody></table></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Revalorisation : augmentation égale ou supérieure à l’inflation</summary><div class="indented"><div id="e0f476ae-7c0b-46be-8f68-6d6f0196f26b" class="column-list"><div id="d09833d4-d776-490b-803b-f07a81e1817a" style="width:87.5%" class="column"><ul id="e3e71004-f292-4116-900a-0d73b1999fac" class="bulleted-list"><li style="list-style-type:disc">Chaque 1er janvier 
+    <strong>ou </strong>si l’inflation est supérieure à 2 % depuis janvier</li></ul><ul id="359a14ae-fdc6-4768-a2b1-023e1ac9c146" class="bulleted-list"><li style="list-style-type:disc">En pratique, les augmentations sont les mêmes depuis 2007</li></ul><ul id="9e49fcf2-48a3-4e8c-be12-7cf43a1d60ff" class="bulleted-list"><li style="list-style-type:disc">+ 6,6 % entre janvier 2022 et janvier 2023</li></ul></div><div id="cbc33dc8-d30b-4720-b62e-0783d912a056" style="width:112.5%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ac46fc1c-29bc-4399-b4fc-ecce92f61fd7"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong><mark class="highlight-red">Revalorisation :</mark></strong> 
+    Augmentation ou ajustement du SMIC</div></figure></div></div></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Montants pris en compte dans le calcul du SMIC</summary><div class="indented"><ul id="28ab545f-cb3f-4ed5-9fee-7fb5be8a2a66" class="toggle"><li><details open=""><summary>Calcul du SMIC </summary><ul id="063834ab-2fd1-4fe3-b15c-16dd9bb12ecf" class="bulleted-list"><li style="list-style-type:disc">Taux horaire du SMIC : Ex: Le taux est a 10€ ⇒ chaque h est rémunérée 10€</li></ul><ul id="f0e23850-73f9-4e2e-937a-820248a393ab" class="bulleted-list"><li style="list-style-type:disc">Durée légale du travail : En France, 35h par semaine</li></ul><ul id="0f77a91f-b88b-4038-a80b-5ad6e11a5f02" class="bulleted-list"><li style="list-style-type:disc">Périodicité de paiement : Si le salaire est versé mensuellement, il est calculé sur une base mensuelle</li></ul></details></li></ul><ul id="fc24a443-4719-4253-92e5-67bc74d04aa4" class="toggle"><li><details open=""><summary>Montants pris en compte</summary><ul id="b183b888-771c-464d-a391-6ed7dd90eed3" class="bulleted-list"><li style="list-style-type:disc">Avantages en nature</li></ul><ul id="0eb31ac9-3cab-4635-bbd2-41601008045e" class="bulleted-list"><li style="list-style-type:disc">Primes liées à la productivité</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="39588192-2784-424c-85b8-64d86ac1a2bb"><div style="font-size:1.5em"><span class="icon">✅</span></div><div style="width:100%">À titre de tolérance, lorsque l’employeur rémunère mensuellement ses salariés sur la base de 151,67 heures donc d’1 ETP, le Smic annuel pris en compte peut être établi sur la base de 12 fois cette valeur, soit : 12 × 151,67 heures × Smic horaire.</div></figure></details></li></ul><p id="da67d498-6df8-44ca-9e1a-2447b866d289" class="">
+    </p><p id="3d29e55e-033b-47b0-ab80-87d297e7dc77" class=""><strong><mark class="highlight-red">Données rapportées d’après l’Urssaf</mark></strong></p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Les montants non-pris en compte dans le calcul du Smic :</summary><div class="indented"><ul id="ba1fe081-0cf9-4e5b-8bb9-6a0b84b76f53" class="bulleted-list"><li style="list-style-type:disc"><strong>Primes et indemnités spécifiques :</strong> <mark class="highlight-teal">ex: </mark>participation, ancienneté, assiduité<mark class="highlight-teal"> ex:</mark> Insalubrité, danger, pénibilité…</li></ul><ul id="fdb5e278-5784-4669-a9f0-2acc865a6e14" class="bulleted-list"><li style="list-style-type:disc"><del><strong>Heures supplémentaires</strong></del></li></ul><ul id="1da6e705-b7d7-466d-9429-88837e2cf92b" class="bulleted-list"><li style="list-style-type:disc"><strong>Remboursements de frais</strong></li></ul><p id="f9bf88e4-458c-43dd-8bd4-567b1f1809e9" class=""><mark class="highlight-red"><strong>Données rapportées d’après Ooreka et Indeed</strong></mark></p></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Pour les apprenti.es</summary><div class="indented"><p id="b1936ff2-d3aa-4a3f-8e13-0bce85b724ac" class="">Dans le cadre de son contrat d’apprentissage (contrat de travail), l’apprenti·e perçoit un salaire qui correspond au minimum à un pourcentage du SMIC.</p><table id="e17c9531-c7c1-49a9-b87a-7f60a798c039" class="simple-table"><thead class="simple-table-header"><tr id="479fb30a-7f5a-4429-9e53-1180a2f33fb4"><th id="o&lt;|b" class="block-color-purple_background simple-table-header">Situation</th><th id="bPZR" class="block-color-purple_background simple-table-header" style="width:90px">16-17 ans</th><th id="=TON" class="block-color-purple_background simple-table-header" style="width:107px">18-20 ans</th><th id="h]s}" class="block-color-purple_background simple-table-header" style="width:182.85000610351562px">21-25 ans</th><th id="JxZk" class="block-color-purple_background simple-table-header" style="width:159px">26 ans et plus</th></tr></thead><tbody><tr id="01bffc40-6bff-47f0-ac41-826e2790bd40"><th id="o&lt;|b" class="block-color-purple_background simple-table-header">1ʳᵉ année du contrat</th><td id="bPZR" class="" style="width:90px">27% du Smic
+    <strong>⇒ 461,57 €</strong></td><td id="=TON" class="" style="width:107px">43% du Smic
+    <strong>⇒ 735 €</strong></td><td id="h]s}" class="" style="width:182.85000610351562px">Salaire le + élevé entre <strong>53% du Smic ⇒ 905,92€ </strong>
+    et 
+    53% du salaire minimum conventionnel correspondant à l’emploi occupé pendant le contrat d’apprentissage </td><td id="JxZk" class="" style="width:159px">//</td></tr><tr id="bfb477c5-c9e1-4cd1-a155-82103ed42d5d"><th id="o&lt;|b" class="block-color-purple_background simple-table-header">2ᵉ année du contrat</th><td id="bPZR" class="" style="width:90px">39% du Smic
+    <strong>⇒ 666,62 €</strong></td><td id="=TON" class="" style="width:107px">51% du Smic
+    <strong>⇒ 871,73 €</strong></td><td id="h]s}" class="" style="width:182.85000610351562px">Salaire le + élevé entre <strong>61% du Smic ⇒ 1042,66€</strong> 
+    et 
+    61% du salaire minimum conventionnel correspondant à l’emploi occupé pendant le contrat d’apprentissage </td><td id="JxZk" class="" style="width:159px"><strong>100% du Smic
+    ⇒ 1709,26€ </strong>
+    Salaire le + élevé entre le Smic et le salaire minimum conventionnel correspondant à l’emploi occupé pendant le contrat d’apprentissage</td></tr><tr id="7ca886db-d2a6-431b-b060-4d0091351fd0"><th id="o&lt;|b" class="block-color-purple_background simple-table-header">3ᵉ année du contrat</th><td id="bPZR" class="" style="width:90px">55% du Smic
+    <strong>⇒ 940,10 €</strong></td><td id="=TON" class="" style="width:107px">67% du Smic
+    <strong>⇒ 1145,22 €</strong></td><td id="h]s}" class="" style="width:182.85000610351562px">Salaire le + élevé entre <strong>78% du Smic ⇒ 1309,24€</strong> 
+    et 
+    78% du salaire minimum conventionnel correspondant à l’emploi occupé pendant le contrat d’apprentissage </td><td id="JxZk" class="" style="width:159px">//</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5c138f7b-e451-488d-8d4e-e0ea611f855a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Le salaire que l&#x27;apprenti reçoit est exempté d&#x27;impôt sur le revenu tant qu&#x27;il ne dépasse pas le montant annuel du SMIC.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="196a761c-a8f1-4f75-90f6-ae2819d3ffa2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Un apprenti qui prépare une licence professionnelle en un an recevra une rémunération équivalente à celle d&#x27;un apprenti en deuxième année de contrat.</div></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">🙋‍♂️Les accords collectifs</summary><div class="indented"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0b1cf5c5-7c87-4eb9-a593-eac9dc5ac90d"><div style="font-size:1.5em"><span class="icon">📔</span></div><div style="width:100%"><mark class="highlight-red"><strong>Accord collectif:</strong></mark> Accord conclu entre un employeur ou des représentants d’employeurs et une ou plusieurs organisations syndicales ou des représentants de salariés, ou dans certains cas, à la suite de la consultation des salariés, en respectant des règles de validité issues du code du travail. 
+    Il peut être conclu à plusieurs niveaux : branche professionnelle, groupe, entreprise, établissement... 
+    L’accord collectif concerne un ou plusieurs thèmes contrairement à la convention collective qui traite de l’ensemble des conditions d’emploi, de travail et de formation professionnelle et des garanties sociales des salariés.
+    <strong><mark class="highlight-red">D’après code.travail.gouv.fr</mark></strong></div></figure><p id="156ac9e8-6335-4adc-aff1-05ee2ac2c380" class="">Enfaite, des <mark class="highlight-red">accords </mark>sont <mark class="highlight-red">conclus </mark>entre les <mark class="highlight-red">organisations patronales </mark>et les <mark class="highlight-red">organisations salariales</mark>, et ces accords peuvent <strong>varier </strong>en termes de <strong>terminologie </strong>et de <strong>portée</strong>. 
+    <strong><mark class="highlight-red">En cas de conflit, l&#x27;accord le plus favorable pour les travailleurs est appliqué.</mark></strong></p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Les modifications du contrat de travail</summary><div class="indented"><p id="0fdf5033-0d89-41e9-81fa-18dde099f9b4" class="">Les <strong>éléments essentiels</strong> du contrat de travail ne peuvent pas être modifiés sans l’<mark class="highlight-red">accord du salariée</mark>.</p><p id="75dc6c18-e7ce-43e1-a708-c9369130ac56" class=""><strong>Les éléments essentiels comprend :</strong><div class="indented"><ul id="1e52be81-1fab-401c-943b-91a790244c2c" class="bulleted-list"><li style="list-style-type:disc">la durée du travail</li></ul><ul id="17abc9e5-2d03-400d-b92a-f7c5d843aa4f" class="bulleted-list"><li style="list-style-type:disc">la rémunération</li></ul><ul id="91c4abdd-2379-421d-840b-bd0a44d77c0b" class="bulleted-list"><li style="list-style-type:disc">la qualification</li></ul><ul id="3bbacb4d-519e-47cc-9593-ecac59d00533" class="bulleted-list"><li style="list-style-type:disc">les attributions du salarié</li></ul></div></p><hr id="c322ee54-75ba-4cd4-ad00-545aecc82740"/><p id="5c918c2d-12ac-48c8-82d0-6e7df373e70d" class="">Les modifications simples (conditions de travail) peuvent être imposées par l’employeur (sauf motifs discriminatoires) :<div class="indented"><ul id="7fbd817d-0270-4c0c-b680-837ea25b310a" class="bulleted-list"><li style="list-style-type:disc"><strong>l&#x27;organisation de l&#x27;entreprise</strong><ul id="a3ca2bc6-3e7b-4fce-86b9-f7beafd4e0e9" class="bulleted-list"><li style="list-style-type:circle"><strong>Modification</strong> des horaires de travail, des équipes de travail, des lieux de travail, etc.<p id="a0488ea3-54c5-4a77-b922-1ab3a0b6b3b1" class="">Ces modifications doivent être <mark class="highlight-red">justifiées</mark> par des <strong>motifs légitimes</strong>.</p></li></ul></li></ul><ul id="15d5d318-78d5-4d26-b635-e7e685dcedd2" class="bulleted-list"><li style="list-style-type:disc"><strong>obligations légales et réglementaires</strong><ul id="a2d85f32-a9f6-4a6d-9f59-2f268ebdd34e" class="bulleted-list"><li style="list-style-type:circle">si des <strong>modifications sont nécessaires</strong> pour se conformer à ces <strong>obligations</strong>, l&#x27;employeur peut les <mark class="highlight-red">imposer</mark>, dans la mesure où elles sont <strong>raisonnables et proportionnées</strong></li></ul></li></ul></div></p><p id="7e018843-2f78-42ce-827f-7c050a1dfcef" class="">Si le salarié <strong>refuse</strong> les modification simples, il peut avoir un <mark class="highlight-red">licenciement disciplinaire</mark>.</p><hr id="95d867d3-f447-4b55-91dc-95d443b736bd"/><ul id="c79170e6-4acf-41cc-be0a-2f8471610796" class="toggle"><li><details open=""><summary><strong>Les obligations générales des salarié :</strong></summary><ul id="ac42ebfa-17ed-4496-b15d-037d097c7327" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Respect des règles de discipline et directives de l’employeur</mark><ul id="80b8ec78-97f0-4f81-917e-2d162bb99c21" class="bulleted-list"><li style="list-style-type:circle">(<mark class="highlight-teal">ex:</mark> horaire, exécution du travail, règle d’hygiène, règlement intérieur, etc.)</li></ul></li></ul><ul id="89751f98-e4ff-464a-acd0-e2a4b597d47f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Devoir de correction et obligation de réserve</mark><ul id="ca76f34c-96da-47f7-962c-4037c819db51" class="bulleted-list"><li style="list-style-type:circle">comportement correct du salarié (<mark class="highlight-teal">ex:</mark> pas d’injures, propos diffamatoires, etc.)</li></ul></li></ul><ul id="4baa26df-a67d-4f80-b633-8f2ba0ec80c0" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Obligation de non-concurrence</mark><ul id="73d599cd-763e-4a37-966d-d601bf9eb26f" class="bulleted-list"><li style="list-style-type:circle">Ne doit pas faire de concurrence déloyale à son employeur<em> (découle de l’obligation de loyauté)</em></li></ul></li></ul><ul id="35a53e3f-2610-4a7e-b5cd-61506484ce3c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Obligation de loyauté</mark><ul id="78b75ab2-5558-4ef2-83d1-e378b2fa7162" class="bulleted-list"><li style="list-style-type:circle">“Le salarié doit exécuter son contrat de travail de bonne foi et de manière loyale. Il ne doit pas adopter de comportements répréhensibles, commettre des agissements sanctionnables, nuire ou accomplir des actes contraires à l’intérêt de l’entreprise.”<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1d17e9bf-a491-45c4-8ff3-7e76cdadd870"><div style="font-size:1.5em"><span class="icon">⚖️</span></div><div style="width:100%"><em>Articles 1135 du Code Civil et L 1222-1 du Code du Travail.</em></div></figure><p id="06f2bc01-c887-4174-a64b-c343e6faaf5a" class="">(<mark class="highlight-teal">ex:</mark> Détournement de fonds, Exercice d’une activité concurrente à celle de l’employeur, Vol de matériel de l’entreprise, etc.)</p></li></ul></li></ul><ul id="81a45cce-d483-40c6-b9e5-f10e84cf8368" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Obligation de discrétion, confidentialité, secret professionnel</mark><ul id="73007850-feec-48e7-8f20-8d284cf94caa" class="bulleted-list"><li style="list-style-type:circle">Obligation générale de discrétion et de confidentialité à l’égard des informations aux quelles il a accès.<p id="a33074cd-832a-4f96-b30e-806a22a480e0" class="">Punissable d&#x27;un emprisonnement de 2 ans et d&#x27;une amende de 30 000 euros</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9268d4ab-e7b2-4c62-bd9a-6c4a9d798659"><div style="font-size:1.5em"><span class="icon">⚖️</span></div><div style="width:100%">A<em>rticle L 1227-1 du Code du Travail.</em></div></figure></li></ul></li></ul></details></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Santé et sécurité</summary><div class="indented"><p id="5cb3b485-3271-4627-80a5-2bc9d3afa936" class="">L’employeur a l’<strong>obligation</strong> d’assurer la sécurité et la santé 
+    des salariés.</p><p id="0b543100-6390-4f83-be38-1cef20dd4d87" class="">Pour cela, il doit :<div class="indented"><ul id="7acafca9-2b36-4b16-bb59-616f11306fc7" class="bulleted-list"><li style="list-style-type:disc">mettre en place des <strong>actions de prévention, d&#x27;information et de formation</strong></li></ul><ul id="6f45bbc9-9206-499e-90ff-3a9d30a5b983" class="bulleted-list"><li style="list-style-type:disc">évaluer les <strong>risques professionnels</strong> sur chaque poste de travail</li></ul><ul id="aa5f4c07-112f-4b42-9212-9129533de605" class="bulleted-list"><li style="list-style-type:disc">Donnée des <strong>Instructions générales et particulières</strong> <mark class="highlight-red">à respecter </mark></li></ul></div></p><hr id="7cc00e9b-638c-4ef3-91c7-1ad974af91f7"/><p id="9526489f-3f99-44c5-b576-0c699989f6ab" class="">De plus, le salarié a le droit, et même l’<mark class="highlight-red">obligation</mark>, de participer à une <strong>visite médicale d&#x27;information et de prévention</strong> <strong>(VMIP)</strong>:<div class="indented"><ul id="e2f7c595-50d4-49c5-ac78-860075aac902" class="bulleted-list"><li style="list-style-type:disc">Évaluer la <strong>compatibilité</strong> entre <strong>l&#x27;état de santé du salarié</strong> et son poste de travail.</li></ul><ul id="c6c170be-5056-4b74-bd8e-fd2339e2959d" class="bulleted-list"><li style="list-style-type:disc">Identifier les <mark class="highlight-red">risques professionnels</mark> auxquels le salarié est exposé et proposer des <strong>mesures de prévention adaptées</strong>.</li></ul><ul id="f3e2274a-f193-4557-b45c-effaef46bbe3" class="bulleted-list"><li style="list-style-type:disc">Informer le salarié sur les<mark class="highlight-red"> risques liés à son poste</mark> de travail et les <strong>mesures de prévention à adopter</strong>.</li></ul><ul id="dcee335b-ef84-48fb-ba44-5d314e8ff4ed" class="bulleted-list"><li style="list-style-type:disc">Échanger avec le salarié sur s<strong>a santé et son travail</strong>, et répondre à ses <strong>éventuelles questions</strong>.</li></ul></div></p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Formation continue</summary><div class="indented"><p id="8a3b8475-4b38-41c4-988f-db4f2cd30f70" class="">La formation professionnelle continue permet d’<strong>acquérir de nouvelles compétences</strong> durant sa vie active pour le <strong>retour ou le maintien dans l’emploi</strong> et pour <strong>sécuriser ou optimiser les parcours professionnels</strong> :</p><ul id="8a00a490-7d9c-4c47-a045-c20334a4938c" class="bulleted-list"><li style="list-style-type:disc">constitue une <mark class="highlight-red">obligation nationale</mark></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="694b1f11-d3c9-48c6-a12a-a6f9884f3d1a"><div style="font-size:1.5em"><span class="icon">⚖️</span></div><div style="width:100%"><em>l&#x27;article L6311-1 du Code du Travail</em></div></figure><ul id="b159bec7-55de-49db-ad48-94fc4f8f72e2" class="bulleted-list"><li style="list-style-type:disc">nécessite le <strong>financement de la formation</strong> elle-même et la <mark class="highlight-red">rémunération ou l’indemnisation</mark> de la personne durant cette formation</li></ul><p id="63f539b1-bf04-40d3-bd5a-9239ea4659ed" class="">Le salarié dispose également du <strong>Compte Personnel de Formation (CPF)</strong></p><p id="48ca3e19-b30b-4e19-8ffa-6c6a73cd1b85" class="">permet à chaque actif de cumuler des droits à la formation tout au long de sa carrière professionnelle, afin de financer des actions de formation pour développer ses compétences</p><p id="613ee127-cb88-4e9f-a195-059d7e8f7374" class=""><strong>plusieurs caractéristique à savoir sur le CPF :</strong></p><ul id="dac91010-1757-49e9-80fe-188f23e033eb" class="bulleted-list"><li style="list-style-type:disc"><strong>500 € par an</strong> pour un travail à <strong>temps plein</strong>, cumulables jusqu&#x27;à<strong> 5000 €</strong> (800 € – 8000 € max
+    pour les personnes peu ou pas qualifiées)</li></ul><ul id="56a99657-9bc0-461e-a52c-ddf1cb1e4862" class="bulleted-list"><li style="list-style-type:disc"><strong>l&#x27;accord des concernés</strong> est impératif pour les utiliser</li></ul><ul id="ec9ebbed-24cf-4c3e-8c35-f6141090fc0e" class="bulleted-list"><li style="list-style-type:disc"><strong>la rémunération est maintenue</strong> pendant la formation</li></ul><ul id="b3be4b9f-2691-4a20-9214-0d7b08da4bdb" class="bulleted-list"><li style="list-style-type:disc">En CDI, droit après 1 an d&#x27;ancienneté et en CDD, après 4 mois d&#x27;ancienneté</li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Les restrictions des droits et libertés</summary><div class="indented"><ul id="6d46b163-2380-4fbf-884d-4ceba532f02b" class="toggle"><li><details open=""><summary><strong>Liberté d’expression :</strong></summary><p id="ae55289c-c246-4da8-9aaf-589e43e18fa1" class="">Un employeur <mark class="highlight-red">ne peut pas interdire</mark> à un salarié, quel que soit sont statut dans l’entreprise, de <strong>s’exprimer librement </strong>sur des questions <strong>politiques, religieuses ou de vie privée.</strong></p></details></li></ul><ul id="221837dc-94b2-42da-82fe-badbf965b545" class="toggle"><li><details open=""><summary><strong>Vie privée :</strong></summary><p id="b24e6f7b-76ba-4dff-9c83-805e77dbbbd6" class="">Chaque salarié à la <strong>possibilité</strong> de protéger ce qui relève de <mark class="highlight-red">son intimité</mark>.</p></details></li></ul><ul id="743b2770-d434-4685-a299-9008813e265b" class="toggle"><li><details open=""><summary><strong>Grève :</strong></summary><p id="b6773e6c-41ae-4b7e-9924-f6b01c462933" class="">Les salariés ont le droit de se <strong>mettre en grève</strong> pour <strong>défendre leurs intérêts professionnels</strong>.</p><p id="969d7a12-9cb9-4062-a373-c8fe8f4b938d" class=""><strong>plusieurs conditions :</strong></p><ul id="d47bb1a0-bfec-4e54-ac4b-51ea8b5089c2" class="bulleted-list"><li style="list-style-type:disc">Collective</li></ul><ul id="7e56af20-6bca-4fb7-b6db-6f3851242ae2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Arrêt totale</mark> du travail</li></ul><ul id="191663be-f761-434b-aae3-197b99254f8a" class="bulleted-list"><li style="list-style-type:disc">Donner un <strong>préavis</strong> à leur employeur</li></ul><ul id="98198ab2-88b8-4432-a825-8f405486b413" class="bulleted-list"><li style="list-style-type:disc">Ne pas avoir pour objectif de <mark class="highlight-red">désorganiser l’entreprise</mark></li></ul><ul id="8ba3aa02-fc6b-47b6-9b28-e015fdf3ba29" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Suspension</mark> de la rémunération</li></ul><ul id="f2e170e4-a829-499e-b279-874a6b07f4cb" class="bulleted-list"><li style="list-style-type:disc">Pas de durée limité</li></ul><p id="da61be31-a1e6-49a8-9cd5-cf7bac5bcbbb" class="">Les entreprises<mark class="highlight-red"> ne peuvent pas</mark> avoir recours aux <strong>CCD</strong> pour remplacer les grévistes, remplacement possible pour les <strong>internes</strong> et <mark class="highlight-red">interdiction des discriminations</mark>, plus précisément des primes aux non grévistes.</p></details></li></ul><ul id="8a0b9032-ecc3-4219-bd9f-1a081f11cffd" class="toggle"><li><details open=""><summary><strong>Liberté syndicale :</strong></summary><p id="9240fd79-3de4-4ed8-a257-702f3dad2a8c" class=""><mark class="highlight-red">principe fondamental</mark> qui garantit aux travailleurs le <strong>droit de se syndiquer</strong>, c&#x27;est-à-dire de <strong>former ou de rejoindre un syndicat</strong> de leur choix, et de participer à des <strong>activités syndicales</strong> sans <mark class="highlight-red">discrimination</mark> de la part des <strong>employeurs ou des autorités publiques</strong>.</p><p id="098bfdce-353f-4e61-9b28-1bb85631411f" class=""><em>(syndicat = association de personnes dont le but est la défense d&#x27;intérêts professionnels communs)</em></p></details></li></ul><ul id="1419b71a-edba-4555-9232-8c22c57dcce9" class="toggle"><li><details open=""><summary><strong>Apparence physique :</strong></summary><p id="e19b0539-cc44-44c1-9933-704bf7701daa" class=""><mark class="highlight-red">Interdiction</mark> de la prise en compte de <strong>l’apparence physique</strong>, ce qui inclue <strong>vêtements, bijoux, signe religieux, etc.</strong>, pendant le <strong>recrutement et dans la relation de travail</strong>. Possible d’avoir des <strong>exigences</strong> si leur finalité est <strong>légitime</strong> et qu&#x27;elles sont <strong>nécessaires</strong>.</p></details></li></ul><ul id="d69ddab9-9ce0-4a5d-b245-7b3164440bc6" class="toggle"><li><details open=""><summary><strong>Grossesse :</strong></summary><p id="e0900938-f979-490f-88ac-eef22c3bf106" class="">Il existe des <strong>mesures de protection spécifiques</strong> pour garantir la <strong>santé et la sécurité</strong> de la femme enceinte au travail :</p><ul id="05871d4f-f1a1-442f-97a6-05d96460d6a0" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Pas d&#x27;obligation d&#x27;informer l&#x27;employeur</mark></li></ul><ul id="2e045f10-9dd3-4132-a11b-169ede1b50ec" class="bulleted-list"><li style="list-style-type:disc"><strong>Si l’employeur est informé :</strong><ul id="b224f4d7-058e-4614-bdc5-39b751729737" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">ne peut pas vous licencié</mark></li></ul><ul id="13d4a98a-c058-44ac-8b64-680bfcb637c3" class="bulleted-list"><li style="list-style-type:circle">possible de <strong>refuser</strong> les tâches <mark class="highlight-red">dangereuses</mark></li></ul><ul id="7323d604-a1e1-4eef-a30b-1a8ef6e8273d" class="bulleted-list"><li style="list-style-type:circle"><strong>absences justifiable</strong> si examens médicaux obligatoires</li></ul><ul id="164523ec-7b3c-4363-9590-5c9e505ea45e" class="bulleted-list"><li style="list-style-type:circle"><strong>aucune réduction de durée de travail</strong>, sauf si indiquée dans la convention collective</li></ul><p id="32660c56-879f-4da2-85b1-4195e779b68d" class="">
+    </p></li></ul></details></li></ul></div></details></div></article></body></html>
