@@ -1,146 +1,446 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio de Benhaddya Loqmann</title>
-    <style>
-        /* CSS styling for your portfolio */
-        /* Reset default margin and padding */
+<html class="light scroll-smooth" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio de Loqmann Benhaddya</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "berkeley-blue": "#003262", // Deep Navy
+              "stanford-red": "#8C1515", // Subtle nod if needed, but primary is Navy
+              "antique-gold": "#B08D55", // Bronze/Gold accents
+              "cream": "#F9F8F4", // Off-white background
+              "paper": "#ffffff",
+              "dark-paper": "#0a1929", 
+            },
+            fontFamily: {
+              "serif": ["Playfair Display", "serif"],
+              "sans": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "none": "0",
+              "sm": "0.125rem",
+              "DEFAULT": "0.25rem",
+              "md": "0.375rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "2xl": "1rem",
+            },
+            backgroundImage: {
+              'academic-gradient': 'linear-gradient(to right, rgba(0, 50, 98, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 50, 98, 0.05) 1px, transparent 1px)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: "Inter", sans-serif;
+            background-color: #F9F8F4;
+            color: #334155;
         }
-        
-        /* Header styles */
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Playfair Display", serif;
+            color: #003262;
         }
-        
-        h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        
-        /* Section styles */
-        section {
-            padding: 40px;
-        }
-        
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        
-        p {
-            line-height: 1.5;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        /* Link styles */
-        a {
-            color: #333;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Footer styles */
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
+        .bg-texture {
+            background-image: radial-gradient(#003262 0.8px, transparent 0.8px);
+            background-size: 32px 32px;
+            opacity: 0.04;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Portfolio de Benhaddya Loqmann</h1>
-    </header>
-    
-    <section>
-        <h2>À propos de moi</h2>
-        <p>Je suis passionné, concentré et désireux de réaliser mes objectifs. J'ai participé au programme d'excellence KESK'IA, qui m'a permis de me préparer à affronter mes nouveaux projets avec aisance.</p>
-    </section>
-    
-    <section>
-        <h2>Informations personnelles</h2>
-        <ul>
-            <li>Nom complet: Benhaddya Loqmann</li>
-            <li>Profession ou occupation: Étudiant en première année d'informatique à l'IUT d'Orsay, Université Paris-Saclay</li>
-            <li>Email: loqmannbenhaddya.pro@gmail.com</li>
-            <li>Téléphone: 0652640183</li>
-            <li>Réseaux sociaux:
-                <ul>
-                    <li><a href="https://www.linkedin.com/in/loqmann-benhaddya-554b83267/">LinkedIn</a></li>
-                    <li><a href="https://github.com/skezu">GitHub</a></li>
-                </ul>
-            </li>
-        </ul>
-    </section>
-    
-    <section>
-        <h2>Formation</h2>
-        <ul>
-            <li>Étudiant en première année d'informatique</li>
-            <li>Baccalauréat obtenu avec mention Très Bien</li>
-        </ul>
-    </section>
-    
-    <section>
-        <h2>Expérience professionnelle</h2>
-        <ul>
-            <li>Programme d'excellence KESK'IA - Autoformation en informatique sur une décennie</li>
-        </ul>
-    </section>
-    
-    <section>
-        <h2>Compétences</h2>
-        <ul>
-            <li>Développement front-end et back-end</li>
-            <li>Langages de programmation: Java, Python, C#, C++, JavaScript, Node.js, HTML/CSS, PHP, SQL</li>
-            <li>Outils et logiciels: Linux, Visual Studio, VS Code, IntelliJ IDEA, Eclipse, Unity 3D, After Effects, Premiere Pro, Canva</li>
-        </ul>
-    </section>
-    
-    <section>
-        <h2>Projets et réalisations</h2>
-        <ul>
-            <li>Jeu mobile développé avec Unity 3D</li>
-            <li>Application de messagerie chiffrée en Python</li>
-            <li>Apprentissage d'une IA de détection d'images</li>
-            <li>Création et déploiement d'une API</li>
-            <li>Application mobile intégrant ma propre IA</li>
-        </ul>
-    </section>
-    
-    <section>
-        <h2>Témoignages ou références</h2>
-        <blockquote>
-            <p>keskia evolukid</p>
-        </blockquote>
-    </section>
-    
-    <!-- Add more sections or information as needed -->
-    
-    <footer>
-        <p>Tous droits réservés &copy; 2023 Benhaddya Loqmann</p>
-    </footer>
-</body>
-</html>
+<body class="bg-cream antialiased overflow-x-hidden selection:bg-antique-gold/20 selection:text-berkeley-blue">
+<nav class="sticky top-0 z-50 w-full bg-cream/90 backdrop-blur-md border-b border-berkeley-blue/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-3 group">
+<div class="w-10 h-10 flex items-center justify-center rounded-sm bg-berkeley-blue text-white shadow-sm group-hover:bg-berkeley-blue/90 transition-colors border border-berkeley-blue">
+<span class="font-serif font-bold text-xl italic">LB</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight text-berkeley-blue group-hover:text-antique-gold transition-colors duration-300 font-serif">
+                    Loqmann Benhaddya
+                </h1>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-10 items-center">
+<a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]" href="#distinctions">Distinctions</a>
+<a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]" href="#projets">Projets</a>
+<a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]" href="#medias">Médias</a>
+<a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]" href="#apropos">À Propos</a>
+<a class="hidden lg:flex items-center justify-center h-10 px-6 bg-berkeley-blue hover:bg-[#002142] text-white text-[10px] font-bold uppercase tracking-[0.2em] transition-all shadow-md hover:shadow-lg" href="#contact">
+                    Contact
+                </a>
+</div>
+<div class="md:hidden">
+<button class="text-berkeley-blue hover:text-antique-gold">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<section class="relative pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden min-h-[90vh] flex items-center">
+<div class="absolute inset-0 bg-texture pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-cream/30 to-cream pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
+<div class="order-2 lg:order-1 lg:col-span-7 flex flex-col justify-center text-left">
+<div class="flex items-center gap-3 mb-6 opacity-0 animate-[fadeIn_0.6s_ease-out_forwards]">
+<div class="h-[1px] w-12 bg-antique-gold"></div>
+<span class="text-antique-gold font-sans font-bold tracking-[0.25em] uppercase text-[11px]">Portfolio Académique</span>
+</div>
+<h1 class="text-5xl sm:text-6xl lg:text-8xl font-serif font-medium text-berkeley-blue leading-[1.1] mb-6 tracking-tight opacity-0 animate-[fadeIn_0.6s_ease-out_0.2s_forwards]">
+            Loqmann <br class="hidden sm:block"/> Benhaddya
+        </h1>
+<div class="pl-0 lg:pl-0 border-l-0 lg:border-l-0 opacity-0 animate-[fadeIn_0.6s_ease-out_0.4s_forwards]">
+<div class="lg:max-w-xl">
+<h2 class="text-xl sm:text-2xl font-serif text-berkeley-blue/90 mb-4 italic">
+                    Ingénieur IA &amp; Entrepreneur Social.
+                </h2>
+<p class="text-lg font-light text-slate-600 leading-relaxed">
+                    Combler le fossé entre la <strong class="font-medium text-berkeley-blue">Tech</strong> et la <strong class="font-medium text-berkeley-blue">Société</strong>. Une rigueur scientifique au service de l'impact humain.
+                </p>
+</div>
+</div>
+<div class="flex flex-wrap gap-5 mt-10 opacity-0 animate-[fadeIn_0.6s_ease-out_0.6s_forwards]">
+<a class="group relative px-8 py-4 bg-berkeley-blue text-white overflow-hidden shadow-lg transition-all hover:shadow-xl hover:-translate-y-1 rounded-sm" href="#contact">
+<div class="absolute inset-0 w-full h-full bg-[#002142] translate-y-full transition-transform duration-300 group-hover:translate-y-0"></div>
+<span class="relative flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+                    Découvrir mon impact
+                </span>
+</a>
+<a class="group px-8 py-4 bg-transparent border border-berkeley-blue/20 text-berkeley-blue hover:border-berkeley-blue hover:bg-berkeley-blue/5 transition-all rounded-sm" href="#projets">
+<span class="flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+                    Voir mes projets
+                </span>
+</a>
+</div>
+<div class="flex items-center gap-10 mt-16 pt-8 border-t border-berkeley-blue/10 opacity-0 animate-[fadeIn_0.6s_ease-out_0.8s_forwards]">
+<div class="flex items-center gap-4 opacity-80 hover:opacity-100 transition-opacity cursor-default group">
+<div class="p-2 border border-berkeley-blue/10 rounded-full group-hover:border-berkeley-blue/30 transition-colors">
+<span class="material-symbols-outlined text-3xl text-berkeley-blue font-light">account_balance</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-0.5">Formation</span>
+<span class="font-serif text-lg text-berkeley-blue leading-none">UC Berkeley Alumni</span>
+</div>
+</div>
+<div class="w-[1px] h-10 bg-berkeley-blue/10 hidden sm:block"></div>
+<div class="flex items-center gap-4 opacity-80 hover:opacity-100 transition-opacity cursor-default group">
+<div class="p-2 border border-berkeley-blue/10 rounded-full group-hover:border-berkeley-blue/30 transition-colors">
+<span class="material-symbols-outlined text-3xl text-berkeley-blue font-light">psychology</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-0.5">Expertise</span>
+<span class="font-serif text-lg text-berkeley-blue leading-none">AI Engineer</span>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end relative items-center opacity-0 animate-[fadeIn_0.8s_ease-out_0.4s_forwards]">
+<div class="relative w-full max-w-[420px] aspect-[4/5]">
+<div class="absolute top-8 -right-8 w-full h-full border border-berkeley-blue/10 z-0 hidden md:block"></div>
+<div class="absolute -bottom-8 -left-8 w-64 h-64 bg-antique-gold/10 rounded-full blur-3xl z-0"></div>
+<div class="relative h-full w-full shadow-2xl z-10 bg-cream p-3 border border-berkeley-blue/5">
+<div class="relative w-full h-full overflow-hidden bg-berkeley-blue">
+<div class="absolute inset-0 bg-berkeley-blue/20 mix-blend-multiply z-20 pointer-events-none"></div>
+<div class="w-full h-full bg-cover bg-center grayscale transition-all duration-1000 ease-out hover:grayscale-0 hover:scale-105" data-alt="Professional portrait of Loqmann Benhaddya" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDMNS_wNPB12HL7Wpva-k46yjXXMuAogS-1aeMnIs8sn4bQ7a0o9rb0za-LQ0S7wJR1027YotQl3QGA9Zh31isFmw2OZ1sNibbUO4HJawNOSJAgUVg6bcmDOXSDukIZlqmeP06pwrM0vy-rQCKcXRqIsBwD42HcipYDPQHViJxwHtHt6S-6j9G8hs9EL8vmxwZdfTyLtgkBo5xcXkT3DIZi-gkw9NZmWTEV9wi98HBdo6g7f3nxpZLRCiGW4qGd-iSCt5ddqTwAzDE");'>
+</div>
+<div class="absolute inset-0 border-[1px] border-white/30 z-30 m-3 pointer-events-none"></div>
+</div>
+</div>
+<div class="absolute -bottom-6 -right-4 z-40 bg-white p-4 shadow-xl border border-berkeley-blue/5 max-w-[180px] hidden sm:block">
+<div class="flex flex-col gap-1">
+<span class="material-symbols-outlined text-antique-gold text-2xl">verified</span>
+<p class="font-serif text-sm font-bold text-berkeley-blue mt-1">Excellence &amp; Innovation</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-white border-y border-berkeley-blue/5" id="distinctions">
+<div class="max-w-5xl mx-auto px-4 sm:px-6">
+<div class="mb-16 text-center">
+<h2 class="text-4xl font-serif text-berkeley-blue mb-4">Distinctions &amp; Reconnaissance</h2>
+<div class="h-[1px] w-24 bg-antique-gold mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-[80px_1fr] gap-x-8 gap-y-12 relative">
+<div class="hidden md:block absolute left-[39px] top-4 bottom-4 w-[1px] bg-berkeley-blue/20"></div>
+<div class="flex flex-col items-center relative z-10">
+<div class="flex items-center justify-center w-20 h-20 rounded-full bg-cream border border-berkeley-blue/10 text-antique-gold shadow-sm">
+<span class="material-symbols-outlined text-[32px]">emoji_events</span>
+</div>
+</div>
+<div class="flex flex-col p-8 bg-cream hover:bg-white rounded-sm border border-transparent hover:border-antique-gold/30 hover:shadow-lg transition-all duration-300">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2 mb-3">
+<h3 class="text-2xl font-serif font-bold text-berkeley-blue">Jeune Talent de l'Année 2023</h3>
+<span class="text-xs font-bold tracking-widest uppercase text-antique-gold border border-antique-gold px-2 py-1">International</span>
+</div>
+<p class="text-berkeley-blue font-medium mb-3 border-b border-berkeley-blue/10 pb-3 inline-block">Business Analytics &amp; AI Summit — Californie</p>
+<p class="text-slate-600 leading-relaxed font-light">
+                    Récompensé pour l'excellence académique et l'impact social lors du sommet international organisé à l'UC Berkeley. Une reconnaissance de la capacité à allier rigueur scientifique et vision humaniste.
+                </p>
+</div>
+<div class="flex flex-col items-center relative z-10">
+<div class="flex items-center justify-center w-20 h-20 rounded-full bg-cream border border-berkeley-blue/10 text-antique-gold shadow-sm">
+<span class="material-symbols-outlined text-[32px]">military_tech</span>
+</div>
+</div>
+<div class="flex flex-col p-8 bg-cream hover:bg-white rounded-sm border border-transparent hover:border-antique-gold/30 hover:shadow-lg transition-all duration-300">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2 mb-3">
+<h3 class="text-2xl font-serif font-bold text-berkeley-blue">Lauréat Concours Kesk'IA</h3>
+<span class="text-xs font-bold tracking-widest uppercase text-antique-gold border border-antique-gold px-2 py-1">1ère Édition</span>
+</div>
+<p class="text-berkeley-blue font-medium mb-3 border-b border-berkeley-blue/10 pb-3 inline-block">Innovation IA Civique</p>
+<p class="text-slate-600 leading-relaxed font-light">
+                    Premier prix pour une solution d'intelligence artificielle appliquée aux problématiques citoyennes et urbaines. Démonstration de l'apport concret de l'IA dans la gestion de la cité.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-cream" id="projets">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="text-left">
+<span class="text-antique-gold font-bold tracking-widest uppercase text-xs mb-2 block">Portfolio</span>
+<h2 class="text-4xl font-serif text-berkeley-blue">Projets Sélectionnés</h2>
+</div>
+<a class="hidden md:flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-berkeley-blue hover:text-antique-gold transition-colors group" href="#">
+                Voir tout le portfolio 
+                <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<article class="group bg-white rounded-sm overflow-hidden border border-berkeley-blue/5 shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="h-72 w-full overflow-hidden relative">
+<div class="absolute inset-0 bg-berkeley-blue/20 group-hover:bg-berkeley-blue/0 transition-colors z-10"></div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBALnS-5hKq8HPw3AK-cW-OAcv9rGMnsTWAPOr_SbpKIVCbCjcUZLe5xUR_Ovcac6XNJrm8L8q5eVWQFR1tAPWy1X2oWlocOUBJo4-Wb8RFfX9uLmAZKJ8rEJXR9PX-H5AapR-p3Z1NMIYZHq7iSaggoT55YeRzuoIxuseyjNbm9PsqEfuioYpvuIYwUf0wUjfosw4woBaagLmJRtjk-MrZbGH2pQe2PvE7raxvG0YQqenkfcVNTisMfQucTNjmvzMqYS5gNUwAnfM");'>
+</div>
+<div class="absolute top-6 left-6 z-20">
+<span class="inline-block px-3 py-1 bg-white text-berkeley-blue text-[10px] font-bold uppercase tracking-widest border border-berkeley-blue/10">Environnement</span>
+</div>
+</div>
+<div class="p-8 border-t border-berkeley-blue/5">
+<h3 class="text-3xl font-serif text-berkeley-blue mb-4 group-hover:text-antique-gold transition-colors">C du propre</h3>
+<p class="text-slate-600 mb-6 leading-relaxed font-light">
+                        Application mobile IA pour le tri des déchets. Construite avec <span class="font-medium">Python</span> et <span class="font-medium">TensorFlow</span> sur un dataset propriétaire. Ce projet a été présenté dans la Silicon Valley comme une innovation majeure pour l'écologie urbaine.
+                    </p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100">
+<div class="flex gap-4 text-slate-400">
+<span class="material-symbols-outlined text-[20px]" title="Python">code</span>
+<span class="material-symbols-outlined text-[20px]" title="AI">psychology</span>
+<span class="material-symbols-outlined text-[20px]" title="Mobile">smartphone</span>
+</div>
+<button class="text-xs font-bold uppercase tracking-widest text-berkeley-blue hover:text-antique-gold transition-colors flex items-center gap-2">
+                            Détails <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</button>
+</div>
+</div>
+</article>
+<article class="group bg-white rounded-sm overflow-hidden border border-berkeley-blue/5 shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="h-72 w-full overflow-hidden relative">
+<div class="absolute inset-0 bg-berkeley-blue/20 group-hover:bg-berkeley-blue/0 transition-colors z-10"></div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB9fQKI0ns8eUg0Xs7bQsZHlgDbEdt_zRCeboXmeVC2JWDiVpdEc0i3xoKeeX0tQz7JGpTz2oNLHSa-bXqCW-IP1RngMQPVRj1YI73uPSan3W-u00KUejADNRNSncL7wmME97etfYSemjpxOgAsPyDAgSDBtNLUc-OluwEcsxcVcTm8d_BQYB5_kjvYQoTLxESxW8k31jABUS--UwX9dUVgn4Svzm0n_-0vXxkjIMPhbD-CdCNkv9nBv-X9MevMNATkebjY9p3Z1XE");'>
+</div>
+<div class="absolute top-6 left-6 z-20">
+<span class="inline-block px-3 py-1 bg-white text-berkeley-blue text-[10px] font-bold uppercase tracking-widest border border-berkeley-blue/10">Social Tech</span>
+</div>
+</div>
+<div class="p-8 border-t border-berkeley-blue/5">
+<h3 class="text-3xl font-serif text-berkeley-blue mb-4 group-hover:text-antique-gold transition-colors">OSM'OZ</h3>
+<p class="text-slate-600 mb-6 leading-relaxed font-light">
+                        Co-fondateur d'une association visant à démocratiser l'accès à la technologie pour les jeunes des quartiers populaires. Ateliers de code, mentorat et hackathons pour l'inclusion numérique.
+                    </p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100">
+<div class="flex gap-4 text-slate-400">
+<span class="material-symbols-outlined text-[20px]" title="Community">diversity_3</span>
+<span class="material-symbols-outlined text-[20px]" title="Education">school</span>
+</div>
+<button class="text-xs font-bold uppercase tracking-widest text-berkeley-blue hover:text-antique-gold transition-colors flex items-center gap-2">
+                            Détails <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<div class="mt-12 text-center md:hidden">
+<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-berkeley-blue hover:text-antique-gold transition-colors" href="#">
+                Voir tout le portfolio <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<section class="py-24 bg-white border-y border-berkeley-blue/5" id="medias">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-20">
+<span class="text-antique-gold font-bold tracking-widest uppercase text-xs mb-2 block">Ils en parlent</span>
+<h2 class="text-4xl font-serif text-berkeley-blue mb-4">Presse &amp; Médias</h2>
+<div class="h-[1px] w-24 bg-antique-gold mx-auto mb-6"></div>
+<p class="text-slate-500 max-w-2xl mx-auto font-light italic">"L'innovation n'a de sens que si elle est partagée."</p>
+</div>
+<div class="flex flex-wrap justify-center items-center gap-16 lg:gap-32">
+<div class="group flex flex-col items-center gap-6 cursor-pointer opacity-40 hover:opacity-100 transition-all duration-500">
+<div class="h-10 flex items-center justify-center grayscale group-hover:grayscale-0">
+<div class="text-3xl font-black italic font-serif text-berkeley-blue">Le Parisien</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-antique-gold opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">Lire l'article</span>
+</div>
+<div class="group flex flex-col items-center gap-6 cursor-pointer opacity-40 hover:opacity-100 transition-all duration-500">
+<div class="h-10 flex items-center justify-center grayscale group-hover:grayscale-0">
+<div class="flex items-center gap-1">
+<span class="font-bold text-3xl tracking-tighter text-berkeley-blue">SQOOL</span>
+<div class="bg-berkeley-blue text-white text-[10px] font-bold px-1 py-0.5 rounded-sm">TV</div>
+</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-antique-gold opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">Voir l'interview</span>
+</div>
+<div class="group flex flex-col items-center gap-6 cursor-pointer opacity-40 hover:opacity-100 transition-all duration-500">
+<div class="h-10 flex items-center justify-center grayscale group-hover:grayscale-0">
+<div class="text-3xl font-bold text-berkeley-blue lowercase tracking-tight">actu.fr</div>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-antique-gold opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">Lire l'article</span>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-cream" id="apropos">
+<div class="max-w-6xl mx-auto px-4 sm:px-6">
+<div class="bg-white rounded-sm p-8 md:p-16 shadow-xl border border-berkeley-blue/5">
+<div class="flex flex-col md:flex-row gap-16 items-start">
+<div class="flex-1">
+<span class="text-antique-gold font-bold tracking-widest uppercase text-xs mb-3 block">Biographie</span>
+<h2 class="text-4xl font-serif text-berkeley-blue mb-8 leading-tight">De Trappes à Berkeley : <br/><i class="font-light">Une Odyssée Moderne</i></h2>
+<div class="text-slate-700 leading-8 font-light space-y-6 text-lg">
+<p class="first-letter:text-5xl first-letter:font-serif first-letter:text-berkeley-blue first-letter:mr-2 first-letter:float-left">
+                            Mon parcours est celui d'une détermination sans faille. Ayant grandi à Trappes, j'ai très tôt compris que la technologie pouvait être un levier puissant d'ascension sociale et d'impact positif.
+                        </p>
+<p>
+                            À travers la résilience et le travail acharné, j'ai tracé mon chemin jusqu'aux portes de l'UC Berkeley. Ce voyage n'est pas seulement académique ; il est le symbole qu'avec la bonne vision, les barrières socio-économiques peuvent être brisées.
+                        </p>
+<p>
+                            Aujourd'hui, ma vision pour l'IA est claire : elle doit être éthique, inclusive et servir le bien commun. Je construis des ponts entre l'innovation de pointe de la Silicon Valley et les besoins réels de notre société.
+                        </p>
+</div>
+<div class="mt-12 pt-8 border-t border-slate-100 flex items-center gap-6">
+<img alt="Signature" class="w-20 h-20 rounded-full object-cover grayscale border-2 border-white shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSmwqoibhWMkWJs8Jmp4p-dQbebLIO6Yln90gaQMKg7KmpT0jprzxqbe0a1qevf4M1quA9o_imMoULeJLsVLat6vnRN6C_nYL5EqOBRyOYOoNB-j7-EagD10WiKSMq2esaZh3digRF64jvu0WWh-YxE_Fjj2cA1x9Bq9TRGkFG5pIz2CXx_EFGLtv9EcU-c8oCeGgT-7yt5LBgDh6rfmgjOyTpSLb9rvhQ7xpfWUnAAJpa2viYMRQcxEfVEiwiN3h2kvnpUP6UiAU"/>
+<div>
+<p class="font-serif font-bold text-xl text-berkeley-blue">Loqmann Benhaddya</p>
+<p class="text-xs font-bold uppercase tracking-widest text-antique-gold mt-1">Ingénieur &amp; Fondateur</p>
+</div>
+</div>
+</div>
+<div class="hidden md:block w-1/3 sticky top-32">
+<div class="relative w-full aspect-[3/4] bg-berkeley-blue rounded-sm overflow-hidden shadow-2xl border-4 border-white">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBQ7Ttx0waEo8Ll0bzOk_WxQ--WM1gJdNkiDlGJ438YdBOQKHzv5NhZy7pmVP6ETcfqeSTWeMIu8tPk2zldLS9JQv3kfIVhgGLw5Pg3g25iyPZPuwzzhpEMpQNoOddm468DK33xyDWsRETB1RFbXt6xFMpmNVNdtoU3tRqV-Z4_Sy6XGB_vy23DJzYlbD1HYTpo0lnYw-VXZV74lFsXiSHuJewd0dOC0lzwIRhYMUIsT1IUBGxARuIDF2aX2nCcbeA-fQLI8iioRXE");'></div>
+<div class="absolute inset-0 flex items-center justify-center p-8 bg-berkeley-blue/20">
+<div class="border border-white/30 p-8 w-full h-full flex items-center justify-center">
+<span class="font-serif text-white/90 text-center text-2xl italic leading-relaxed">
+                                    "La connaissance est le seul bien qui s'accroît quand on le partage."
+                                </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-white border-t border-berkeley-blue/5" id="contact">
+<div class="max-w-4xl mx-auto px-4 sm:px-6">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-serif text-berkeley-blue mb-4">Contact Innovant</h2>
+<div class="h-[1px] w-24 bg-antique-gold mx-auto mb-6"></div>
+<p class="text-slate-500 font-light">Interagissez avec mon jumeau numérique. Une expérience IA sobre et précise.</p>
+</div>
+<div class="bg-cream rounded-sm shadow-2xl border border-berkeley-blue/10 overflow-hidden flex flex-col min-h-[500px]">
+<div class="bg-berkeley-blue p-5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-berkeley-blue rounded-full"></div>
+</div>
+<div>
+<p class="font-serif font-bold text-lg text-white">Loqmann AI Twin</p>
+<p class="text-xs text-white/60 uppercase tracking-widest">Assistant Virtuel</p>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-white/30"></div>
+<div class="w-2 h-2 rounded-full bg-white/30"></div>
+<div class="w-2 h-2 rounded-full bg-white/30"></div>
+</div>
+</div>
+<div class="flex-1 p-8 flex flex-col gap-6 overflow-y-auto bg-white">
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-berkeley-blue/5 flex-shrink-0 flex items-center justify-center text-berkeley-blue mt-1">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<div class="bg-cream p-6 rounded-lg rounded-tl-none shadow-sm text-slate-700 border border-slate-100 font-light leading-relaxed">
+<p>Bonjour. Je suis l'intelligence artificielle représentative de Loqmann Benhaddya. Je suis programmé pour répondre à vos questions concernant son parcours académique, ses projets technologiques ou ses disponibilités. Comment puis-je vous assister ?</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 mt-auto justify-end">
+<button class="px-4 py-2 bg-white border border-berkeley-blue/20 text-berkeley-blue text-xs font-bold uppercase tracking-wider hover:bg-berkeley-blue hover:text-white transition-all shadow-sm">
+                        Disponibilités conférence
+                    </button>
+<button class="px-4 py-2 bg-white border border-berkeley-blue/20 text-berkeley-blue text-xs font-bold uppercase tracking-wider hover:bg-berkeley-blue hover:text-white transition-all shadow-sm">
+                        En savoir plus sur "C du propre"
+                    </button>
+<button class="px-4 py-2 bg-white border border-berkeley-blue/20 text-berkeley-blue text-xs font-bold uppercase tracking-wider hover:bg-berkeley-blue hover:text-white transition-all shadow-sm">
+                        Contact direct
+                    </button>
+</div>
+</div>
+<div class="p-5 bg-cream border-t border-slate-200">
+<div class="flex items-center gap-3 bg-white rounded-sm px-4 py-3 border border-slate-200 focus-within:border-berkeley-blue focus-within:ring-1 focus-within:ring-berkeley-blue transition-all shadow-sm">
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full text-berkeley-blue placeholder-slate-400 font-light" placeholder="Posez votre question..." type="text"/>
+<button class="text-berkeley-blue hover:text-antique-gold p-1 transition-colors">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-center gap-12 mt-16">
+<a class="flex flex-col items-center gap-2 text-slate-400 hover:text-berkeley-blue transition-colors group" href="#">
+<span class="material-symbols-outlined text-[32px] group-hover:scale-110 transition-transform">work</span>
+<span class="text-xs font-bold uppercase tracking-widest">LinkedIn</span>
+</a>
+<a class="flex flex-col items-center gap-2 text-slate-400 hover:text-berkeley-blue transition-colors group" href="#">
+<span class="material-symbols-outlined text-[32px] group-hover:scale-110 transition-transform">code_blocks</span>
+<span class="text-xs font-bold uppercase tracking-widest">GitHub</span>
+</a>
+<a class="flex flex-col items-center gap-2 text-slate-400 hover:text-berkeley-blue transition-colors group" href="mailto:contact@loqmann.com">
+<span class="material-symbols-outlined text-[32px] group-hover:scale-110 transition-transform">mail</span>
+<span class="text-xs font-bold uppercase tracking-widest">Email</span>
+</a>
+</div>
+</div>
+</section>
+<footer class="py-12 bg-berkeley-blue text-center border-t border-white/10">
+<div class="flex flex-col items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center border border-white/20 text-white font-serif italic text-lg mb-2">LB</div>
+<p class="text-sm text-white/60 font-light">
+            © 2024 Loqmann Benhaddya. Tous droits réservés.
+        </p>
+<p class="text-xs text-antique-gold uppercase tracking-widest opacity-80">
+            Design &amp; Intelligence Artificielle
+        </p>
+</div>
+</footer>
+<style>@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</body></html>
