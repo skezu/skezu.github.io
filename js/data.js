@@ -50,7 +50,7 @@ const portfolioData = {
         list: [
             {
                 icon: "emoji_events",
-                title: "Jeune Talent de l'Année 2023",
+                title: "Young Talent of the Year 2023",
                 tag: "International",
                 subtitle: "Business Analytics & AI Summit — Californie",
                 description: "Récompensé pour l'excellence académique et l'impact social lors du sommet international organisé à l'UC Berkeley. Une reconnaissance de la capacité à allier rigueur scientifique et vision humaniste."
@@ -61,6 +61,20 @@ const portfolioData = {
                 tag: "1ère Édition",
                 subtitle: "Innovation IA Civique",
                 description: "Premier prix pour une solution d'intelligence artificielle appliquée aux problématiques citoyennes et urbaines. Démonstration de l'apport concret de l'IA dans la gestion de la cité."
+            },
+            {
+                icon: "campaign",
+                title: "Startup Pitch Winner",
+                tag: "2023",
+                subtitle: "VivaTech — Paris",
+                description: "Présentation de la startup GreenAI lors du salon VivaTech 2023."
+            },
+            {
+                icon: "school",
+                title: "Prix du Talent 2025",
+                tag: "2025",
+                subtitle: "Université Paris Saclay",
+                description: "Lauréat du prix #ReussiteAlternance2025 décerné par le CFA numiA et l'Université Paris Saclay."
             }
         ]
     },
