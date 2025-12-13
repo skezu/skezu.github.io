@@ -117,20 +117,33 @@ const portfolioData = {
                 type: "text",
                 name: "Le Parisien",
                 label: "Lire l'article",
-                link: "#"
+                link: "https://www.leparisien.fr/yvelines-78/intelligence-artificielle-ces-codeurs-de-trappes-ont-gagne-leur-billet-pour-la-silicon-valley-13-07-2023-IT6PFGCY4BEXXOYSGBA4OPO67U.php"
             },
             {
                 type: "complex",
                 main: "SQOOL",
                 sub: "TV",
                 label: "Voir l'interview",
-                link: "#"
+                link: "https://youtu.be/ukOPIeNO_qY?si=T8JE2E0iJXxQRqI7"
+            },
+            {
+                type: "complex",
+                main: "franceinfo",
+                sub: ":",
+                label: "Lire l'article",
+                link: "https://www.franceinfo.fr/sciences/high-tech/technologie-de-trappes-a-la-silicon-valley-rencontre-avec-loqmann-benhaddya-prodige-de-l-intelligence-artificielle_6301326.html"
             },
             {
                 type: "text",
-                name: "actu.fr",
-                label: "Lire l'article",
-                link: "#"
+                name: "BanlieusardNouveau",
+                label: "Voir la vidéo",
+                link: "https://youtu.be/22DuQTz1Zc8?si=eIfN1lAmKZEzGlz-"
+            },
+            {
+                type: "text",
+                name: "Talendeed",
+                label: "Voir la vidéo",
+                link: "https://youtu.be/fyelOp2e7zI?si=MJJlXCxzNIOafZvW"
             }
         ]
     },
