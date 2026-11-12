@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Classroom · Loqmann Benhaddya</title>
+<meta name="description" content="Teaching generative AI: managers at Nissan and L'Oréal with Data Wise Academy, Stanford Continuing Studies, IUT d'Orsay, and OSMOZ, the non-profit I co-founded in Trappes.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap">
+<style>
+/* The common frame, shared by the home page and every chapter.
+   Paper and ink, the dark stage, one yellow highlighter, one violet dot. Newsreader for headlines, Archivo for the interface. */
+:root{
+  --paper:#FFFFFF; --ink:#111214; --muted:#5C5F66; --hair:rgba(17,18,20,.14); --wash:#F4F4F1;
+  --stage:#0B0B0D; --onstage:#F4F4F1; --dim:#A3A6AE; --soft:#D2D4D9; --rule:rgba(244,244,241,.18);
+  --light:#FFE600; --live:#6F2CF5;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif; --ui:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --black:'Archivo Black','Archivo',Impact,sans-serif; --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --mast:49px;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--mast) + 8px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--ui);-webkit-font-smoothing:antialiased}
+body.dark{background:var(--stage);color:var(--onstage)}
+a{color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.dark :focus-visible,.stage :focus-visible{outline-color:var(--light)}
+
+/* masthead: the same band on every page */
+.mast{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;height:calc(var(--mast) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--hair);background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.dark .mast{border-color:var(--rule);background:rgba(11,11,13,.88)}
+.logo{font:400 17px/1 var(--black);text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.logo b{color:var(--live);font-weight:400}
+.sec{font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dark .sec{color:var(--dim)}
+.mast .sp{flex:1}
+.ghost{font:500 13.5px var(--ui);color:var(--muted);padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.ghost:hover{color:var(--ink);background:rgba(17,18,20,.06)}
+.dark .ghost{color:var(--dim)}.dark .ghost:hover{color:var(--onstage);background:rgba(255,255,255,.08)}
+
+/* type */
+.kick{font:700 11.5px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--live);display:flex;gap:8px;align-items:center;margin:0 0 14px}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--live);flex:none}
+h1{font:500 clamp(38px,5.6vw,68px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+h2{font:500 clamp(28px,3.8vw,46px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+h3{font:500 clamp(20px,2vw,25px)/1.15 var(--serif);letter-spacing:-.01em;margin:0 0 6px}
+.stand{font:400 clamp(17px,1.5vw,20px)/1.5 var(--serif);color:var(--muted);margin:0;max-width:54ch}
+.dark .stand,.stage .stand{color:var(--soft)}
+.lab{font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.dark .lab,.stage .lab{color:var(--dim)}
+mark{background:linear-gradient(transparent 58%,var(--light) 58% 92%,transparent 92%);color:inherit;padding:0 .06em}
+.num{font:400 12.5px var(--mono);color:var(--muted)}
+
+/* buttons and contact row */
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 13.5px var(--ui);text-decoration:none;background:var(--ink);color:var(--paper);padding:11px 17px;border-radius:99px;border:0;cursor:pointer}
+.btn:hover{background:#000}
+.btn.y{background:var(--light);color:var(--stage)}
+.btn.line{background:none;color:inherit;box-shadow:inset 0 0 0 1px var(--hair)}
+.btn.line:hover{box-shadow:inset 0 0 0 1px currentColor}
+.dark .btn.line,.stage .btn.line{box-shadow:inset 0 0 0 1px var(--rule)}
+.reach{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* the dark stage, when a page uses it for a section; the violet gets a lighter tint there so small labels stay readable */
+.stage{background:var(--stage);color:var(--onstage)}
+.stage,body.dark{--live:#9B7CFF}
+
+/* what closes every chapter: where you are, and the next one */
+.next{display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid var(--hair)}
+.next a{text-decoration:none;padding:clamp(22px,3.4vw,38px) clamp(18px,3vw,34px)}
+.next .back{display:flex;align-items:flex-end;font:600 12px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--hair)}
+.next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.next .go:hover{background:var(--wash)}
+.next .go .k{grid-column:1/-1;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--live)}
+.next .go b{font:500 clamp(28px,4.4vw,56px)/1 var(--serif);letter-spacing:-.02em}
+.next .go .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 var(--serif);color:var(--muted)}
+.next .go .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 var(--serif);transition:transform .25s}
+.next .go:hover .ar{transform:translateX(6px)}
+
+/* a labelled frame for the parts of a preview that only explain the preview */
+.demo{border:1px dashed var(--hair);border-radius:14px;overflow:hidden}
+.demo>.tag{display:block;padding:9px 14px;font:600 11px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px dashed var(--hair);background:var(--wash)}
+
+/* page to page: the browser cross-fades and carries shared elements over, where it can */
+
+a:not([href]){cursor:default}
+@media (max-width:480px){.mast .opt{display:none}}
+@media (max-width:640px){
+  .sec{display:none}
+  .next{grid-template-columns:1fr}.next .back{border-right:0;border-bottom:1px solid var(--hair);padding-block:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+</style>
+<style>
+/* Chapter 04. An article, then a course list set like a printed timetable, one lesson told on the dark stage,
+   and the rooms themselves in photographs. */
+.intro{padding-block:clamp(36px,6vw,76px) clamp(26px,4vw,44px);max-width:900px}
+.by{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;padding-top:14px;border-top:1px solid var(--hair);font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+figure{margin:0}
+figure img{width:100%;height:auto;border-radius:6px}
+figcaption{margin-top:9px;font:500 12.5px/1.4 var(--ui);color:var(--muted)}
+.stage figcaption{color:var(--dim)}
+
+/* the course list */
+.list{border-top:3px double var(--ink);padding-block:clamp(22px,3.4vw,40px) clamp(40px,6vw,76px)}
+.tt{width:100%;border-collapse:collapse;margin-top:14px}
+.tt th{text-align:left;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:10px 18px 10px 0;border-bottom:1px solid var(--ink)}
+.tt td{padding:16px 18px 16px 0;border-bottom:1px solid var(--hair);vertical-align:top;font:400 15px/1.45 var(--ui);color:var(--muted)}
+.tt td:first-child{font:500 clamp(19px,1.9vw,23px)/1.15 var(--serif);color:var(--ink);width:27%}
+.tt td:first-child small{display:block;margin-top:4px;font:600 11px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tt td:nth-child(3){color:var(--ink)}
+.tt td:last-child{white-space:nowrap;font:400 12.5px var(--mono);padding-right:0}
+.tt a{text-underline-offset:3px}
+
+/* one lesson */
+.lesson{padding-block:clamp(50px,8vw,100px)}
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(26px,5vw,70px);align-items:start;margin-top:clamp(20px,3vw,34px)}
+.story .copy{margin:0 0 14px;font:400 clamp(17px,1.45vw,19.5px)/1.55 var(--serif);color:var(--soft);max-width:44ch}
+.swap{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:0 0 22px;font:500 clamp(40px,6.4vw,84px)/.95 var(--serif);letter-spacing:-.03em}
+.swap s{color:var(--dim);text-decoration-thickness:3px;text-decoration-color:var(--live)}
+.swap b{font-weight:500;color:var(--stage);background:var(--light);padding:0 .14em}
+.swap small{flex-basis:100%;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:18px 0 0;padding:0}
+.chips li{font:600 12px var(--ui);padding:5px 11px;border-radius:99px;box-shadow:inset 0 0 0 1px var(--rule);color:var(--soft)}
+.shots{display:grid;gap:18px}
+.shots .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+/* the other rooms */
+.rooms{padding-block:clamp(44px,7vw,90px);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(26px,5vw,70px);align-items:start}
+.rooms .txt{display:grid;gap:0;border-top:1px solid var(--ink)}
+.rooms article{padding:20px 0;border-bottom:1px solid var(--hair);display:grid;gap:6px}
+.rooms article p{margin:0;font:400 15.5px/1.5 var(--ui);color:var(--muted)}
+.rooms .r{font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--live)}
+
+/* OSMOZ */
+.home{background:var(--wash)}
+.home .in{padding-block:clamp(44px,7vw,90px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(26px,5vw,70px);align-items:start}
+.home .copy{margin:0 0 14px;font:400 clamp(17px,1.45vw,19.5px)/1.55 var(--serif);max-width:44ch}
+.home ul{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--ink)}
+.home li{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 0;border-bottom:1px solid var(--hair);font:400 15px/1.45 var(--ui);color:var(--muted)}
+.home li b{font:500 19px/1.2 var(--serif);color:var(--ink)}
+.home .more{display:inline-block;margin-top:18px;font:600 14px var(--ui);text-underline-offset:3px}
+
+@media (max-width:860px){
+  .tt thead{display:none}
+  .tt tr{display:grid;gap:4px;padding:14px 0;border-bottom:1px solid var(--hair)}
+  .tt td{border:0;padding:0}.tt td:first-child{width:auto}
+  .tt td[data-l]::before{content:attr(data-l) " · ";font:700 10px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .story,.rooms,.home .in{grid-template-columns:1fr}
+}
+@media (max-width:480px){.shots .two{grid-template-columns:1fr}}
+</style>
+<link rel="alternate" hreflang="en" href="https://skezu.github.io/teaching.html"><link rel="alternate" hreflang="fr" href="https://skezu.github.io/fr/teaching.html"><link rel="alternate" hreflang="x-default" href="https://skezu.github.io/teaching.html">
+<script>
+/* First visit from outside the site, in a browser set to French: go to the French page.
+   A choice made with the FR / EN switch is remembered and always wins. */
+(function () {
+  try {
+    var pick = localStorage.getItem('lb-lang');
+    var ref = document.referrer && new URL(document.referrer).origin === location.origin;
+    var fr = (navigator.languages && navigator.languages[0] || navigator.language || '').toLowerCase().indexOf('fr') === 0;
+    if (!pick && !ref && fr) location.replace('fr/' + (location.pathname.split('/').pop() || 'index.html') + location.search + location.hash);
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-lang]');
+    if (a) try { localStorage.setItem('lb-lang', a.dataset.lang); } catch (x) {}
+  });
+})();
+</script>
+<style>
+/* The band, the next-story block and the footer: the same on every page, in a light and a dark tone.
+   Names start with lb- so they never collide with a chapter's own styles. */
+.lb-mast{--v:#6F2CF5;--c:#111214;--bg:rgba(255,255,255,.92);--ln:rgba(17,18,20,.14);position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;height:calc(49px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--ln);background:var(--bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--c);transition:background .3s,color .3s,border-color .3s}
+.lb-mast[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:rgba(11,11,13,.88);--ln:rgba(244,244,241,.18)}
+.lb-logo{font:400 17px/1 'Archivo Black','Archivo',Impact,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:inherit}
+.lb-logo b{color:var(--v);font-weight:400}
+.lb-logo .s{display:none}
+.lb-sp{flex:1}
+.lb-rail{display:flex;gap:2px;min-width:0;font:600 12.5px/1 'Archivo',system-ui,sans-serif;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.lb-rail::-webkit-scrollbar{display:none}
+.lb-rail a{padding:7px 9px;border-radius:99px;color:inherit;opacity:.66;text-decoration:none;transition:opacity .15s}
+.lb-rail a:hover{opacity:1}
+.lb-rail a[aria-current]{background:#FFE600;color:#111214;opacity:1}
+.lb-link[aria-current]{color:#111214}
+/* the yellow marker as its own layer (placed by the script after the band); without the script the word keeps its own background */
+.lb-pill{position:absolute;z-index:0;left:0;top:0;width:0;height:0;border-radius:99px;background:#FFE600;opacity:0;pointer-events:none;view-transition-name:lb-pill}
+.lb-rail,.lb-link,.lb-logo{position:relative;z-index:1}
+.lb-mast.pilled a[aria-current]{background:none}
+.lb-link{font:500 13.5px/1 'Archivo',system-ui,sans-serif;color:inherit;opacity:.7;padding:8px 9px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.lb-link:hover,.lb-link[aria-current]{opacity:1}
+.lb-mast:not(.pilled) .lb-link[aria-current]{background:#FFE600;border-radius:99px}
+.lb-mast a:focus-visible,.lb-next a:focus-visible,.lb-foot a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:6px}
+@media (max-width:900px){.lb-logo .f{display:none}.lb-logo .s{display:inline}}
+@media (max-width:600px){.lb-link.opt{display:none}.lb-rail a{padding:7px 8px}.lb-rail{padding-right:20px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}.lb-link{padding:8px 10px}}   /* on a phone the chapter words scroll sideways (their right edge fades to say so); Contact always stays in view */
+@media (max-width:400px){.lb-mast{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:6px}.lb-rail{font-size:12px}.lb-rail a{padding:7px 6px}}
+
+.lb-next{--v:#6F2CF5;--c:#111214;--bg:#FFFFFF;--mu:#5C5F66;--ln:rgba(17,18,20,.14);--hv:#F4F4F1;background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font-family:'Archivo',system-ui,sans-serif}
+.lb-next[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:#0B0B0D;--mu:#A3A6AE;--ln:rgba(244,244,241,.18);--hv:#17171A}
+.lb-next .in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.lb-next a{text-decoration:none;color:inherit;padding:clamp(22px,3.4vw,38px) max(20px,clamp(18px,3vw,34px))}
+.lb-next .back{display:flex;align-items:flex-end;font:600 12px 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-right:1px solid var(--ln);white-space:nowrap}
+.lb-next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.lb-next .go:hover{background:var(--hv)}
+.lb-next .k{grid-column:1/-1;font:700 11px 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--v)}
+.lb-next b{font:500 clamp(28px,4.4vw,56px)/1 'Newsreader',Georgia,serif;letter-spacing:-.02em}
+.lb-next .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 'Newsreader',Georgia,serif;color:var(--mu)}
+.lb-next .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 'Newsreader',Georgia,serif;transition:transform .25s}
+.lb-next .go:hover .ar{transform:translateX(6px)}
+@media (max-width:640px){.lb-next .in{grid-template-columns:1fr}.lb-next .back{border-right:0;border-bottom:1px solid var(--ln);padding-block:14px}}
+
+.lb-foot{--c:#5C5F66;--bg:#FFFFFF;--ln:rgba(17,18,20,.14);background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font:500 13px/1.4 'Archivo',system-ui,sans-serif}
+.lb-foot[data-tone=dark]{--c:#A3A6AE;--bg:#0B0B0D;--ln:rgba(244,244,241,.18)}
+.lb-foot .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding:18px max(20px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lb-foot span:first-child{margin-right:auto}
+.lb-foot .mail{user-select:all;overflow-wrap:anywhere}
+.lb-foot a{color:inherit;text-underline-offset:3px}
+.lb-foot a:hover{color:inherit;text-decoration-thickness:2px}
+@media (prefers-reduced-motion:reduce){.lb-mast,.lb-next .go,.lb-next .ar{transition:none}}
+
+/* ---------- from one page to the next ----------
+   A "shared axis" change of page: the old page fades out first while it starts to move, then the new one fades in as it settles,
+   both sliding 30px in the direction of travel. The two are never on screen together, so text never overlaps.
+   The band stays still and the yellow marker glides from the old word to the new one. 0.32 s in all, one easing curve for everything. */
+@view-transition{navigation:auto}
+html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
+:root{--lb-ease:cubic-bezier(.4,0,.2,1);--lb-t:.32s}
+:root[data-dir=fwd]{--lb-d:1}:root[data-dir=back]{--lb-d:-1}
+.lb-mast{view-transition-name:lb-mast}
+.lb-rail{view-transition-name:lb-rail}
+:root[data-nav]::view-transition-old(root){animation:lb-out var(--lb-t) var(--lb-ease) both}
+:root[data-nav]::view-transition-new(root){animation:lb-in var(--lb-t) var(--lb-ease) both}
+@keyframes lb-out{0%{opacity:1;transform:none}30%{opacity:0}100%{opacity:0;transform:translateX(calc(var(--lb-d,0) * -30px))}}
+@keyframes lb-in{0%{opacity:0;transform:translateX(calc(var(--lb-d,0) * 30px))}30%{opacity:0}100%{opacity:1;transform:none}}
+::view-transition-group(lb-mast){animation:none;z-index:3}
+::view-transition-old(lb-mast),::view-transition-new(lb-mast){animation-duration:.2s;height:100%}
+::view-transition-group(lb-pill){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:4}
+::view-transition-old(lb-pill),::view-transition-new(lb-pill){height:100%}
+::view-transition-group(lb-rail){animation:none;z-index:5}
+/* the words do not cross-fade (that makes them flicker): the old set is swapped for the new one half-way through the band's own fade */
+::view-transition-old(lb-rail),::view-transition-new(lb-rail){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-rail){animation:lb-off .2s linear both}
+::view-transition-new(lb-rail){animation:lb-on .2s linear both}
+/* Press and Contact sit outside the row of chapters: they get the same treatment, so their word stays readable on top of the marker */
+.lb-link[href="press.html"]{view-transition-name:lb-press}
+.lb-link[href="contact.html"]{view-transition-name:lb-contact}
+::view-transition-group(lb-press),::view-transition-group(lb-contact){animation:none;z-index:5}
+::view-transition-old(lb-press),::view-transition-new(lb-press),::view-transition-old(lb-contact),::view-transition-new(lb-contact){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-press),::view-transition-old(lb-contact){animation:lb-off .2s linear both}
+::view-transition-new(lb-press),::view-transition-new(lb-contact){animation:lb-on .2s linear both}
+@keyframes lb-off{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes lb-on{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+/* contact → internship notice: the address block stays where it is and the small notice card unfolds into the full notice.
+   The snapshots keep their real size (no stretching): the box grows and uncovers the new content from the top. */
+::view-transition-group(ct-addr){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:2}
+::view-transition-group(ct-notice){animation-duration:.42s;animation-timing-function:var(--lb-ease);overflow:clip;z-index:2}
+::view-transition-old(ct-notice),::view-transition-new(ct-notice){height:100%;width:100%;object-fit:none;object-position:0 0;mix-blend-mode:normal}
+::view-transition-old(ct-notice){animation:lb-hide .42s both}
+::view-transition-new(ct-notice){animation:lb-show .42s both}
+:root[data-dir=back]::view-transition-old(ct-notice){animation-name:lb-show}   /* going back, the full notice folds up: the taller one is always the one shown */
+:root[data-dir=back]::view-transition-new(ct-notice){animation-name:lb-hide}
+@keyframes lb-show{from,to{opacity:1}}
+@keyframes lb-hide{from,to{opacity:0}}
+.lb-novt body{animation:lb-fade .3s ease-out both}
+@keyframes lb-fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  :root{--lb-t:.16s;--lb-d:0!important}
+  ::view-transition-group(lb-pill),::view-transition-group(ct-addr),::view-transition-group(ct-notice){animation-duration:.01s}
+  .lb-novt body{animation:none}
+}
+
+/* FR / EN switch, at the end of the band. Small and quiet: a reader who needs it looks for it there. */
+.lb-link.lb-lang{font:700 11.5px/1 'Archivo',system-ui,sans-serif;letter-spacing:.06em;padding:7px 8px;margin-left:2px;border:1px solid currentColor;border-radius:99px;opacity:.55}
+.lb-link.lb-lang:hover,.lb-link.lb-lang:focus-visible{opacity:1}
+@media (max-width:600px){.lb-link.lb-lang{padding:6px 7px;font-size:11px}}
+</style>
+<script>
+/* Runs in <head>, before the first paint.
+   1. Works out which way the reader is moving (chapters are an ordered row: front page, videos, agents, teams, teaching, vision, awards, press, contact, internship),
+      so the page change can slide the right way.
+   2. Makes a fresh arrival land at the top of the chapter, or on the anchor in the link. Back, forward and reload keep the browser's own position. */
+(function () {
+  var ORDER = ['index', 'videos', 'agents', 'teams', 'teaching', 'vision', 'awards', 'press', 'contact', 'internship'];
+  var root = document.documentElement;
+  function key(u) { try { var p = new URL(u, location.href).pathname.split('/').pop().replace(/\.html$/, ''); return p || 'index'; } catch (e) { return ''; } }
+  function dir() {
+    var from = '';
+    try { from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || document.referrer || ''; } catch (e) {}
+    if (!from) return 'none';
+    try { if (new URL(from, location.href).origin !== location.origin) return 'none'; } catch (e) { return 'none'; }
+    var a = ORDER.indexOf(key(from)), b = ORDER.indexOf(key(location.href));
+    return a < 0 || b < 0 || a === b ? 'none' : b > a ? 'fwd' : 'back';
+  }
+  function arm() {                       /* the slide only applies to a change of page, never to a transition inside a page */
+    root.dataset.dir = dir(); root.dataset.nav = '1';
+    clearTimeout(arm.t); arm.t = setTimeout(function () { delete root.dataset.nav; }, 900);
+  }
+  arm();
+  addEventListener('pagereveal', function (e) {
+    arm();
+    if (e.viewTransition) {            /* a transition is running: keep the flag until it has finished, however long the page took to arrive */
+      clearTimeout(arm.t);
+      e.viewTransition.finished.then(function () { delete root.dataset.nav; }, function () { delete root.dataset.nav; });
+    }
+  });
+  if (!('CSSViewTransitionRule' in window)) root.classList.add('lb-novt');   /* no page transitions here: fade the page in instead */
+
+  var nav = (performance.getEntriesByType('navigation')[0] || {}).type;
+  if (nav !== 'back_forward' && nav !== 'reload') {
+    var moved = false;
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+    var land = function () {
+      if (moved) return;
+      var id = decodeURIComponent(location.hash.slice(1)), t = id && document.getElementById(id);
+      if (t) t.scrollIntoView({ block: 'start' });
+      else { scrollTo(0, 0); var m = document.getElementById('lb-mast'); if (m && m.getBoundingClientRect().top < 0) m.scrollIntoView({ block: 'start' }); }
+    };
+    addEventListener('DOMContentLoaded', land);
+    addEventListener('load', land);
+  }
+})();
+</script>
+<script type="speculationrules">{"prerender":[{"where":{"selector_matches":"a[href$='.html'],a[href*='.html#']"},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+<header class="lb-mast" data-tone="light" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, front page"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapters"><a href="videos.html">videos</a><a href="agents.html">agents</a><a href="teams.html">teams</a><a href="teaching.html" aria-current="page">teaching</a><a href="vision.html">vision</a><a href="awards.html">awards</a></nav><a class="lb-link opt" href="press.html">Press</a><a class="lb-link" href="contact.html">Contact</a><a class="lb-link lb-lang" href="fr/teaching.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="Lire en français">FR</a></header><script>
+/* Runs right after the band. Puts the yellow marker behind the current word, as its own layer,
+   so that on a change of page the browser can slide it from one word to the next. */
+(function () {
+  var m = document.getElementById('lb-mast'), p = m.querySelector('.lb-pill'), a = m.querySelector('[aria-current]'), rail = m.querySelector('.lb-rail');
+  function place() {
+    if (!a || !a.offsetParent) { p.style.opacity = 0; return; }
+    var r = a.getBoundingClientRect(), b = m.getBoundingClientRect();
+    p.style.cssText = 'opacity:1;left:' + (r.left - b.left) + 'px;top:' + (r.top - b.top) + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+  }
+  if (a && rail.contains(a)) rail.scrollLeft = a.offsetLeft - (rail.clientWidth - a.offsetWidth) / 2;   /* keep the current word in view on a narrow phone */
+  m.classList.add('pilled'); place();
+  addEventListener('resize', place); rail.addEventListener('scroll', place, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+
+<main>
+  <section class="wrap gut intro">
+    <p class="kick"><i></i>Chapter 04 · Teaching</p>
+    <h1>AI only lands when the people in the room <mark>can use it</mark>.</h1>
+    <p class="stand">Alongside my work I teach generative AI: to managers at Nissan and L'Oréal, to professionals at Stanford Continuing Studies, to computer science students at my former university, and to young people in Trappes through OSMOZ, the non-profit I co-founded.</p>
+    <p class="by"><span>Teaching assistant, co-instructor, speaker</span><span>United States and France</span><span>Since 2023</span></p>
+  </section>
+
+  <section class="wrap gut list" aria-label="Where I have taught">
+    <p class="lab">The course list</p>
+    <table class="tt">
+      <thead><tr><th>Where</th><th>Who was in the room</th><th>What I did</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>Nissan<small>Nashville, United States</small></td><td data-l="In the room">Managers, with Data Wise Academy and Gauthier Vasseur</td><td data-l="My part">Coached managers through a three-day generative AI hackathon</td><td>2024 – 2025</td></tr>
+        <tr><td>L'Oréal / SalonCentric<small>United States</small></td><td data-l="In the room">Managers, with Data Wise Academy</td><td data-l="My part">Same three-day format</td><td>2024 – 2025</td></tr>
+        <tr><td>Stanford Continuing Studies<small>International audience</small></td><td data-l="In the room">Working professionals</td><td data-l="My part">Co-instructor, AI and automation</td><td>2024 – 2025</td></tr>
+        <tr><td>IUT d'Orsay<small>Université Paris-Saclay</small></td><td data-l="In the room">Computer science students, where I studied</td><td data-l="My part">Guest talk, "AI and the Future of Software Engineering"</td><td>2025, 2026</td></tr>
+        <tr><td>OSMOZ<small>Trappes, France</small></td><td data-l="In the room">Young people from working-class neighbourhoods, and anyone curious</td><td data-l="My part">Co-founder. Workshops, hackathons and talks on AI and data</td><td>Since 2023</td></tr>
+        <tr><td>Digiteka<small>Paris</small></td><td data-l="In the room">All my colleagues</td><td data-l="My part">Company-wide training on agents, then one-to-one coaching. <a href="teams.html#s3">See chapter 03</a></td><td>May 2026</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="stage lesson">
+    <div class="wrap gut">
+      <p class="kick"><i></i>Nissan · one lesson</p>
+      <h2>One file, every morning.</h2>
+      <div class="story">
+        <div>
+          <p class="swap"><small>The same task</small><s>7 hours a week</s><b>5 minutes</b></p>
+          <p class="copy">A finance manager at Nissan told me about a task that came back every morning: reshaping a file of several million rows before the real work could begin. It took up to seven hours a week.</p>
+          <p class="copy">During the training it became a notebook, written with generative AI. The same job now takes about five minutes. That is what I like about this format: people leave with something that works on their own files.</p>
+          <ul class="chips" aria-label="What the hackathons covered"><li>Excel and CSV automation</li><li>Financial reporting</li><li>Information synthesis</li><li>Power BI and Tableau</li><li>AI-assisted development</li></ul>
+        </div>
+        <div class="shots">
+          <figure><img src="photos/nissan-room.jpg" alt="A training room at Nissan with groups of participants working on laptops around yellow tables" width="1500" height="1125" loading="lazy"><figcaption>Nissan North America. The room during the hackathon.</figcaption></figure>
+          <div class="two">
+            <figure><img src="photos/nissan-group.jpg" alt="About thirty participants and trainers standing together, several holding certificates" width="1400" height="1050" loading="lazy"><figcaption>The cohort, certificates in hand.</figcaption></figure>
+            <figure><img src="photos/nissan-entrance.jpg" alt="Gauthier Vasseur, Loqmann Benhaddya and two OSMOZ co-founders standing in front of the Nissan North America building" width="1200" height="796" loading="lazy"><figcaption>Outside, with Gauthier Vasseur and OSMOZ co-founders.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap gut rooms" aria-label="Other rooms">
+    <figure><img src="photos/loreal-group.jpg" alt="A group of about thirty people standing under a SalonCentric sign in an office lobby" width="1400" height="933" loading="lazy"><figcaption>SalonCentric, part of L'Oréal. The whole group.</figcaption></figure>
+    <div class="txt">
+      <article><span class="r">Co-instructor</span><h3>Stanford Continuing Studies</h3><p>I co-taught AI and automation to an international audience of working professionals.</p></article>
+      <article><span class="r">Guest speaker</span><h3>IUT d'Orsay, Université Paris-Saclay</h3><p>A talk on AI and the future of software engineering, given in 2025 and 2026 to computer science students in the department where I studied.</p></article>
+      <article><span class="r">Teaching assistant</span><h3>Data Wise Academy</h3><p>Corporate programmes led by Gauthier Vasseur. I coach managers during three-day hackathons on generative AI applied to data.</p></article>
+    </div>
+  </section>
+
+  <section class="home" aria-label="OSMOZ">
+    <div class="wrap gut in">
+      <div>
+        <p class="kick"><i></i>Trappes · since 2023</p>
+        <h2>And at home, OSMOZ.</h2>
+        <p class="copy">OSMOZ is a non-profit I co-founded with teammates from C du Propre, the project we won KESK'IA with. We open AI and data to young people from working-class neighbourhoods, and to anyone else who wants in.</p>
+        <ul>
+          <li><b>Workshops</b>First contact with AI, built around things people can try the same day.</li>
+          <li><b>A NASA Space Apps Challenge hackathon</b>A national edition, with a NASA expert taking part.</li>
+          <li><b>A conference</b>With experts from Silicon Valley.</li>
+        </ul>
+        <a class="more" href="press.html">A documentary followed part of this road →</a>
+      </div>
+      <figure><img src="photos/nasa-jpl.jpg" alt="Loqmann Benhaddya and Allan Petre standing in front of the NASA Jet Propulsion Laboratory sign" width="1400" height="788" loading="lazy"><figcaption>NASA Jet Propulsion Laboratory, California, 4 April 2024. With Allan Petre, the friend who invited me.</figcaption></figure>
+    </div>
+  </section>
+</main>
+<nav class="lb-next" data-tone="light" aria-label="Next"><div class="in"><a class="back" href="index.html">← Front page</a><a class="go" href="vision.html"><span class="k">Next story · 05 of 06</span><b>The Litter Detector</b><span class="d">A model that finds litter in a street photo, built end to end by a team of five.</span><span class="ar" aria-hidden="true">→</span></a></div></nav>
+<footer class="lb-foot" data-tone="light"><div class="in"><span>Loqmann Benhaddya · Paris</span><span class="mail">loqmannbenhaddya.pro@gmail.com</span><a href="https://www.linkedin.com/in/loqmann-benhaddya" rel="noopener">LinkedIn</a><a href="https://github.com/skezu" rel="noopener">GitHub</a><a href="press.html">Press</a><a href="cv/Loqmann-Benhaddya-CV-EN.pdf">CV (PDF)</a></div></footer>
+</body>
+</html>

@@ -1,319 +1,374 @@
-<!DOCTYPE html>
-<html class="light scroll-smooth" lang="fr">
-
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Portfolio de Loqmann Benhaddya</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loqmann Benhaddya · AI engineer</title>
+<meta name="description" content="Loqmann Benhaddya, AI engineer. UC Berkeley Young Talent of the Year, AI lead at Digiteka, co-founder and CTO of Yudrab. Looking for an AI / ML engineering internship abroad from 2027.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap">
+<style>
+/* The common frame, shared by the home page and every chapter.
+   Paper and ink, the dark stage, one yellow highlighter, one violet dot. Newsreader for headlines, Archivo for the interface. */
+:root{
+  --paper:#FFFFFF; --ink:#111214; --muted:#5C5F66; --hair:rgba(17,18,20,.14); --wash:#F4F4F1;
+  --stage:#0B0B0D; --onstage:#F4F4F1; --dim:#A3A6AE; --soft:#D2D4D9; --rule:rgba(244,244,241,.18);
+  --light:#FFE600; --live:#6F2CF5;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif; --ui:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --black:'Archivo Black','Archivo',Impact,sans-serif; --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --mast:49px;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--mast) + 8px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--ui);-webkit-font-smoothing:antialiased}
+body.dark{background:var(--stage);color:var(--onstage)}
+a{color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.dark :focus-visible,.stage :focus-visible{outline-color:var(--light)}
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="js/tailwind-config.js"></script>
+/* masthead: the same band on every page */
+.mast{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;height:calc(var(--mast) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--hair);background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.dark .mast{border-color:var(--rule);background:rgba(11,11,13,.88)}
+.logo{font:400 17px/1 var(--black);text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.logo b{color:var(--live);font-weight:400}
+.sec{font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dark .sec{color:var(--dim)}
+.mast .sp{flex:1}
+.ghost{font:500 13.5px var(--ui);color:var(--muted);padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.ghost:hover{color:var(--ink);background:rgba(17,18,20,.06)}
+.dark .ghost{color:var(--dim)}.dark .ghost:hover{color:var(--onstage);background:rgba(255,255,255,.08)}
+
+/* type */
+.kick{font:700 11.5px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--live);display:flex;gap:8px;align-items:center;margin:0 0 14px}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--live);flex:none}
+h1{font:500 clamp(38px,5.6vw,68px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+h2{font:500 clamp(28px,3.8vw,46px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+h3{font:500 clamp(20px,2vw,25px)/1.15 var(--serif);letter-spacing:-.01em;margin:0 0 6px}
+.stand{font:400 clamp(17px,1.5vw,20px)/1.5 var(--serif);color:var(--muted);margin:0;max-width:54ch}
+.dark .stand,.stage .stand{color:var(--soft)}
+.lab{font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.dark .lab,.stage .lab{color:var(--dim)}
+mark{background:linear-gradient(transparent 58%,var(--light) 58% 92%,transparent 92%);color:inherit;padding:0 .06em}
+.num{font:400 12.5px var(--mono);color:var(--muted)}
+
+/* buttons and contact row */
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 13.5px var(--ui);text-decoration:none;background:var(--ink);color:var(--paper);padding:11px 17px;border-radius:99px;border:0;cursor:pointer}
+.btn:hover{background:#000}
+.btn.y{background:var(--light);color:var(--stage)}
+.btn.line{background:none;color:inherit;box-shadow:inset 0 0 0 1px var(--hair)}
+.btn.line:hover{box-shadow:inset 0 0 0 1px currentColor}
+.dark .btn.line,.stage .btn.line{box-shadow:inset 0 0 0 1px var(--rule)}
+.reach{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* the dark stage, when a page uses it for a section; the violet gets a lighter tint there so small labels stay readable */
+.stage{background:var(--stage);color:var(--onstage)}
+.stage,body.dark{--live:#9B7CFF}
+
+/* what closes every chapter: where you are, and the next one */
+.next{display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid var(--hair)}
+.next a{text-decoration:none;padding:clamp(22px,3.4vw,38px) clamp(18px,3vw,34px)}
+.next .back{display:flex;align-items:flex-end;font:600 12px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--hair)}
+.next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.next .go:hover{background:var(--wash)}
+.next .go .k{grid-column:1/-1;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--live)}
+.next .go b{font:500 clamp(28px,4.4vw,56px)/1 var(--serif);letter-spacing:-.02em}
+.next .go .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 var(--serif);color:var(--muted)}
+.next .go .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 var(--serif);transition:transform .25s}
+.next .go:hover .ar{transform:translateX(6px)}
+
+/* a labelled frame for the parts of a preview that only explain the preview */
+.demo{border:1px dashed var(--hair);border-radius:14px;overflow:hidden}
+.demo>.tag{display:block;padding:9px 14px;font:600 11px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px dashed var(--hair);background:var(--wash)}
+
+/* page to page: the browser cross-fades and carries shared elements over, where it can */
+
+a:not([href]){cursor:default}
+@media (max-width:480px){.mast .opt{display:none}}
+@media (max-width:640px){
+  .sec{display:none}
+  .next{grid-template-columns:1fr}.next .back{border-right:0;border-bottom:1px solid var(--hair);padding-block:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+</style>
+<style>
+/* Home. One short headline with room around it, then six lines: one fact per chapter, each a link.
+   Everything else lives inside the chapters. */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,6vw,96px);align-items:center;padding-block:clamp(44px,9vh,110px) clamp(44px,8vh,100px)}
+.who{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:0 0 clamp(20px,3.4vh,34px);font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.who b{font:400 clamp(17px,1.6vw,20px)/1 var(--black);letter-spacing:0;color:var(--ink)}
+.hook{font:500 clamp(36px,min(5.2vw,8.6vh),74px)/1.05 var(--serif);letter-spacing:-.026em;margin:0 0 clamp(24px,4vh,40px);text-wrap:balance;max-width:19ch}
+.hook mark{background:linear-gradient(transparent 62%,var(--light) 62% 92%,transparent 92%)}
+.open{display:flex;align-items:center;gap:10px;margin:0 0 clamp(20px,3vh,28px);font:400 clamp(16px,1.4vw,18.5px)/1.4 var(--serif);color:var(--muted)}
+.open i{flex:none;width:9px;height:9px;border-radius:50%;background:#12A150;box-shadow:0 0 0 4px rgba(18,161,80,.18)}
+.pic{width:clamp(190px,23vw,310px);height:auto;aspect-ratio:1;object-fit:cover;border-radius:6px}
+
+.so{border-top:3px double var(--ink);padding-block:22px clamp(44px,7vw,90px)}
+.rows{list-style:none;margin:6px 0 0;padding:0}
+.row{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:6px clamp(18px,3.4vw,52px);align-items:baseline;padding:clamp(24px,3.8vh,38px) 0;border-bottom:1px solid var(--hair);text-decoration:none}
+.row .n{font:400 12.5px var(--mono);color:var(--muted)}
+.row .n b{display:block;margin-top:5px;font:700 10.5px var(--ui);letter-spacing:.12em;text-transform:uppercase}
+.row .t{font:500 clamp(22px,2.55vw,33px)/1.2 var(--serif);letter-spacing:-.015em;text-wrap:pretty;max-width:36ch}
+.row .t span{background:linear-gradient(var(--light),var(--light)) no-repeat 0 90%/0% 24%;transition:background-size .4s cubic-bezier(.3,.7,.2,1);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.row:hover .t span,.row:focus-visible .t span{background-size:100% 24%}
+.row .go{font:600 13px var(--ui);white-space:nowrap;color:var(--muted);transition:color .2s,transform .25s}
+.row:hover .go{color:var(--ink);transform:translateX(4px)}
+
+.seen{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 26px;padding-block:20px;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.seen .lab{margin:0}
+.seen ul{display:flex;flex-wrap:wrap;gap:6px 22px;list-style:none;margin:0;padding:0;font:500 clamp(17px,1.7vw,21px)/1.2 var(--serif)}
+.seen a{margin-left:auto;font:600 13.5px var(--ui);text-underline-offset:3px}
+
+.foot{padding-block:clamp(50px,9vw,110px) clamp(50px,8vw,90px);display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:28px;align-items:end}
+.foot h2{max-width:18ch;margin-bottom:10px}
+.mailtxt{font:600 14px var(--ui);user-select:all;overflow-wrap:anywhere}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;gap:18px}
+  .pic{order:-1;width:84px;border-radius:50%}
+  .hook{max-width:none}
+  .row{grid-template-columns:1fr;gap:8px}
+  .row .n b{display:inline;margin:0 0 0 10px}
+  .foot{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.row .t span,.row .go{transition:none}}
+</style>
+<link rel="alternate" hreflang="en" href="https://skezu.github.io/index.html"><link rel="alternate" hreflang="fr" href="https://skezu.github.io/fr/index.html"><link rel="alternate" hreflang="x-default" href="https://skezu.github.io/index.html">
+<script>
+/* First visit from outside the site, in a browser set to French: go to the French page.
+   A choice made with the FR / EN switch is remembered and always wins. */
+(function () {
+  try {
+    var pick = localStorage.getItem('lb-lang');
+    var ref = document.referrer && new URL(document.referrer).origin === location.origin;
+    var fr = (navigator.languages && navigator.languages[0] || navigator.language || '').toLowerCase().indexOf('fr') === 0;
+    if (!pick && !ref && fr) location.replace('fr/' + (location.pathname.split('/').pop() || 'index.html') + location.search + location.hash);
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-lang]');
+    if (a) try { localStorage.setItem('lb-lang', a.dataset.lang); } catch (x) {}
+  });
+})();
+</script>
+<style>
+/* The band, the next-story block and the footer: the same on every page, in a light and a dark tone.
+   Names start with lb- so they never collide with a chapter's own styles. */
+.lb-mast{--v:#6F2CF5;--c:#111214;--bg:rgba(255,255,255,.92);--ln:rgba(17,18,20,.14);position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;height:calc(49px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--ln);background:var(--bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--c);transition:background .3s,color .3s,border-color .3s}
+.lb-mast[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:rgba(11,11,13,.88);--ln:rgba(244,244,241,.18)}
+.lb-logo{font:400 17px/1 'Archivo Black','Archivo',Impact,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:inherit}
+.lb-logo b{color:var(--v);font-weight:400}
+.lb-logo .s{display:none}
+.lb-sp{flex:1}
+.lb-rail{display:flex;gap:2px;min-width:0;font:600 12.5px/1 'Archivo',system-ui,sans-serif;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.lb-rail::-webkit-scrollbar{display:none}
+.lb-rail a{padding:7px 9px;border-radius:99px;color:inherit;opacity:.66;text-decoration:none;transition:opacity .15s}
+.lb-rail a:hover{opacity:1}
+.lb-rail a[aria-current]{background:#FFE600;color:#111214;opacity:1}
+.lb-link[aria-current]{color:#111214}
+/* the yellow marker as its own layer (placed by the script after the band); without the script the word keeps its own background */
+.lb-pill{position:absolute;z-index:0;left:0;top:0;width:0;height:0;border-radius:99px;background:#FFE600;opacity:0;pointer-events:none;view-transition-name:lb-pill}
+.lb-rail,.lb-link,.lb-logo{position:relative;z-index:1}
+.lb-mast.pilled a[aria-current]{background:none}
+.lb-link{font:500 13.5px/1 'Archivo',system-ui,sans-serif;color:inherit;opacity:.7;padding:8px 9px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.lb-link:hover,.lb-link[aria-current]{opacity:1}
+.lb-mast:not(.pilled) .lb-link[aria-current]{background:#FFE600;border-radius:99px}
+.lb-mast a:focus-visible,.lb-next a:focus-visible,.lb-foot a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:6px}
+@media (max-width:900px){.lb-logo .f{display:none}.lb-logo .s{display:inline}}
+@media (max-width:600px){.lb-link.opt{display:none}.lb-rail a{padding:7px 8px}.lb-rail{padding-right:20px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}.lb-link{padding:8px 10px}}   /* on a phone the chapter words scroll sideways (their right edge fades to say so); Contact always stays in view */
+@media (max-width:400px){.lb-mast{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:6px}.lb-rail{font-size:12px}.lb-rail a{padding:7px 6px}}
+
+.lb-next{--v:#6F2CF5;--c:#111214;--bg:#FFFFFF;--mu:#5C5F66;--ln:rgba(17,18,20,.14);--hv:#F4F4F1;background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font-family:'Archivo',system-ui,sans-serif}
+.lb-next[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:#0B0B0D;--mu:#A3A6AE;--ln:rgba(244,244,241,.18);--hv:#17171A}
+.lb-next .in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.lb-next a{text-decoration:none;color:inherit;padding:clamp(22px,3.4vw,38px) max(20px,clamp(18px,3vw,34px))}
+.lb-next .back{display:flex;align-items:flex-end;font:600 12px 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-right:1px solid var(--ln);white-space:nowrap}
+.lb-next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.lb-next .go:hover{background:var(--hv)}
+.lb-next .k{grid-column:1/-1;font:700 11px 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--v)}
+.lb-next b{font:500 clamp(28px,4.4vw,56px)/1 'Newsreader',Georgia,serif;letter-spacing:-.02em}
+.lb-next .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 'Newsreader',Georgia,serif;color:var(--mu)}
+.lb-next .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 'Newsreader',Georgia,serif;transition:transform .25s}
+.lb-next .go:hover .ar{transform:translateX(6px)}
+@media (max-width:640px){.lb-next .in{grid-template-columns:1fr}.lb-next .back{border-right:0;border-bottom:1px solid var(--ln);padding-block:14px}}
+
+.lb-foot{--c:#5C5F66;--bg:#FFFFFF;--ln:rgba(17,18,20,.14);background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font:500 13px/1.4 'Archivo',system-ui,sans-serif}
+.lb-foot[data-tone=dark]{--c:#A3A6AE;--bg:#0B0B0D;--ln:rgba(244,244,241,.18)}
+.lb-foot .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding:18px max(20px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lb-foot span:first-child{margin-right:auto}
+.lb-foot .mail{user-select:all;overflow-wrap:anywhere}
+.lb-foot a{color:inherit;text-underline-offset:3px}
+.lb-foot a:hover{color:inherit;text-decoration-thickness:2px}
+@media (prefers-reduced-motion:reduce){.lb-mast,.lb-next .go,.lb-next .ar{transition:none}}
+
+/* ---------- from one page to the next ----------
+   A "shared axis" change of page: the old page fades out first while it starts to move, then the new one fades in as it settles,
+   both sliding 30px in the direction of travel. The two are never on screen together, so text never overlaps.
+   The band stays still and the yellow marker glides from the old word to the new one. 0.32 s in all, one easing curve for everything. */
+@view-transition{navigation:auto}
+html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
+:root{--lb-ease:cubic-bezier(.4,0,.2,1);--lb-t:.32s}
+:root[data-dir=fwd]{--lb-d:1}:root[data-dir=back]{--lb-d:-1}
+.lb-mast{view-transition-name:lb-mast}
+.lb-rail{view-transition-name:lb-rail}
+:root[data-nav]::view-transition-old(root){animation:lb-out var(--lb-t) var(--lb-ease) both}
+:root[data-nav]::view-transition-new(root){animation:lb-in var(--lb-t) var(--lb-ease) both}
+@keyframes lb-out{0%{opacity:1;transform:none}30%{opacity:0}100%{opacity:0;transform:translateX(calc(var(--lb-d,0) * -30px))}}
+@keyframes lb-in{0%{opacity:0;transform:translateX(calc(var(--lb-d,0) * 30px))}30%{opacity:0}100%{opacity:1;transform:none}}
+::view-transition-group(lb-mast){animation:none;z-index:3}
+::view-transition-old(lb-mast),::view-transition-new(lb-mast){animation-duration:.2s;height:100%}
+::view-transition-group(lb-pill){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:4}
+::view-transition-old(lb-pill),::view-transition-new(lb-pill){height:100%}
+::view-transition-group(lb-rail){animation:none;z-index:5}
+/* the words do not cross-fade (that makes them flicker): the old set is swapped for the new one half-way through the band's own fade */
+::view-transition-old(lb-rail),::view-transition-new(lb-rail){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-rail){animation:lb-off .2s linear both}
+::view-transition-new(lb-rail){animation:lb-on .2s linear both}
+/* Press and Contact sit outside the row of chapters: they get the same treatment, so their word stays readable on top of the marker */
+.lb-link[href="press.html"]{view-transition-name:lb-press}
+.lb-link[href="contact.html"]{view-transition-name:lb-contact}
+::view-transition-group(lb-press),::view-transition-group(lb-contact){animation:none;z-index:5}
+::view-transition-old(lb-press),::view-transition-new(lb-press),::view-transition-old(lb-contact),::view-transition-new(lb-contact){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-press),::view-transition-old(lb-contact){animation:lb-off .2s linear both}
+::view-transition-new(lb-press),::view-transition-new(lb-contact){animation:lb-on .2s linear both}
+@keyframes lb-off{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes lb-on{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+/* contact → internship notice: the address block stays where it is and the small notice card unfolds into the full notice.
+   The snapshots keep their real size (no stretching): the box grows and uncovers the new content from the top. */
+::view-transition-group(ct-addr){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:2}
+::view-transition-group(ct-notice){animation-duration:.42s;animation-timing-function:var(--lb-ease);overflow:clip;z-index:2}
+::view-transition-old(ct-notice),::view-transition-new(ct-notice){height:100%;width:100%;object-fit:none;object-position:0 0;mix-blend-mode:normal}
+::view-transition-old(ct-notice){animation:lb-hide .42s both}
+::view-transition-new(ct-notice){animation:lb-show .42s both}
+:root[data-dir=back]::view-transition-old(ct-notice){animation-name:lb-show}   /* going back, the full notice folds up: the taller one is always the one shown */
+:root[data-dir=back]::view-transition-new(ct-notice){animation-name:lb-hide}
+@keyframes lb-show{from,to{opacity:1}}
+@keyframes lb-hide{from,to{opacity:0}}
+.lb-novt body{animation:lb-fade .3s ease-out both}
+@keyframes lb-fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  :root{--lb-t:.16s;--lb-d:0!important}
+  ::view-transition-group(lb-pill),::view-transition-group(ct-addr),::view-transition-group(ct-notice){animation-duration:.01s}
+  .lb-novt body{animation:none}
+}
+
+/* FR / EN switch, at the end of the band. Small and quiet: a reader who needs it looks for it there. */
+.lb-link.lb-lang{font:700 11.5px/1 'Archivo',system-ui,sans-serif;letter-spacing:.06em;padding:7px 8px;margin-left:2px;border:1px solid currentColor;border-radius:99px;opacity:.55}
+.lb-link.lb-lang:hover,.lb-link.lb-lang:focus-visible{opacity:1}
+@media (max-width:600px){.lb-link.lb-lang{padding:6px 7px;font-size:11px}}
+</style>
+<script>
+/* Runs in <head>, before the first paint.
+   1. Works out which way the reader is moving (chapters are an ordered row: front page, videos, agents, teams, teaching, vision, awards, press, contact, internship),
+      so the page change can slide the right way.
+   2. Makes a fresh arrival land at the top of the chapter, or on the anchor in the link. Back, forward and reload keep the browser's own position. */
+(function () {
+  var ORDER = ['index', 'videos', 'agents', 'teams', 'teaching', 'vision', 'awards', 'press', 'contact', 'internship'];
+  var root = document.documentElement;
+  function key(u) { try { var p = new URL(u, location.href).pathname.split('/').pop().replace(/\.html$/, ''); return p || 'index'; } catch (e) { return ''; } }
+  function dir() {
+    var from = '';
+    try { from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || document.referrer || ''; } catch (e) {}
+    if (!from) return 'none';
+    try { if (new URL(from, location.href).origin !== location.origin) return 'none'; } catch (e) { return 'none'; }
+    var a = ORDER.indexOf(key(from)), b = ORDER.indexOf(key(location.href));
+    return a < 0 || b < 0 || a === b ? 'none' : b > a ? 'fwd' : 'back';
+  }
+  function arm() {                       /* the slide only applies to a change of page, never to a transition inside a page */
+    root.dataset.dir = dir(); root.dataset.nav = '1';
+    clearTimeout(arm.t); arm.t = setTimeout(function () { delete root.dataset.nav; }, 900);
+  }
+  arm();
+  addEventListener('pagereveal', function (e) {
+    arm();
+    if (e.viewTransition) {            /* a transition is running: keep the flag until it has finished, however long the page took to arrive */
+      clearTimeout(arm.t);
+      e.viewTransition.finished.then(function () { delete root.dataset.nav; }, function () { delete root.dataset.nav; });
+    }
+  });
+  if (!('CSSViewTransitionRule' in window)) root.classList.add('lb-novt');   /* no page transitions here: fade the page in instead */
+
+  var nav = (performance.getEntriesByType('navigation')[0] || {}).type;
+  if (nav !== 'back_forward' && nav !== 'reload') {
+    var moved = false;
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+    var land = function () {
+      if (moved) return;
+      var id = decodeURIComponent(location.hash.slice(1)), t = id && document.getElementById(id);
+      if (t) t.scrollIntoView({ block: 'start' });
+      else { scrollTo(0, 0); var m = document.getElementById('lb-mast'); if (m && m.getBoundingClientRect().top < 0) m.scrollIntoView({ block: 'start' }); }
+    };
+    addEventListener('DOMContentLoaded', land);
+    addEventListener('load', land);
+  }
+})();
+</script>
+<script type="speculationrules">{"prerender":[{"where":{"selector_matches":"a[href$='.html'],a[href*='.html#']"},"eagerness":"moderate"}]}</script>
 </head>
+<body>
+<header class="lb-mast" data-tone="light" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, front page"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapters"><a href="videos.html">videos</a><a href="agents.html">agents</a><a href="teams.html">teams</a><a href="teaching.html">teaching</a><a href="vision.html">vision</a><a href="awards.html">awards</a></nav><a class="lb-link opt" href="press.html">Press</a><a class="lb-link" href="contact.html">Contact</a><a class="lb-link lb-lang" href="fr/index.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="Lire en français">FR</a></header><script>
+/* Runs right after the band. Puts the yellow marker behind the current word, as its own layer,
+   so that on a change of page the browser can slide it from one word to the next. */
+(function () {
+  var m = document.getElementById('lb-mast'), p = m.querySelector('.lb-pill'), a = m.querySelector('[aria-current]'), rail = m.querySelector('.lb-rail');
+  function place() {
+    if (!a || !a.offsetParent) { p.style.opacity = 0; return; }
+    var r = a.getBoundingClientRect(), b = m.getBoundingClientRect();
+    p.style.cssText = 'opacity:1;left:' + (r.left - b.left) + 'px;top:' + (r.top - b.top) + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+  }
+  if (a && rail.contains(a)) rail.scrollLeft = a.offsetLeft - (rail.clientWidth - a.offsetWidth) / 2;   /* keep the current word in view on a narrow phone */
+  m.classList.add('pilled'); place();
+  addEventListener('resize', place); rail.addEventListener('scroll', place, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
 
-<body class="bg-cream antialiased overflow-x-hidden selection:bg-antique-gold/20 selection:text-berkeley-blue">
+<main>
+  <section class="wrap gut hero">
+    <div>
+      <p class="who"><b>Loqmann Benhaddya</b><span>AI engineer · Paris</span></p>
+      <h1 class="hook">UC Berkeley named me <mark>Young Talent of the Year</mark> at 18. Here is what I have built since.</h1>
+      <p class="open"><i></i>Open to an AI / ML engineering internship abroad, from 2027.</p>
+      <div class="reach">
+        <a class="btn" href="mailto:loqmannbenhaddya.pro@gmail.com">Email me</a>
+        <a class="btn line" href="https://www.linkedin.com/in/loqmann-benhaddya" rel="noopener">LinkedIn</a>
+        <a class="btn line" href="https://github.com/skezu" rel="noopener">GitHub</a>
+        <a class="btn line" href="cv/Loqmann-Benhaddya-CV-EN.pdf">CV</a>
+      </div>
+    </div>
+    <img class="pic" src="photos/portrait-square.jpg" alt="Portrait of Loqmann Benhaddya" width="640" height="640">
+  </section>
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 w-full bg-cream/90 backdrop-blur-md border-b border-berkeley-blue/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-3 group">
-                    <div
-                        class="w-10 h-10 flex items-center justify-center rounded-sm bg-berkeley-blue text-white shadow-sm group-hover:bg-berkeley-blue/90 transition-colors border border-berkeley-blue">
-                        <span class="font-serif font-bold text-xl italic" id="nav-initials">LB</span>
-                    </div>
-                    <h1
-                        class="text-lg font-bold tracking-tight text-berkeley-blue group-hover:text-antique-gold transition-colors duration-300 font-serif">
-                        Loqmann Benhaddya
-                    </h1>
-                </div>
-                <div class="hidden md:flex flex-1 justify-end gap-10 items-center">
-                    <a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]"
-                        href="#distinctions">Distinctions</a>
-                    <a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]"
-                        href="#projets">Projets</a>
-                    <a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]"
-                        href="#medias">Médias</a>
-                    <a class="text-xs font-bold text-slate-600 hover:text-berkeley-blue transition-colors uppercase tracking-[0.15em]"
-                        href="#apropos">À Propos</a>
-                    <a class="hidden lg:flex items-center justify-center h-10 px-6 bg-berkeley-blue hover:bg-[#002142] text-white text-[10px] font-bold uppercase tracking-[0.2em] transition-all shadow-md hover:shadow-lg"
-                        href="#contact">
-                        Contact
-                    </a>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-berkeley-blue hover:text-antique-gold">
-                        <span class="material-symbols-outlined">menu</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+  <section class="wrap gut so" id="stories" aria-label="What I have built since 2023">
+    <p class="lab">Since 2023</p>
+    <ol class="rows">
+      <li><a class="row" href="videos.html"><span class="n">01<b>Digiteka</b></span><span class="t"><span>Five news publishers, including the group behind France's best-selling daily newspaper, use an AI I built to turn articles into videos. 16,000 so far.</span></span><span class="go">Article to Video →</span></a></li>
+      <li><a class="row" href="agents.html"><span class="n">02<b>Yudrab</b></span><span class="t"><span>At my startup, the engineering team is me: iOS, Android, web and the AI assistant.</span></span><span class="go">The Harness →</span></a></li>
+      <li><a class="row" href="teams.html"><span class="n">03<b>Digiteka</b></span><span class="t"><span>I lead AI at Digiteka. I trained the whole company and built the AI tools its teams use.</span></span><span class="go">The Rollout →</span></a></li>
+      <li><a class="row" href="teaching.html"><span class="n">04<b>Teaching</b></span><span class="t"><span>I trained managers at Nissan and L'Oréal to use generative AI on their own data.</span></span><span class="go">The Classroom →</span></a></li>
+      <li><a class="row" href="vision.html"><span class="n">05<b>C du Propre</b></span><span class="t"><span>With four teammates, I built an AI that spots litter in a photo, from the data to the phone app.</span></span><span class="go">The Litter Detector →</span></a></li>
+      <li><a class="row" href="awards.html"><span class="n">06<b>Awards</b></span><span class="t"><span>Four awards since 2023: UC Berkeley, Université Paris-Saclay, VivaTech and Société Générale.</span></span><span class="go">Four Rooms →</span></a></li>
+    </ol>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="relative pt-8 pb-24 lg:pt-12 lg:pb-40 overflow-hidden min-h-[90vh] flex items-center">
-        <div class="absolute inset-0 bg-texture pointer-events-none"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cream/30 to-cream pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
-                <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col justify-center text-left">
-                    <div class="flex items-center gap-3 mb-6 opacity-0 animate-[fadeIn_0.6s_ease-out_forwards]">
-                        <div class="h-[1px] w-12 bg-antique-gold"></div>
-                        <span class="text-antique-gold font-sans font-bold tracking-[0.25em] uppercase text-[11px]"
-                            id="hero-subtitle-prefix"></span>
-                    </div>
-                    <h1
-                        class="text-5xl sm:text-6xl lg:text-8xl font-serif font-medium text-berkeley-blue leading-[1.1] mb-6 tracking-tight opacity-0 animate-[fadeIn_0.6s_ease-out_0.2s_forwards]">
-                        <span id="hero-title-first"></span> <br class="hidden sm:block" /> <span
-                            id="hero-title-last"></span>
-                    </h1>
-                    <div
-                        class="pl-0 lg:pl-0 border-l-0 lg:border-l-0 opacity-0 animate-[fadeIn_0.6s_ease-out_0.4s_forwards]">
-                        <div class="lg:max-w-xl">
-                            <h2 class="text-xl sm:text-2xl font-serif text-berkeley-blue/90 mb-4 italic" id="hero-role">
-                            </h2>
-                            <p class="text-lg font-light text-slate-600 leading-relaxed" id="hero-description"></p>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-5 mt-10 opacity-0 animate-[fadeIn_0.6s_ease-out_0.6s_forwards]">
-                        <a class="group relative px-8 py-4 bg-berkeley-blue text-white overflow-hidden shadow-lg transition-all hover:shadow-xl hover:-translate-y-1 rounded-sm"
-                            href="#" id="hero-cta-primary-link">
-                            <div
-                                class="absolute inset-0 w-full h-full bg-[#002142] translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                            </div>
-                            <span
-                                class="relative flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase"
-                                id="hero-cta-primary"></span>
-                        </a>
-                        <a class="group px-8 py-4 bg-transparent border border-berkeley-blue/20 text-berkeley-blue hover:border-berkeley-blue hover:bg-berkeley-blue/5 transition-all rounded-sm"
-                            href="#" id="hero-cta-secondary-link">
-                            <span
-                                class="flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase"
-                                id="hero-cta-secondary"></span>
-                        </a>
-                    </div>
-                    <div class="flex items-center gap-10 mt-16 pt-8 border-t border-berkeley-blue/10 opacity-0 animate-[fadeIn_0.6s_ease-out_0.8s_forwards]"
-                        id="hero-stats">
-                        <!-- Stats injected by JS -->
-                    </div>
-                </div>
-                <div
-                    class="order-1 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end relative items-center opacity-0 animate-[fadeIn_0.8s_ease-out_0.4s_forwards]">
-                    <div class="relative w-full max-w-[420px] aspect-[4/5]">
-                        <div
-                            class="absolute top-8 -right-8 w-full h-full border border-berkeley-blue/10 z-0 hidden md:block">
-                        </div>
-                        <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-antique-gold/10 rounded-full blur-3xl z-0">
-                        </div>
-                        <div class="relative h-full w-full shadow-2xl z-10 bg-cream p-3 border border-berkeley-blue/5">
-                            <div class="relative w-full h-full overflow-hidden bg-berkeley-blue">
-                                <div
-                                    class="absolute inset-0 bg-berkeley-blue/20 mix-blend-multiply z-20 pointer-events-none">
-                                </div>
-                                <div id="hero-image"
-                                    class="w-full h-full bg-cover bg-center grayscale transition-all duration-1000 ease-out hover:grayscale-0 hover:scale-105">
-                                </div>
-                                <div class="absolute inset-0 border-[1px] border-white/30 z-30 m-3 pointer-events-none">
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="absolute -bottom-6 -right-4 z-40 bg-white p-4 shadow-xl border border-berkeley-blue/5 max-w-[180px] hidden sm:block">
-                            <div class="flex flex-col gap-1">
-                                <span class="material-symbols-outlined text-antique-gold text-2xl"
-                                    id="hero-badge-icon"></span>
-                                <p class="font-serif text-sm font-bold text-berkeley-blue mt-1" id="hero-badge-text">
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="wrap gut" aria-label="Press coverage">
+    <div class="seen">
+      <p class="lab">Covered by</p>
+      <ul><li>franceinfo · France 3</li><li>SQOOL TV</li><li>Le Monde Informatique</li><li>Presse Agence</li><li>Banlieusard Nouveau</li></ul>
+      <a href="press.html">All press coverage →</a>
+    </div>
+  </section>
 
-    <!-- Distinctions Section -->
-    <section class="py-24 bg-white border-y border-berkeley-blue/5" id="distinctions">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6">
-            <div class="mb-16 text-center">
-                <h2 class="text-4xl font-serif text-berkeley-blue mb-4" id="distinctions-title"></h2>
-                <div class="h-[1px] w-24 bg-antique-gold mx-auto"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-[80px_1fr] gap-x-8 gap-y-12 relative" id="distinctions-list">
-                <!-- Distinctions injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="py-24 bg-cream" id="projets">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div class="text-left">
-                    <span class="text-antique-gold font-bold tracking-widest uppercase text-xs mb-2 block"
-                        id="projects-subtitle"></span>
-                    <h2 class="text-4xl font-serif text-berkeley-blue" id="projects-title"></h2>
-                </div>
-                <a class="hidden md:flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-berkeley-blue hover:text-antique-gold transition-colors group view-all-projects"
-                    href="#">
-                    <!-- View all text injected by JS -->
-                </a>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10" id="projects-grid">
-                <!-- Projects injected by JS -->
-            </div>
-            <div class="mt-12 text-center md:hidden">
-                <a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-berkeley-blue hover:text-antique-gold transition-colors view-all-projects"
-                    href="#">
-                    <!-- View all text injected by JS -->
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Media Section -->
-    <section class="py-24 bg-white border-y border-berkeley-blue/5" id="medias">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <span class="text-antique-gold font-bold tracking-widest uppercase text-xs mb-2 block"
-                    id="media-subtitle"></span>
-                <h2 class="text-4xl font-serif text-berkeley-blue mb-4" id="media-title"></h2>
-                <div class="h-[1px] w-24 bg-antique-gold mx-auto mb-6"></div>
-                <p class="text-slate-500 max-w-2xl mx-auto font-light italic" id="media-quote"></p>
-            </div>
-            <div class="flex flex-wrap justify-center items-center gap-16 lg:gap-32" id="media-list">
-                <!-- Media items injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="py-24 bg-cream" id="apropos">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="bg-white rounded-sm p-8 md:p-16 shadow-xl border border-berkeley-blue/5">
-                <div class="flex flex-col md:flex-row gap-16 items-start">
-                    <div class="flex-1">
-                        <span class="text-antique-gold font-bold tracking-widest uppercase text-xs mb-3 block"
-                            id="about-subtitle"></span>
-                        <h2 class="text-4xl font-serif text-berkeley-blue mb-8 leading-tight" id="about-title"></h2>
-                        <div class="text-slate-700 leading-8 font-light space-y-6 text-lg" id="about-text">
-                            <!-- About text injected by JS -->
-                        </div>
-                        <div class="mt-12 pt-8 border-t border-slate-100 flex items-center gap-6">
-                            <img alt="Signature" id="about-signature-img"
-                                class="w-20 h-20 rounded-full object-cover grayscale border-2 border-white shadow-md"
-                                src="" />
-                            <div>
-                                <p class="font-serif font-bold text-xl text-berkeley-blue" id="about-name"></p>
-                                <p class="text-xs font-bold uppercase tracking-widest text-antique-gold mt-1"
-                                    id="about-role"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hidden md:block w-1/3 sticky top-32">
-                        <div
-                            class="relative w-full aspect-[3/4] bg-berkeley-blue rounded-sm overflow-hidden shadow-2xl border-4 border-white">
-                            <div id="about-quote-bg"
-                                class="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700">
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center p-8 bg-berkeley-blue/20">
-                                <div class="border border-white/30 p-8 w-full h-full flex items-center justify-center">
-                                    <span class="font-serif text-white/90 text-center text-2xl italic leading-relaxed"
-                                        id="about-quote-text"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="py-24 bg-white border-t border-berkeley-blue/5" id="contact">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-serif text-berkeley-blue mb-4" id="contact-title"></h2>
-                <div class="h-[1px] w-24 bg-antique-gold mx-auto mb-6"></div>
-                <p class="text-slate-500 font-light" id="contact-subtitle"></p>
-            </div>
-            <div
-                class="bg-cream rounded-sm shadow-2xl border border-berkeley-blue/10 overflow-hidden flex flex-col min-h-[500px]">
-                <div class="bg-berkeley-blue p-5 flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="relative">
-                            <div
-                                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
-                                <span class="material-symbols-outlined">smart_toy</span>
-                            </div>
-                            <div
-                                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-berkeley-blue rounded-full">
-                            </div>
-                        </div>
-                        <div>
-                            <p class="font-serif font-bold text-lg text-white">Loqmann AI Twin</p>
-                            <p class="text-xs text-white/60 uppercase tracking-widest">Assistant Virtuel</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <div class="w-2 h-2 rounded-full bg-white/30"></div>
-                        <div class="w-2 h-2 rounded-full bg-white/30"></div>
-                        <div class="w-2 h-2 rounded-full bg-white/30"></div>
-                    </div>
-                </div>
-                <div class="flex-1 p-8 flex flex-col gap-6 overflow-y-auto bg-white">
-                    <div class="flex gap-4 max-w-[85%]">
-                        <div
-                            class="w-8 h-8 rounded-full bg-berkeley-blue/5 flex-shrink-0 flex items-center justify-center text-berkeley-blue mt-1">
-                            <span class="material-symbols-outlined text-sm">smart_toy</span>
-                        </div>
-                        <div
-                            class="bg-cream p-6 rounded-lg rounded-tl-none shadow-sm text-slate-700 border border-slate-100 font-light leading-relaxed">
-                            <p id="contact-intro-message"></p>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-3 mt-auto justify-end" id="contact-suggestions">
-                        <!-- Suggestions injected by JS -->
-                    </div>
-                </div>
-                <div class="p-5 bg-cream border-t border-slate-200">
-                    <div
-                        class="flex items-center gap-3 bg-white rounded-sm px-4 py-3 border border-slate-200 focus-within:border-berkeley-blue focus-within:ring-1 focus-within:ring-berkeley-blue transition-all shadow-sm">
-                        <input
-                            class="bg-transparent border-none focus:ring-0 text-sm w-full text-berkeley-blue placeholder-slate-400 font-light"
-                            placeholder="Posez votre question..." type="text" />
-                        <button class="text-berkeley-blue hover:text-antique-gold p-1 transition-colors">
-                            <span class="material-symbols-outlined">send</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center gap-12 mt-16" id="contact-socials">
-                <!-- Socials injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 bg-berkeley-blue text-center border-t border-white/10">
-        <div class="flex flex-col items-center gap-4">
-            <div class="w-10 h-10 flex items-center justify-center border border-white/20 text-white font-serif italic text-lg mb-2"
-                id="footer-initials"></div>
-            <p class="text-sm text-white/60 font-light" id="footer-copyright">
-            </p>
-            <p class="text-xs text-antique-gold uppercase tracking-widest opacity-80" id="footer-tagline">
-            </p>
-        </div>
-    </footer>
-
-    <script src="js/data.js"></script>
-    <script src="js/app.js"></script>
-
+  <footer class="wrap gut foot" id="contact">
+    <div><p class="kick"><i></i>Contact</p><h2>Looking for an AI or ML engineering intern who has already shipped?</h2><p class="stand">Three to five months, abroad, from 2027.</p></div>
+    <div class="reach">
+      <a class="btn" href="internship.html">Read the internship notice →</a>
+      <a class="btn line" href="contact.html">Contact me</a>
+    </div>
+  </footer>
+</main>
+<footer class="lb-foot" data-tone="light"><div class="in"><span>Loqmann Benhaddya · Paris</span><span class="mail">loqmannbenhaddya.pro@gmail.com</span><a href="https://www.linkedin.com/in/loqmann-benhaddya" rel="noopener">LinkedIn</a><a href="https://github.com/skezu" rel="noopener">GitHub</a><a href="press.html">Press</a><a href="cv/Loqmann-Benhaddya-CV-EN.pdf">CV (PDF)</a></div></footer>
 </body>
-
 </html>

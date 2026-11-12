@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dans la presse · Loqmann Benhaddya</title>
+<meta name="description" content="Loqmann Benhaddya et l'équipe C du Propre à la télévision, en documentaire et dans la presse écrite depuis 2023, avec les liens vers les originaux.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap">
+<style>
+/* The common frame, shared by the home page and every chapter.
+   Paper and ink, the dark stage, one yellow highlighter, one violet dot. Newsreader for headlines, Archivo for the interface. */
+:root{
+  --paper:#FFFFFF; --ink:#111214; --muted:#5C5F66; --hair:rgba(17,18,20,.14); --wash:#F4F4F1;
+  --stage:#0B0B0D; --onstage:#F4F4F1; --dim:#A3A6AE; --soft:#D2D4D9; --rule:rgba(244,244,241,.18);
+  --light:#FFE600; --live:#6F2CF5;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif; --ui:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --black:'Archivo Black','Archivo',Impact,sans-serif; --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --mast:49px;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--mast) + 8px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--ui);-webkit-font-smoothing:antialiased}
+body.dark{background:var(--stage);color:var(--onstage)}
+a{color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.dark :focus-visible,.stage :focus-visible{outline-color:var(--light)}
+
+/* masthead: the same band on every page */
+.mast{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;height:calc(var(--mast) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--hair);background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.dark .mast{border-color:var(--rule);background:rgba(11,11,13,.88)}
+.logo{font:400 17px/1 var(--black);text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.logo b{color:var(--live);font-weight:400}
+.sec{font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dark .sec{color:var(--dim)}
+.mast .sp{flex:1}
+.ghost{font:500 13.5px var(--ui);color:var(--muted);padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.ghost:hover{color:var(--ink);background:rgba(17,18,20,.06)}
+.dark .ghost{color:var(--dim)}.dark .ghost:hover{color:var(--onstage);background:rgba(255,255,255,.08)}
+
+/* type */
+.kick{font:700 11.5px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--live);display:flex;gap:8px;align-items:center;margin:0 0 14px}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--live);flex:none}
+h1{font:500 clamp(38px,5.6vw,68px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+h2{font:500 clamp(28px,3.8vw,46px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+h3{font:500 clamp(20px,2vw,25px)/1.15 var(--serif);letter-spacing:-.01em;margin:0 0 6px}
+.stand{font:400 clamp(17px,1.5vw,20px)/1.5 var(--serif);color:var(--muted);margin:0;max-width:54ch}
+.dark .stand,.stage .stand{color:var(--soft)}
+.lab{font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.dark .lab,.stage .lab{color:var(--dim)}
+mark{background:linear-gradient(transparent 58%,var(--light) 58% 92%,transparent 92%);color:inherit;padding:0 .06em}
+.num{font:400 12.5px var(--mono);color:var(--muted)}
+
+/* buttons and contact row */
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 13.5px var(--ui);text-decoration:none;background:var(--ink);color:var(--paper);padding:11px 17px;border-radius:99px;border:0;cursor:pointer}
+.btn:hover{background:#000}
+.btn.y{background:var(--light);color:var(--stage)}
+.btn.line{background:none;color:inherit;box-shadow:inset 0 0 0 1px var(--hair)}
+.btn.line:hover{box-shadow:inset 0 0 0 1px currentColor}
+.dark .btn.line,.stage .btn.line{box-shadow:inset 0 0 0 1px var(--rule)}
+.reach{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* the dark stage, when a page uses it for a section; the violet gets a lighter tint there so small labels stay readable */
+.stage{background:var(--stage);color:var(--onstage)}
+.stage,body.dark{--live:#9B7CFF}
+
+/* what closes every chapter: where you are, and the next one */
+.next{display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid var(--hair)}
+.next a{text-decoration:none;padding:clamp(22px,3.4vw,38px) clamp(18px,3vw,34px)}
+.next .back{display:flex;align-items:flex-end;font:600 12px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--hair)}
+.next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.next .go:hover{background:var(--wash)}
+.next .go .k{grid-column:1/-1;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--live)}
+.next .go b{font:500 clamp(28px,4.4vw,56px)/1 var(--serif);letter-spacing:-.02em}
+.next .go .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 var(--serif);color:var(--muted)}
+.next .go .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 var(--serif);transition:transform .25s}
+.next .go:hover .ar{transform:translateX(6px)}
+
+/* a labelled frame for the parts of a preview that only explain the preview */
+.demo{border:1px dashed var(--hair);border-radius:14px;overflow:hidden}
+.demo>.tag{display:block;padding:9px 14px;font:600 11px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px dashed var(--hair);background:var(--wash)}
+
+/* page to page: the browser cross-fades and carries shared elements over, where it can */
+
+a:not([href]){cursor:default}
+@media (max-width:480px){.mast .opt{display:none}}
+@media (max-width:640px){
+  .sec{display:none}
+  .next{grid-template-columns:1fr}.next .back{border-right:0;border-bottom:1px solid var(--hair);padding-block:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+</style>
+<style>
+/* The press page: two lead clippings, then every piece as one ruled line, newest first. Headlines stay in their original language. */
+.intro{padding-block:clamp(36px,6vw,76px) clamp(26px,4vw,44px);max-width:900px}
+.leads{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);border-top:3px double var(--ink);border-bottom:1px solid var(--ink)}
+.lead{display:grid;gap:12px;align-content:start;padding:clamp(22px,3.4vw,40px) clamp(0px,3vw,36px) clamp(22px,3.4vw,40px) 0;text-decoration:none;transition:background .2s}
+.lead+.lead{padding-left:clamp(18px,3vw,36px);padding-right:0;border-left:1px solid var(--hair)}
+.lead .src{display:flex;flex-wrap:wrap;gap:6px 14px;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lead .src b{color:var(--live)}
+.lead q{quotes:"«\00a0" "\00a0»";font:500 clamp(26px,3.3vw,44px)/1.08 var(--serif);letter-spacing:-.02em;text-wrap:balance}
+.lead+.lead q{font-size:clamp(22px,2.4vw,31px)}
+.lead .en{font:400 15.5px/1.45 var(--ui);color:var(--muted);max-width:52ch}
+.lead .go{font:600 13.5px var(--ui)}
+.lead:hover .go{text-decoration:underline;text-underline-offset:3px}
+
+/* the two lead pieces each open on a picture. The first is a photograph from my own archive of the moment the report covers:
+   no play button and no outlet branding on it, so it never passes for a still from the report itself.
+   The second is the documentary's own thumbnail, so it carries a play button. */
+.lead .ph{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;border-radius:6px;background:var(--wash)}
+.lead .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.3,.7,.2,1)}
+.lead:hover .ph img{transform:scale(1.03)}
+.lead .ph.play::after{content:"";position:absolute;right:12px;bottom:12px;width:44px;height:44px;border-radius:50%;background:var(--light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 6.5v11l9-5.5z' fill='%23111214'/%3E%3C/svg%3E") center/26px no-repeat;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.lead .ph em{position:absolute;left:0;bottom:0;padding:5px 9px;background:rgba(11,11,13,.74);color:#fff;font:600 10.5px var(--ui);letter-spacing:.08em;text-transform:uppercase;font-style:normal;border-radius:0 6px 0 0}
+@media (prefers-reduced-motion:reduce){.lead .ph img{transition:none}}
+.all{padding-block:clamp(30px,5vw,56px) clamp(44px,7vw,90px)}
+.clip{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--ink)}
+.clip li{border-bottom:1px solid var(--hair)}
+.clip a,.clip .row{display:grid;grid-template-columns:118px 190px minmax(0,1fr) auto;gap:6px 22px;align-items:baseline;padding:15px 0;text-decoration:none;transition:padding .18s}
+.clip a:hover{padding-left:8px}
+.clip time{font:400 12.5px var(--mono);color:var(--muted)}
+.clip .o{font:700 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase}
+.clip .t{font:500 clamp(18px,1.8vw,22px)/1.2 var(--serif)}
+.clip .t small{display:block;margin-top:3px;font:400 14px/1.4 var(--ui);color:var(--muted)}
+.clip .k{font:600 11px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.note{margin:18px 0 0;font:400 14px/1.5 var(--ui);color:var(--muted);max-width:70ch}
+@media (max-width:860px){
+  .leads{grid-template-columns:1fr}
+  .lead{padding-right:0}.lead+.lead{padding-left:0;border-left:0;border-top:1px solid var(--hair)}
+  .clip a,.clip .row{grid-template-columns:1fr auto}
+  .clip time{grid-column:1}.clip .o{grid-column:1/-1;grid-row:2}.clip .t{grid-column:1/-1}.clip .k{grid-column:2;grid-row:1}
+}
+</style>
+<link rel="alternate" hreflang="en" href="https://skezu.github.io/press.html"><link rel="alternate" hreflang="fr" href="https://skezu.github.io/fr/press.html"><link rel="alternate" hreflang="x-default" href="https://skezu.github.io/press.html">
+<script>
+/* French pages: only remember a choice made with the FR / EN switch. */
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[data-lang]');
+  if (a) try { localStorage.setItem('lb-lang', a.dataset.lang); } catch (x) {}
+});
+</script>
+<style>
+/* The band, the next-story block and the footer: the same on every page, in a light and a dark tone.
+   Names start with lb- so they never collide with a chapter's own styles. */
+.lb-mast{--v:#6F2CF5;--c:#111214;--bg:rgba(255,255,255,.92);--ln:rgba(17,18,20,.14);position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;height:calc(49px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--ln);background:var(--bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--c);transition:background .3s,color .3s,border-color .3s}
+.lb-mast[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:rgba(11,11,13,.88);--ln:rgba(244,244,241,.18)}
+.lb-logo{font:400 17px/1 'Archivo Black','Archivo',Impact,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:inherit}
+.lb-logo b{color:var(--v);font-weight:400}
+.lb-logo .s{display:none}
+.lb-sp{flex:1}
+.lb-rail{display:flex;gap:2px;min-width:0;font:600 12.5px/1 'Archivo',system-ui,sans-serif;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.lb-rail::-webkit-scrollbar{display:none}
+.lb-rail a{padding:7px 9px;border-radius:99px;color:inherit;opacity:.66;text-decoration:none;transition:opacity .15s}
+.lb-rail a:hover{opacity:1}
+.lb-rail a[aria-current]{background:#FFE600;color:#111214;opacity:1}
+.lb-link[aria-current]{color:#111214}
+/* the yellow marker as its own layer (placed by the script after the band); without the script the word keeps its own background */
+.lb-pill{position:absolute;z-index:0;left:0;top:0;width:0;height:0;border-radius:99px;background:#FFE600;opacity:0;pointer-events:none;view-transition-name:lb-pill}
+.lb-rail,.lb-link,.lb-logo{position:relative;z-index:1}
+.lb-mast.pilled a[aria-current]{background:none}
+.lb-link{font:500 13.5px/1 'Archivo',system-ui,sans-serif;color:inherit;opacity:.7;padding:8px 9px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.lb-link:hover,.lb-link[aria-current]{opacity:1}
+.lb-mast:not(.pilled) .lb-link[aria-current]{background:#FFE600;border-radius:99px}
+.lb-mast a:focus-visible,.lb-next a:focus-visible,.lb-foot a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:6px}
+@media (max-width:900px){.lb-logo .f{display:none}.lb-logo .s{display:inline}}
+@media (max-width:600px){.lb-link.opt{display:none}.lb-rail a{padding:7px 8px}.lb-rail{padding-right:20px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}.lb-link{padding:8px 10px}}   /* on a phone the chapter words scroll sideways (their right edge fades to say so); Contact always stays in view */
+@media (max-width:400px){.lb-mast{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:6px}.lb-rail{font-size:12px}.lb-rail a{padding:7px 6px}}
+
+.lb-next{--v:#6F2CF5;--c:#111214;--bg:#FFFFFF;--mu:#5C5F66;--ln:rgba(17,18,20,.14);--hv:#F4F4F1;background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font-family:'Archivo',system-ui,sans-serif}
+.lb-next[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:#0B0B0D;--mu:#A3A6AE;--ln:rgba(244,244,241,.18);--hv:#17171A}
+.lb-next .in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.lb-next a{text-decoration:none;color:inherit;padding:clamp(22px,3.4vw,38px) max(20px,clamp(18px,3vw,34px))}
+.lb-next .back{display:flex;align-items:flex-end;font:600 12px 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-right:1px solid var(--ln);white-space:nowrap}
+.lb-next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.lb-next .go:hover{background:var(--hv)}
+.lb-next .k{grid-column:1/-1;font:700 11px 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--v)}
+.lb-next b{font:500 clamp(28px,4.4vw,56px)/1 'Newsreader',Georgia,serif;letter-spacing:-.02em}
+.lb-next .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 'Newsreader',Georgia,serif;color:var(--mu)}
+.lb-next .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 'Newsreader',Georgia,serif;transition:transform .25s}
+.lb-next .go:hover .ar{transform:translateX(6px)}
+@media (max-width:640px){.lb-next .in{grid-template-columns:1fr}.lb-next .back{border-right:0;border-bottom:1px solid var(--ln);padding-block:14px}}
+
+.lb-foot{--c:#5C5F66;--bg:#FFFFFF;--ln:rgba(17,18,20,.14);background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font:500 13px/1.4 'Archivo',system-ui,sans-serif}
+.lb-foot[data-tone=dark]{--c:#A3A6AE;--bg:#0B0B0D;--ln:rgba(244,244,241,.18)}
+.lb-foot .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding:18px max(20px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lb-foot span:first-child{margin-right:auto}
+.lb-foot .mail{user-select:all;overflow-wrap:anywhere}
+.lb-foot a{color:inherit;text-underline-offset:3px}
+.lb-foot a:hover{color:inherit;text-decoration-thickness:2px}
+@media (prefers-reduced-motion:reduce){.lb-mast,.lb-next .go,.lb-next .ar{transition:none}}
+
+/* ---------- from one page to the next ----------
+   A "shared axis" change of page: the old page fades out first while it starts to move, then the new one fades in as it settles,
+   both sliding 30px in the direction of travel. The two are never on screen together, so text never overlaps.
+   The band stays still and the yellow marker glides from the old word to the new one. 0.32 s in all, one easing curve for everything. */
+@view-transition{navigation:auto}
+html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
+:root{--lb-ease:cubic-bezier(.4,0,.2,1);--lb-t:.32s}
+:root[data-dir=fwd]{--lb-d:1}:root[data-dir=back]{--lb-d:-1}
+.lb-mast{view-transition-name:lb-mast}
+.lb-rail{view-transition-name:lb-rail}
+:root[data-nav]::view-transition-old(root){animation:lb-out var(--lb-t) var(--lb-ease) both}
+:root[data-nav]::view-transition-new(root){animation:lb-in var(--lb-t) var(--lb-ease) both}
+@keyframes lb-out{0%{opacity:1;transform:none}30%{opacity:0}100%{opacity:0;transform:translateX(calc(var(--lb-d,0) * -30px))}}
+@keyframes lb-in{0%{opacity:0;transform:translateX(calc(var(--lb-d,0) * 30px))}30%{opacity:0}100%{opacity:1;transform:none}}
+::view-transition-group(lb-mast){animation:none;z-index:3}
+::view-transition-old(lb-mast),::view-transition-new(lb-mast){animation-duration:.2s;height:100%}
+::view-transition-group(lb-pill){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:4}
+::view-transition-old(lb-pill),::view-transition-new(lb-pill){height:100%}
+::view-transition-group(lb-rail){animation:none;z-index:5}
+/* the words do not cross-fade (that makes them flicker): the old set is swapped for the new one half-way through the band's own fade */
+::view-transition-old(lb-rail),::view-transition-new(lb-rail){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-rail){animation:lb-off .2s linear both}
+::view-transition-new(lb-rail){animation:lb-on .2s linear both}
+/* Press and Contact sit outside the row of chapters: they get the same treatment, so their word stays readable on top of the marker */
+.lb-link[href="press.html"]{view-transition-name:lb-press}
+.lb-link[href="contact.html"]{view-transition-name:lb-contact}
+::view-transition-group(lb-press),::view-transition-group(lb-contact){animation:none;z-index:5}
+::view-transition-old(lb-press),::view-transition-new(lb-press),::view-transition-old(lb-contact),::view-transition-new(lb-contact){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-press),::view-transition-old(lb-contact){animation:lb-off .2s linear both}
+::view-transition-new(lb-press),::view-transition-new(lb-contact){animation:lb-on .2s linear both}
+@keyframes lb-off{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes lb-on{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+/* contact → internship notice: the address block stays where it is and the small notice card unfolds into the full notice.
+   The snapshots keep their real size (no stretching): the box grows and uncovers the new content from the top. */
+::view-transition-group(ct-addr){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:2}
+::view-transition-group(ct-notice){animation-duration:.42s;animation-timing-function:var(--lb-ease);overflow:clip;z-index:2}
+::view-transition-old(ct-notice),::view-transition-new(ct-notice){height:100%;width:100%;object-fit:none;object-position:0 0;mix-blend-mode:normal}
+::view-transition-old(ct-notice){animation:lb-hide .42s both}
+::view-transition-new(ct-notice){animation:lb-show .42s both}
+:root[data-dir=back]::view-transition-old(ct-notice){animation-name:lb-show}   /* going back, the full notice folds up: the taller one is always the one shown */
+:root[data-dir=back]::view-transition-new(ct-notice){animation-name:lb-hide}
+@keyframes lb-show{from,to{opacity:1}}
+@keyframes lb-hide{from,to{opacity:0}}
+.lb-novt body{animation:lb-fade .3s ease-out both}
+@keyframes lb-fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  :root{--lb-t:.16s;--lb-d:0!important}
+  ::view-transition-group(lb-pill),::view-transition-group(ct-addr),::view-transition-group(ct-notice){animation-duration:.01s}
+  .lb-novt body{animation:none}
+}
+
+/* FR / EN switch, at the end of the band. Small and quiet: a reader who needs it looks for it there. */
+.lb-link.lb-lang{font:700 11.5px/1 'Archivo',system-ui,sans-serif;letter-spacing:.06em;padding:7px 8px;margin-left:2px;border:1px solid currentColor;border-radius:99px;opacity:.55}
+.lb-link.lb-lang:hover,.lb-link.lb-lang:focus-visible{opacity:1}
+@media (max-width:600px){.lb-link.lb-lang{padding:6px 7px;font-size:11px}}
+</style>
+<script>
+/* Runs in <head>, before the first paint.
+   1. Works out which way the reader is moving (chapters are an ordered row: front page, videos, agents, teams, teaching, vision, awards, press, contact, internship),
+      so the page change can slide the right way.
+   2. Makes a fresh arrival land at the top of the chapter, or on the anchor in the link. Back, forward and reload keep the browser's own position. */
+(function () {
+  var ORDER = ['index', 'videos', 'agents', 'teams', 'teaching', 'vision', 'awards', 'press', 'contact', 'internship'];
+  var root = document.documentElement;
+  function key(u) { try { var p = new URL(u, location.href).pathname.split('/').pop().replace(/\.html$/, ''); return p || 'index'; } catch (e) { return ''; } }
+  function dir() {
+    var from = '';
+    try { from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || document.referrer || ''; } catch (e) {}
+    if (!from) return 'none';
+    try { if (new URL(from, location.href).origin !== location.origin) return 'none'; } catch (e) { return 'none'; }
+    var a = ORDER.indexOf(key(from)), b = ORDER.indexOf(key(location.href));
+    return a < 0 || b < 0 || a === b ? 'none' : b > a ? 'fwd' : 'back';
+  }
+  function arm() {                       /* the slide only applies to a change of page, never to a transition inside a page */
+    root.dataset.dir = dir(); root.dataset.nav = '1';
+    clearTimeout(arm.t); arm.t = setTimeout(function () { delete root.dataset.nav; }, 900);
+  }
+  arm();
+  addEventListener('pagereveal', function (e) {
+    arm();
+    if (e.viewTransition) {            /* a transition is running: keep the flag until it has finished, however long the page took to arrive */
+      clearTimeout(arm.t);
+      e.viewTransition.finished.then(function () { delete root.dataset.nav; }, function () { delete root.dataset.nav; });
+    }
+  });
+  if (!('CSSViewTransitionRule' in window)) root.classList.add('lb-novt');   /* no page transitions here: fade the page in instead */
+
+  var nav = (performance.getEntriesByType('navigation')[0] || {}).type;
+  if (nav !== 'back_forward' && nav !== 'reload') {
+    var moved = false;
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+    var land = function () {
+      if (moved) return;
+      var id = decodeURIComponent(location.hash.slice(1)), t = id && document.getElementById(id);
+      if (t) t.scrollIntoView({ block: 'start' });
+      else { scrollTo(0, 0); var m = document.getElementById('lb-mast'); if (m && m.getBoundingClientRect().top < 0) m.scrollIntoView({ block: 'start' }); }
+    };
+    addEventListener('DOMContentLoaded', land);
+    addEventListener('load', land);
+  }
+})();
+</script>
+<script type="speculationrules">{"prerender":[{"where":{"selector_matches":"a[href$='.html'],a[href*='.html#']"},"eagerness":"moderate"}]}</script>
+<style>.en:empty,small:empty{display:none}</style>
+</head>
+<body>
+<header class="lb-mast" data-tone="light" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, accueil"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapitres"><a href="videos.html">vidéos</a><a href="agents.html">agents</a><a href="teams.html">équipes</a><a href="teaching.html">enseignement</a><a href="vision.html">vision</a><a href="awards.html">prix</a></nav><a class="lb-link opt" href="press.html" aria-current="page">Presse</a><a class="lb-link" href="contact.html">Contact</a><a class="lb-link lb-lang" href="../press.html" hreflang="en" lang="en" data-lang="en" aria-label="Read in English">EN</a></header><script>
+/* Runs right after the band. Puts the yellow marker behind the current word, as its own layer,
+   so that on a change of page the browser can slide it from one word to the next. */
+(function () {
+  var m = document.getElementById('lb-mast'), p = m.querySelector('.lb-pill'), a = m.querySelector('[aria-current]'), rail = m.querySelector('.lb-rail');
+  function place() {
+    if (!a || !a.offsetParent) { p.style.opacity = 0; return; }
+    var r = a.getBoundingClientRect(), b = m.getBoundingClientRect();
+    p.style.cssText = 'opacity:1;left:' + (r.left - b.left) + 'px;top:' + (r.top - b.top) + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+  }
+  if (a && rail.contains(a)) rail.scrollLeft = a.offsetLeft - (rail.clientWidth - a.offsetWidth) / 2;   /* keep the current word in view on a narrow phone */
+  m.classList.add('pilled'); place();
+  addEventListener('resize', place); rail.addEventListener('scroll', place, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+
+<main>
+  <section class="wrap gut intro">
+    <p class="kick"><i></i>Presse</p>
+    <h1>D'autres ont aussi raconté cette histoire.</h1>
+    <p class="stand">Télévision, documentaire et presse écrite depuis 2023. Chaque ligne ouvre l'original, et les titres sont cités tels que publiés.</p>
+  </section>
+
+  <section class="wrap gut" aria-label="Deux pièces pour commencer">
+    <div class="leads">
+      <a class="lead" href="https://www.franceinfo.fr/sciences/high-tech/technologie-de-trappes-a-la-silicon-valley-rencontre-avec-loqmann-benhaddya-prodige-de-l-intelligence-artificielle_6301326.html" rel="noopener">
+        <span class="ph"><img src="../photos/berkeley-stage.jpg" alt="Loqmann Benhaddya sur scène à Berkeley, tenant son certificat" width="1600" height="1067"><em>Berkeley, décembre 2023 · photo personnelle</em></span>
+        <span class="src"><b>franceinfo · France 3</b><span>13 janvier 2024</span><span>Reportage télévisé</span></span>
+        <q lang="fr">De Trappes à la Silicon Valley, rencontre avec Loqmann Benhaddya, prodige de l'intelligence artificielle</q>
+        <span class="en"></span>
+        <span class="go">Voir le reportage sur franceinfo ↗</span>
+      </a>
+      <a class="lead" href="https://youtu.be/22DuQTz1Zc8" rel="noopener">
+        <span class="ph play"><img src="../photos/bn-documentary.jpg" alt="La miniature du documentaire : Loqmann devant le panneau du Jet Propulsion Laboratory de la NASA, avec le titre De Trappes à la Silicon Valley" width="1280" height="720" loading="lazy"><em>La miniature du documentaire</em></span>
+        <span class="src"><b>Banlieusard Nouveau</b><span>Documentaire</span></span>
+        <q lang="fr">De Trappes à la Silicon Valley : des cracks de l'IA à Los Angeles et San Francisco</q>
+        <span class="en">Tourné pendant le voyage en Californie qui récompensait la victoire à KESK'IA.</span>
+        <span class="go">Voir sur YouTube ↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="wrap gut all" aria-label="Autres articles">
+    <p class="lab">Autres articles, du plus récent au plus ancien</p>
+    <ul class="clip">
+      <li><div class="row"><time datetime="2025-03">Mars 2025</time><span class="o">Talenteed</span><span class="t">Interview vidéo</span><span class="k">Interview</span></div></li>
+      <li><a href="https://www.sqooltv.com/videos/des-etudiants-de-trappes-remportent-le-concours-keskia/" rel="noopener"><time datetime="2024-02-15">15 févr. 2024</time><span class="o">SQOOL TV</span><span class="t" lang="fr">Des étudiants de Trappes remportent le concours Kesk'IA<small lang="fr">Dans l'émission L'École du futur.</small></span><span class="k">Télévision ↗</span></a></li>
+      <li><a href="https://presseagence.fr/paris-c-du-propre-application-de-gestion-des-dechets/" rel="noopener"><time datetime="2024-01-20">20 janv. 2024</time><span class="o">Presse Agence</span><span class="t" lang="fr">Paris : C du Propre, application de gestion des déchets<small lang="fr"></small></span><span class="k">Article ↗</span></a></li>
+      <li><a href="https://www.tsa-algerie.com/france-des-jeunes-des-banlieues-sillustrent-dans-lia/" rel="noopener"><time datetime="2023-07-16">16 juil. 2023</time><span class="o">TSA</span><span class="t" lang="fr">France : des jeunes des banlieues s'illustrent dans l'IA<small lang="fr"></small></span><span class="k">Article ↗</span></a></li>
+      <li><a href="https://www.linfodurable.fr/keskia-pepiniere-de-talents-de-lintelligence-artificielle-au-service-des-communes-39260" rel="noopener"><time datetime="2023-06-23">23 juin 2023</time><span class="o">L'Info Durable · AFP</span><span class="t" lang="fr">Kesk'IA, pépinière de talents de l'intelligence artificielle au service des communes<small lang="fr">Publié le jour de la finale nationale.</small></span><span class="k">Article ↗</span></a></li>
+      <li><a href="https://www.lemondeinformatique.fr/actualites/lire-kesk-ia-recompense-des-projets-ia-de-jeunes-de-quartiers-prioritaires-90653.html" rel="noopener"><time datetime="2023-06-08">8 juin 2023</time><span class="o">Le Monde Informatique</span><span class="t" lang="fr">Kesk'IA récompense des projets IA de jeunes de quartiers prioritaires<small lang="fr"></small></span><span class="k">Article ↗</span></a></li>
+    </ul>
+    <p class="note">Les articles de 2023 parlent du programme KESK'IA et de <a href="vision.html">C du Propre</a>, le projet avec lequel mon équipe l'a remporté. Tous ne citent pas chaque membre de l'équipe.</p>
+  </section>
+</main>
+<nav class="lb-next" data-tone="light" aria-label="Suite"><div class="in"><a class="back" href="index.html">← Accueil</a><a class="go" href="contact.html"><span class="k">Contact</span><b>Écrivez-moi</b><span class="d">Je cherche un stage en ingénierie IA ou ML à l'étranger, à partir de 2027.</span><span class="ar" aria-hidden="true">→</span></a></div></nav>
+<footer class="lb-foot" data-tone="light"><div class="in"><span>Loqmann Benhaddya · Paris</span><span class="mail">loqmannbenhaddya.pro@gmail.com</span><a href="https://www.linkedin.com/in/loqmann-benhaddya" rel="noopener">LinkedIn</a><a href="https://github.com/skezu" rel="noopener">GitHub</a><a href="press.html">Presse</a><a href="../cv/Loqmann-Benhaddya-CV-EN.pdf">CV (PDF)</a></div></footer>
+</body>
+</html>

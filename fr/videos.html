@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>De l'article à la vidéo · Loqmann Benhaddya</title>
+<meta name="description" content="Comment j'ai conçu chez Digiteka le pipeline qui transforme un article de presse en vidéo verticale : benchmark, architecture en trois étages, infrastructure et résultats.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap">
+<style>
+/* Chapter 01. A news article pinned to the viewport; scrolling reframes it 16:9 -> 9:16 and plays the story as a vertical video.
+   Single look by choice: white paper, then a dark video stage. */
+:root{
+  --paper:#FFFFFF; --ink:#111214; --muted:#5C5F66; --rule:#111214; --live:#6F2CF5; --stage:#0B0B0D; --cap:#FFE600; --onstage:#F4F4F1;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif; --ui:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif; --cap-font:'Archivo Black','Archivo',Impact,sans-serif;
+  --mh:calc(49px + env(safe-area-inset-top,0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+#wrap{height:900vh;position:relative}
+#stage{position:sticky;top:var(--mh);height:calc(100vh - var(--mh));height:calc(100svh - var(--mh));overflow:hidden;background:var(--paper)}
+/* ---------- the article ---------- */
+#paper{position:absolute;inset:0;transform-origin:50% 30%;will-change:transform,filter}
+.strip{display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--rule);padding-block:12px 10px;font:600 12px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.strip b{color:var(--ink);font-weight:700}
+.strip span:last-child{margin-left:auto}
+article{max-width:1180px;margin:0 auto;padding-block:24px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:34px;align-items:start}
+.kick{font:700 12px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--live);display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.kick i{width:8px;height:8px;border-radius:50%;background:var(--live);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+h1{font:700 clamp(32px,4.4vw,60px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+.stand{font:400 clamp(17px,1.5vw,21px)/1.4 var(--serif);color:#2B2D31;margin:0 0 16px;max-width:52ch}
+.by{font:500 13px var(--ui);color:var(--muted);border-top:1px solid #D9D9D4;padding-top:10px;display:flex;gap:14px;flex-wrap:wrap}
+.by b{color:var(--ink);font-weight:600}
+figure{margin:0}
+#src{aspect-ratio:16/9;width:100%;max-width:100%}
+.bars{background:linear-gradient(90deg,#F4F4F1 0 14.28%,#FFE600 0 28.56%,#19C3D6 0 42.84%,#18B15A 0 57.12%,#C02BD8 0 71.4%,#E8112D 0 85.68%,#1B2CC1 0);position:relative;overflow:hidden}
+.bars::before{content:"LB";position:absolute;inset:0;display:grid;place-items:center;font:400 min(22vw,150px)/1 var(--cap-font);color:var(--stage);mix-blend-mode:multiply;letter-spacing:-.04em}
+.bars::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:var(--stage)}
+figcaption{font:500 12px var(--ui);color:var(--muted);margin-top:8px}
+.cols{grid-column:1/-1;columns:3 260px;column-gap:30px;border-top:1px solid var(--rule);padding-top:16px;font:400 16.5px/1.5 var(--serif)}
+.cols p{margin:0 0 12px}
+.cols p:first-child::first-letter{font:700 58px/.82 var(--serif);float:left;padding:4px 8px 0 0}
+.hint{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);font:600 12px var(--ui);letter-spacing:.1em;text-transform:uppercase;padding:9px 14px;border-radius:99px;white-space:nowrap;z-index:3}
+/* ---------- the reframe ---------- */
+#shade{position:absolute;inset:0;background:var(--stage);opacity:0;pointer-events:none}
+#crop{position:absolute;left:0;top:0;opacity:0;pointer-events:none;outline:2px solid var(--cap);outline-offset:0;z-index:2;overflow:visible}
+#crop::before{font-size:min(22vw,150px)}
+#crop span{position:absolute;left:-2px;bottom:100%;background:var(--cap);color:var(--stage);font:700 11px var(--ui);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;white-space:nowrap;z-index:2}
+/* ---------- the video ---------- */
+#video{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,64px);padding-block:20px;color:var(--onstage);opacity:0;pointer-events:none}
+#video.live{pointer-events:auto}
+#phone{height:min(calc(100vh - var(--mh) - 44px),740px);height:min(calc(100svh - var(--mh) - 44px),740px);aspect-ratio:9/16;max-width:calc(100vw - 40px);border-radius:26px;overflow:hidden;position:relative;background:#000;box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.14)}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 18px 22px;opacity:0;transition:opacity .35s;pointer-events:none}
+.scene.on{opacity:1;pointer-events:auto}
+.scene .glyph{position:absolute;right:-6%;top:9%;font:400 clamp(110px,26vh,230px)/.8 var(--cap-font);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.34);white-space:nowrap;transform:rotate(-6deg)}
+.scene .who{position:absolute;left:16px;top:34px;display:flex;align-items:center;gap:8px;font:600 12px var(--ui);letter-spacing:.04em;z-index:1}
+.scene .who i{width:26px;height:26px;border-radius:50%;background:var(--onstage);color:var(--stage);display:grid;place-items:center;font:400 10px var(--cap-font);font-style:normal}
+/* the real footage sits between a plain top bar and the caption, so the feed's own text stays readable */
+.scene.real{padding:62px 0 0;justify-content:flex-start}
+.scene.real video{flex:1;min-height:0;width:100%;object-fit:cover;display:block}
+.scene.real .txt{padding:14px 18px 20px}
+.scene.real .cap{font-size:clamp(17px,3vh,26px);margin-bottom:8px}
+.scene .tagline{position:absolute;right:14px;top:72px;z-index:1;font:700 10px var(--ui);letter-spacing:.12em;text-transform:uppercase;background:var(--cap);color:var(--stage);padding:4px 7px}
+.cap{font:400 clamp(22px,4.2vh,38px)/1.06 var(--cap-font);text-transform:uppercase;letter-spacing:-.01em;margin:0 0 12px;position:relative}
+.cap span{opacity:.32;transition:opacity .15s}
+.cap span.said{opacity:1}
+.cap span.now{opacity:1;background:var(--cap);color:var(--stage);box-shadow:-.12em 0 0 var(--cap),.12em 0 0 var(--cap)}
+.sub{font:500 13.5px/1.4 var(--ui);margin:0;max-width:34ch;position:relative}
+.segs{position:absolute;left:12px;right:12px;top:14px;display:flex;gap:4px;z-index:2}
+.segs i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}
+.segs i b{display:block;height:100%;width:0;background:#fff}
+.tc{position:absolute;right:14px;top:36px;font:600 11px var(--ui);letter-spacing:.06em;z-index:2;font-variant-numeric:tabular-nums}
+.rail{min-width:0}
+#chapters{justify-self:end;display:grid;gap:4px;text-align:right}
+#chapters .lab,#detail .lab{font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:#8B8E96;margin-bottom:8px}
+#chapters button{all:unset;cursor:pointer;font:400 clamp(18px,2vw,26px)/1.15 var(--cap-font);text-transform:uppercase;color:#5D6068;padding:3px 0;transition:color .2s}
+#chapters button:hover{color:var(--onstage)}
+#chapters button.on{color:var(--cap)}
+#chapters button:focus-visible,.btn:focus-visible,#phone a:focus-visible{outline:2px solid var(--cap);outline-offset:3px}
+#detail{max-width:340px}
+#detail h2{font:700 clamp(24px,2.4vw,34px)/1.08 var(--serif);margin:0 0 12px;text-wrap:balance}
+#detail ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font:400 15.5px/1.4 var(--ui);color:#C9CBD1}
+#detail li{border-top:1px solid rgba(255,255,255,.16);padding-top:10px}
+#detail li b{color:var(--onstage);font-weight:600}
+.s-contact .mail{font:600 13px var(--ui);user-select:all;overflow-wrap:anywhere;margin:0 0 10px;position:relative}
+.btn{display:inline-block;font:700 12px var(--ui);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;background:var(--cap);color:var(--stage);padding:9px 12px;border-radius:99px;position:relative}
+.btn.line{background:transparent;color:var(--onstage);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;position:relative}
+@media (max-width:920px){
+  article{grid-template-columns:1fr;gap:18px;padding-block:16px}
+  .cols{display:none}
+  .stand{margin-bottom:10px}
+  .strip span:last-child{display:none}
+  #video{grid-template-columns:1fr;justify-items:center;padding-block:12px}
+  #chapters,#detail{display:none}
+  .scene .glyph{font-size:clamp(90px,19vh,170px)}
+  #phone{height:min(calc(100vh - var(--mh) - 24px),calc((100vw - 32px) * 16 / 9));height:min(calc(100svh - var(--mh) - 24px),calc((100vw - 32px) * 16 / 9))}
+}
+@media (prefers-reduced-motion:reduce){.kick i{animation:none}.scene,.cap span{transition:none}}
+</style>
+<link rel="alternate" hreflang="en" href="https://skezu.github.io/videos.html"><link rel="alternate" hreflang="fr" href="https://skezu.github.io/fr/videos.html"><link rel="alternate" hreflang="x-default" href="https://skezu.github.io/videos.html">
+<script>
+/* French pages: only remember a choice made with the FR / EN switch. */
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[data-lang]');
+  if (a) try { localStorage.setItem('lb-lang', a.dataset.lang); } catch (x) {}
+});
+</script>
+<style>
+/* The band, the next-story block and the footer: the same on every page, in a light and a dark tone.
+   Names start with lb- so they never collide with a chapter's own styles. */
+.lb-mast{--v:#6F2CF5;--c:#111214;--bg:rgba(255,255,255,.92);--ln:rgba(17,18,20,.14);position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;height:calc(49px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--ln);background:var(--bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--c);transition:background .3s,color .3s,border-color .3s}
+.lb-mast[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:rgba(11,11,13,.88);--ln:rgba(244,244,241,.18)}
+.lb-logo{font:400 17px/1 'Archivo Black','Archivo',Impact,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:inherit}
+.lb-logo b{color:var(--v);font-weight:400}
+.lb-logo .s{display:none}
+.lb-sp{flex:1}
+.lb-rail{display:flex;gap:2px;min-width:0;font:600 12.5px/1 'Archivo',system-ui,sans-serif;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.lb-rail::-webkit-scrollbar{display:none}
+.lb-rail a{padding:7px 9px;border-radius:99px;color:inherit;opacity:.66;text-decoration:none;transition:opacity .15s}
+.lb-rail a:hover{opacity:1}
+.lb-rail a[aria-current]{background:#FFE600;color:#111214;opacity:1}
+.lb-link[aria-current]{color:#111214}
+/* the yellow marker as its own layer (placed by the script after the band); without the script the word keeps its own background */
+.lb-pill{position:absolute;z-index:0;left:0;top:0;width:0;height:0;border-radius:99px;background:#FFE600;opacity:0;pointer-events:none;view-transition-name:lb-pill}
+.lb-rail,.lb-link,.lb-logo{position:relative;z-index:1}
+.lb-mast.pilled a[aria-current]{background:none}
+.lb-link{font:500 13.5px/1 'Archivo',system-ui,sans-serif;color:inherit;opacity:.7;padding:8px 9px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.lb-link:hover,.lb-link[aria-current]{opacity:1}
+.lb-mast:not(.pilled) .lb-link[aria-current]{background:#FFE600;border-radius:99px}
+.lb-mast a:focus-visible,.lb-next a:focus-visible,.lb-foot a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:6px}
+@media (max-width:900px){.lb-logo .f{display:none}.lb-logo .s{display:inline}}
+@media (max-width:600px){.lb-link.opt{display:none}.lb-rail a{padding:7px 8px}.lb-rail{padding-right:20px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}.lb-link{padding:8px 10px}}   /* on a phone the chapter words scroll sideways (their right edge fades to say so); Contact always stays in view */
+@media (max-width:400px){.lb-mast{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:6px}.lb-rail{font-size:12px}.lb-rail a{padding:7px 6px}}
+
+.lb-next{--v:#6F2CF5;--c:#111214;--bg:#FFFFFF;--mu:#5C5F66;--ln:rgba(17,18,20,.14);--hv:#F4F4F1;background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font-family:'Archivo',system-ui,sans-serif}
+.lb-next[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:#0B0B0D;--mu:#A3A6AE;--ln:rgba(244,244,241,.18);--hv:#17171A}
+.lb-next .in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.lb-next a{text-decoration:none;color:inherit;padding:clamp(22px,3.4vw,38px) max(20px,clamp(18px,3vw,34px))}
+.lb-next .back{display:flex;align-items:flex-end;font:600 12px 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-right:1px solid var(--ln);white-space:nowrap}
+.lb-next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.lb-next .go:hover{background:var(--hv)}
+.lb-next .k{grid-column:1/-1;font:700 11px 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--v)}
+.lb-next b{font:500 clamp(28px,4.4vw,56px)/1 'Newsreader',Georgia,serif;letter-spacing:-.02em}
+.lb-next .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 'Newsreader',Georgia,serif;color:var(--mu)}
+.lb-next .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 'Newsreader',Georgia,serif;transition:transform .25s}
+.lb-next .go:hover .ar{transform:translateX(6px)}
+@media (max-width:640px){.lb-next .in{grid-template-columns:1fr}.lb-next .back{border-right:0;border-bottom:1px solid var(--ln);padding-block:14px}}
+
+.lb-foot{--c:#5C5F66;--bg:#FFFFFF;--ln:rgba(17,18,20,.14);background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font:500 13px/1.4 'Archivo',system-ui,sans-serif}
+.lb-foot[data-tone=dark]{--c:#A3A6AE;--bg:#0B0B0D;--ln:rgba(244,244,241,.18)}
+.lb-foot .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding:18px max(20px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lb-foot span:first-child{margin-right:auto}
+.lb-foot .mail{user-select:all;overflow-wrap:anywhere}
+.lb-foot a{color:inherit;text-underline-offset:3px}
+.lb-foot a:hover{color:inherit;text-decoration-thickness:2px}
+@media (prefers-reduced-motion:reduce){.lb-mast,.lb-next .go,.lb-next .ar{transition:none}}
+
+/* ---------- from one page to the next ----------
+   A "shared axis" change of page: the old page fades out first while it starts to move, then the new one fades in as it settles,
+   both sliding 30px in the direction of travel. The two are never on screen together, so text never overlaps.
+   The band stays still and the yellow marker glides from the old word to the new one. 0.32 s in all, one easing curve for everything. */
+@view-transition{navigation:auto}
+html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
+:root{--lb-ease:cubic-bezier(.4,0,.2,1);--lb-t:.32s}
+:root[data-dir=fwd]{--lb-d:1}:root[data-dir=back]{--lb-d:-1}
+.lb-mast{view-transition-name:lb-mast}
+.lb-rail{view-transition-name:lb-rail}
+:root[data-nav]::view-transition-old(root){animation:lb-out var(--lb-t) var(--lb-ease) both}
+:root[data-nav]::view-transition-new(root){animation:lb-in var(--lb-t) var(--lb-ease) both}
+@keyframes lb-out{0%{opacity:1;transform:none}30%{opacity:0}100%{opacity:0;transform:translateX(calc(var(--lb-d,0) * -30px))}}
+@keyframes lb-in{0%{opacity:0;transform:translateX(calc(var(--lb-d,0) * 30px))}30%{opacity:0}100%{opacity:1;transform:none}}
+::view-transition-group(lb-mast){animation:none;z-index:3}
+::view-transition-old(lb-mast),::view-transition-new(lb-mast){animation-duration:.2s;height:100%}
+::view-transition-group(lb-pill){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:4}
+::view-transition-old(lb-pill),::view-transition-new(lb-pill){height:100%}
+::view-transition-group(lb-rail){animation:none;z-index:5}
+/* the words do not cross-fade (that makes them flicker): the old set is swapped for the new one half-way through the band's own fade */
+::view-transition-old(lb-rail),::view-transition-new(lb-rail){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-rail){animation:lb-off .2s linear both}
+::view-transition-new(lb-rail){animation:lb-on .2s linear both}
+/* Press and Contact sit outside the row of chapters: they get the same treatment, so their word stays readable on top of the marker */
+.lb-link[href="press.html"]{view-transition-name:lb-press}
+.lb-link[href="contact.html"]{view-transition-name:lb-contact}
+::view-transition-group(lb-press),::view-transition-group(lb-contact){animation:none;z-index:5}
+::view-transition-old(lb-press),::view-transition-new(lb-press),::view-transition-old(lb-contact),::view-transition-new(lb-contact){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-press),::view-transition-old(lb-contact){animation:lb-off .2s linear both}
+::view-transition-new(lb-press),::view-transition-new(lb-contact){animation:lb-on .2s linear both}
+@keyframes lb-off{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes lb-on{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+/* contact → internship notice: the address block stays where it is and the small notice card unfolds into the full notice.
+   The snapshots keep their real size (no stretching): the box grows and uncovers the new content from the top. */
+::view-transition-group(ct-addr){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:2}
+::view-transition-group(ct-notice){animation-duration:.42s;animation-timing-function:var(--lb-ease);overflow:clip;z-index:2}
+::view-transition-old(ct-notice),::view-transition-new(ct-notice){height:100%;width:100%;object-fit:none;object-position:0 0;mix-blend-mode:normal}
+::view-transition-old(ct-notice){animation:lb-hide .42s both}
+::view-transition-new(ct-notice){animation:lb-show .42s both}
+:root[data-dir=back]::view-transition-old(ct-notice){animation-name:lb-show}   /* going back, the full notice folds up: the taller one is always the one shown */
+:root[data-dir=back]::view-transition-new(ct-notice){animation-name:lb-hide}
+@keyframes lb-show{from,to{opacity:1}}
+@keyframes lb-hide{from,to{opacity:0}}
+.lb-novt body{animation:lb-fade .3s ease-out both}
+@keyframes lb-fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  :root{--lb-t:.16s;--lb-d:0!important}
+  ::view-transition-group(lb-pill),::view-transition-group(ct-addr),::view-transition-group(ct-notice){animation-duration:.01s}
+  .lb-novt body{animation:none}
+}
+
+/* FR / EN switch, at the end of the band. Small and quiet: a reader who needs it looks for it there. */
+.lb-link.lb-lang{font:700 11.5px/1 'Archivo',system-ui,sans-serif;letter-spacing:.06em;padding:7px 8px;margin-left:2px;border:1px solid currentColor;border-radius:99px;opacity:.55}
+.lb-link.lb-lang:hover,.lb-link.lb-lang:focus-visible{opacity:1}
+@media (max-width:600px){.lb-link.lb-lang{padding:6px 7px;font-size:11px}}
+</style>
+<script>
+/* Runs in <head>, before the first paint.
+   1. Works out which way the reader is moving (chapters are an ordered row: front page, videos, agents, teams, teaching, vision, awards, press, contact, internship),
+      so the page change can slide the right way.
+   2. Makes a fresh arrival land at the top of the chapter, or on the anchor in the link. Back, forward and reload keep the browser's own position. */
+(function () {
+  var ORDER = ['index', 'videos', 'agents', 'teams', 'teaching', 'vision', 'awards', 'press', 'contact', 'internship'];
+  var root = document.documentElement;
+  function key(u) { try { var p = new URL(u, location.href).pathname.split('/').pop().replace(/\.html$/, ''); return p || 'index'; } catch (e) { return ''; } }
+  function dir() {
+    var from = '';
+    try { from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || document.referrer || ''; } catch (e) {}
+    if (!from) return 'none';
+    try { if (new URL(from, location.href).origin !== location.origin) return 'none'; } catch (e) { return 'none'; }
+    var a = ORDER.indexOf(key(from)), b = ORDER.indexOf(key(location.href));
+    return a < 0 || b < 0 || a === b ? 'none' : b > a ? 'fwd' : 'back';
+  }
+  function arm() {                       /* the slide only applies to a change of page, never to a transition inside a page */
+    root.dataset.dir = dir(); root.dataset.nav = '1';
+    clearTimeout(arm.t); arm.t = setTimeout(function () { delete root.dataset.nav; }, 900);
+  }
+  arm();
+  addEventListener('pagereveal', function (e) {
+    arm();
+    if (e.viewTransition) {            /* a transition is running: keep the flag until it has finished, however long the page took to arrive */
+      clearTimeout(arm.t);
+      e.viewTransition.finished.then(function () { delete root.dataset.nav; }, function () { delete root.dataset.nav; });
+    }
+  });
+  if (!('CSSViewTransitionRule' in window)) root.classList.add('lb-novt');   /* no page transitions here: fade the page in instead */
+
+  var nav = (performance.getEntriesByType('navigation')[0] || {}).type;
+  if (nav !== 'back_forward' && nav !== 'reload') {
+    var moved = false;
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+    var land = function () {
+      if (moved) return;
+      var id = decodeURIComponent(location.hash.slice(1)), t = id && document.getElementById(id);
+      if (t) t.scrollIntoView({ block: 'start' });
+      else { scrollTo(0, 0); var m = document.getElementById('lb-mast'); if (m && m.getBoundingClientRect().top < 0) m.scrollIntoView({ block: 'start' }); }
+    };
+    addEventListener('DOMContentLoaded', land);
+    addEventListener('load', land);
+  }
+})();
+</script>
+<script type="speculationrules">{"prerender":[{"where":{"selector_matches":"a[href$='.html'],a[href*='.html#']"},"eagerness":"moderate"}]}</script>
+<style>.en:empty,small:empty{display:none}</style>
+</head>
+<body>
+<header class="lb-mast" data-tone="light" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, accueil"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapitres"><a href="videos.html" aria-current="page">vidéos</a><a href="agents.html">agents</a><a href="teams.html">équipes</a><a href="teaching.html">enseignement</a><a href="vision.html">vision</a><a href="awards.html">prix</a></nav><a class="lb-link opt" href="press.html">Presse</a><a class="lb-link" href="contact.html">Contact</a><a class="lb-link lb-lang" href="../videos.html" hreflang="en" lang="en" data-lang="en" aria-label="Read in English">EN</a></header><script>
+/* Runs right after the band. Puts the yellow marker behind the current word, as its own layer,
+   so that on a change of page the browser can slide it from one word to the next. */
+(function () {
+  var m = document.getElementById('lb-mast'), p = m.querySelector('.lb-pill'), a = m.querySelector('[aria-current]'), rail = m.querySelector('.lb-rail');
+  function place() {
+    if (!a || !a.offsetParent) { p.style.opacity = 0; return; }
+    var r = a.getBoundingClientRect(), b = m.getBoundingClientRect();
+    p.style.cssText = 'opacity:1;left:' + (r.left - b.left) + 'px;top:' + (r.top - b.top) + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+  }
+  if (a && rail.contains(a)) rail.scrollLeft = a.offsetLeft - (rail.clientWidth - a.offsetWidth) / 2;   /* keep the current word in view on a narrow phone */
+  m.classList.add('pilled'); place();
+  addEventListener('resize', place); rail.addEventListener('scroll', place, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+<div id="wrap">
+  <div id="stage">
+    <div id="paper">
+      <div class="strip gut"><b>Chapitre 01</b><span>Vidéo générative · Digiteka</span><span id="date"></span></div>
+      <article class="gut">
+        <div>
+          <div class="kick"><i></i>Digiteka · Vidéo générative</div>
+          <h1>Cet article va devenir une vidéo verticale. J'ai construit la machine qui le fait.</h1>
+          <p class="stand">Chez Digiteka, j'ai conçu et dirigé le pipeline qui transforme un article de presse en vidéo pensée pour le téléphone. Continuez à faire défiler. La page va faire à cette histoire ce que le logiciel fait à celles d'un éditeur.</p>
+          <div class="by"><span>Par <b>Loqmann Benhaddya</b></span><span>Architecte et développeur principal</span><span>Temps de lecture : un défilement</span></div>
+        </div>
+        <figure>
+          <div id="src" class="bars"></div>
+          <figcaption>Image source, 16:9. Faites défiler et AutoCut la recadre pour les écrans verticaux.</figcaption>
+        </figure>
+        <div class="cols">
+          <p>Digiteka gère la vidéo des éditeurs de presse. En 2025, leurs lecteurs étaient passés aux formats verticaux courts, et l'entreprise lançait un fil de vidéos verticales. Ce fil avait besoin de vidéos. Les rédactions produisent des articles. Mon travail : combler cet écart automatiquement.</p>
+          <p>J'ai commencé par un benchmark, pas par du code. Cinq modèles de vidéo générative, testés sur de vraies images de presse et comparés sur le coût, la vitesse et la qualité. Celui que j'ai retenu est facturé à la vidéo et non à la seconde, ce qui le rendait plusieurs fois moins cher que tout ce qui se facture à la seconde, à la qualité qu'il nous fallait.</p>
+          <p>Le pipeline a trois étages. Un modèle lit l'image et le titre et écrit un prompt. Un deuxième anime l'image. Un troisième note le résultat et décide s'il part en ligne, passe par un humain ou est jeté. Sur sa première année, il a généré plus de 16 000 vidéos pour cinq clients médias.</p>
+        </div>
+      </article>
+      <div class="hint" id="hint">Faites défiler pour lancer la lecture ↓</div>
+    </div>
+
+    <div id="shade"></div>
+    <div id="crop" class="bars"><span>AutoCut · 16:9 → 9:16</span></div>
+
+    <div id="video" class="gut">
+      <div id="chapters" class="rail"><div class="lab">En lecture</div></div>
+      <div id="phone">
+        <div class="segs" id="segs"></div>
+        <div class="tc" id="tc">0:00 / 0:42</div>
+      </div>
+      <div id="detail" class="rail"><div class="lab">Dans cette scène</div><h2></h2><ul></ul></div>
+    </div>
+  </div>
+</div>
+<nav class="lb-next" data-tone="dark" aria-label="Suite"><div class="in"><a class="back" href="index.html">← Accueil</a><a class="go" href="agents.html"><span class="k">Histoire suivante · 02 sur 06</span><b>Le harness</b><span class="d">Un agent intégré à l'application, qui agit et demande avant d'écrire.</span><span class="ar" aria-hidden="true">→</span></a></div></nav>
+<footer class="lb-foot" data-tone="dark"><div class="in"><span>Loqmann Benhaddya · Paris</span><span class="mail">loqmannbenhaddya.pro@gmail.com</span><a href="https://www.linkedin.com/in/loqmann-benhaddya" rel="noopener">LinkedIn</a><a href="https://github.com/skezu" rel="noopener">GitHub</a><a href="press.html">Presse</a><a href="../cv/Loqmann-Benhaddya-CV-EN.pdf">CV (PDF)</a></div></footer>
+
+<script>
+const SC = [
+  { t:'Brief', bg:'#1B2CC1', glyph:'9:16', cap:'Les lecteurs sont passés à la vidéo verticale. Les rédactions écrivent toujours des articles.', sub:'Digiteka lançait un fil de vidéos verticales. Il fallait de quoi le remplir.',
+    h:'Le brief.', facts:['<b>En entrée</b> : une image de presse et un titre','<b>En sortie</b> : un aperçu animé de huit secondes, en 9:16','<b>Mon rôle</b> : architecte et développeur principal, du benchmark à la production'] },
+  { t:'Benchmark', bg:'#6F2CF5', glyph:'×5', cap:'J\'ai testé cinq modèles avant d\'écrire le pipeline.', sub:'Sur de vraies images de presse, comparés sur le coût, la vitesse et la qualité.',
+    h:'D\'abord mesurer.', facts:['<b>Cinq candidats</b> : Wan 2.2, Kling, Veo 3.1, Sora 2 et Grok','<b>Premier filtre</b> : y a-t-il seulement une API ? Deux étaient éliminés','<b>Retenu</b> : Wan 2.2, poids ouverts, facturé à la vidéo et non à la seconde'] },
+  { t:'Pipeline', bg:'#0F7A63', glyph:'1·2·3', cap:'Trois modèles à la suite. L\'un lit, l\'autre anime, le dernier juge.', sub:'Chaque étage peut être amélioré sans toucher aux autres.',
+    h:'Trois étages.', facts:['<b>Lire</b> : un modèle étudie l\'image et le titre, puis écrit le prompt de mouvement','<b>Animer</b> : génération image vers vidéo','<b>Juger</b> : une note sur 100. Validé à 75, relecture humaine de 50 à 74, rejeté en dessous'] },
+  { t:'Serveurs', bg:'#111214', glyph:'GPU', cap:'J\'ai essayé de faire tourner le modèle sur nos propres GPU. L\'API a gagné.', sub:'Des chiffres mesurés valent mieux qu\'une belle théorie.',
+    h:'Auto-hébergement ou API ?', facts:['<b>Nos propres GPU</b> : de 2 100 à 162 secondes par vidéo, treize fois plus rapide','<b>API managée</b> : 30 secondes, et pas de coupures liées aux instances spot','<b>Décision</b> : l\'API en production, avec la dépendance inscrite dans la feuille de route'] },
+  { t:'Résultats', bg:'#000', glyph:'', real:true, cap:'Plus de 16 000 vidéos générées, pour cinq clients médias.', sub:'Un vrai fil, filmé sur un téléphone. Chaque vidéo vient d\'un article.',
+    h:'En production.', facts:['<b>16 000+</b> vidéos générées la première année','<b>3 sur 4</b> aboutissent de bout en bout. Les autres sont relancées ou relues','<b>5</b> clients médias en ligne sur le fil vertical'] },
+  { t:'Outils', bg:'#F06A00', glyph:'+2', cap:'Autour, j\'ai construit les outils qu\'utilisent les équipes.', sub:'Un pipeline n\'est utile que si les gens peuvent le piloter.',
+    h:'Ce qui entoure le pipeline.', facts:['<b>AutoCut</b> : recadrage automatique du 16:9 au 9:16','<b>Un éditeur vidéo web</b>, construit en interne','<b>Un backend qui garde tout</b> : chaque prompt, note et statut, pour pouvoir étudier les échecs'] },
+  { t:'Suite', bg:'#0B0B0D', glyph:'→', cap:'Histoire suivante : un agent qui demande avant d\'écrire.', sub:'', contact:true,
+    h:'Ce que ça a prouvé.', facts:['<b>La preuve de concept</b> qui a ouvert la porte au reste','<b>Ensuite</b> : faire passer toute l\'entreprise à l\'IA','<b>Ouvert à</b> un stage en ingénierie IA / ML à l\'étranger, à partir de 2027'] }
+];
+const $ = id => document.getElementById(id);
+const wrap = $('wrap'), stage = $('stage'), paper = $('paper'), shade = $('shade'), crop = $('crop'), video = $('video'), phone = $('phone'), src = $('src'), band = $('lb-mast');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('date').textContent = new Date().toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+SC.forEach((s, i) => {
+  const d = document.createElement('div'); d.className = 'scene' + (s.contact ? ' s-contact' : '') + (s.real ? ' real' : ''); d.style.background = s.bg;
+  d.innerHTML = (s.real ? '<video src="../media/tizr-demo.mp4" poster="../media/tizr-demo-poster.jpg" muted loop playsinline preload="metadata" aria-label="Enregistrement d\'écran du fil de vidéos verticales, où chaque vidéo a été générée à partir d\'un article"></video><span class="tagline">Images réelles</span>' : '<div class="glyph">' + s.glyph + '</div>') +
+    '<div class="who"><i>LB</i>@loqmann · ' + s.t + '</div>' + (s.real ? '<div class="txt">' : '') + '<p class="cap">' +
+    s.cap.split(' ').map(w => '<span>' + w + '</span>').join(' ') + '</p>' +
+    (s.real ? '<p class="sub">' + s.sub + '</p></div>' : s.contact ? '<div class="btns"><a class="btn" href="agents.html">Lire Le harness →</a><a class="btn line" href="index.html#contact">Contact</a></div>' : '<p class="sub">' + s.sub + '</p>');
+  phone.appendChild(d); s.el = d; s.words = [...d.querySelectorAll('.cap span')]; s.vid = d.querySelector('video');
+  const seg = document.createElement('i'); seg.innerHTML = '<b></b>'; $('segs').appendChild(seg); s.seg = seg.firstChild;
+  const b = document.createElement('button'); b.type = 'button'; b.textContent = s.t; b.onclick = () => jump(i); $('chapters').appendChild(b); s.btn = b;
+});
+
+const A = .05, B = .2;                       // reframe happens between these scroll fractions
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = x => x * x * (3 - 2 * x);
+let srcRect, phoneRect, last = -2;
+function measure(){
+  const st = stage.getBoundingClientRect();
+  const keep = paper.style.transform; paper.style.transform = 'none';
+  const a = src.getBoundingClientRect(), b = phone.getBoundingClientRect();
+  paper.style.transform = keep;
+  srcRect = { x:a.left - st.left, y:a.top - st.top, w:a.width, h:a.height };
+  phoneRect = { x:b.left - st.left, y:b.top - st.top, w:b.width, h:b.height };
+}
+function jump(i){
+  const total = wrap.offsetHeight - stage.offsetHeight;
+  scrollTo({ top: wrap.offsetTop - band.offsetHeight + total * (B + (1 - B) * ((i + .45) / SC.length)), behavior: reduce ? 'auto' : 'smooth' });
+}
+function update(){
+  const total = wrap.offsetHeight - stage.offsetHeight;
+  const p = clamp((scrollY - wrap.offsetTop + band.offsetHeight) / total);
+  const b = ease(clamp((p - A) / (B - A)));
+  // 1. the article recedes
+  paper.style.transform = 'scale(' + (1 - .1 * b) + ')';
+  paper.style.filter = b ? 'blur(' + (b * 5) + 'px)' : 'none';
+  shade.style.opacity = b * .93;
+  band.dataset.tone = b > .55 ? 'dark' : 'light';
+  $('hint').style.opacity = 1 - clamp(p / A);
+  // 2. the 16:9 frame is cut to 9:16
+  const m = ease(clamp(b / .8)), r = srcRect, q = phoneRect;
+  crop.style.opacity = b > 0 && b < 1 ? 1 : 0;
+  crop.style.transform = 'translate(' + (r.x + (q.x - r.x) * m) + 'px,' + (r.y + (q.y - r.y) * m) + 'px)';
+  crop.style.width = (r.w + (q.w - r.w) * m) + 'px'; crop.style.height = (r.h + (q.h - r.h) * m) + 'px';
+  crop.style.borderRadius = (26 * m) + 'px';
+  // 3. the video takes over
+  const v = clamp((b - .8) / .2); video.style.opacity = v; video.classList.toggle('live', v > .5);
+  const c = clamp((p - B) / (1 - B)) * SC.length, idx = Math.min(SC.length - 1, Math.floor(c)), f = c - idx;
+  SC.forEach((s, i) => {
+    s.seg.style.width = (i < idx ? 100 : i === idx ? f * 100 : 0) + '%';
+    if(i === idx){ const n = Math.floor(clamp(f / .7) * (s.words.length + 1)); s.words.forEach((w, j) => { w.className = j < n - 1 ? 'said' : j === n - 1 ? 'now' : ''; }); }
+  });
+  const sec = Math.round(clamp((p - B) / (1 - B)) * 42); $('tc').textContent = '0:' + String(sec).padStart(2, '0') + ' / 0:42';
+  const shown = v > .5 ? idx : -1;
+  if(shown !== last){
+    last = shown;
+    SC.forEach((s, i) => {
+      s.el.classList.toggle('on', i === idx); s.btn.classList.toggle('on', i === idx);
+      if(s.vid){ if(i === shown && !reduce) s.vid.play().catch(() => {}); else s.vid.pause(); }   // the real footage only plays while its scene is on screen
+    });
+    $('detail').querySelector('h2').textContent = SC[idx].h;
+    $('detail').querySelector('ul').innerHTML = SC[idx].facts.map(x => '<li>' + x + '</li>').join('');
+  }
+}
+if(reduce) SC.forEach(s => { if(s.vid) s.vid.controls = true; });
+addEventListener('scroll', update, { passive:true });
+addEventListener('resize', () => { measure(); update(); });
+document.fonts && document.fonts.ready.then(() => { measure(); update(); });
+measure(); update();
+</script>
+</body>
+</html>

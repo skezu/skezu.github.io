@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Four awards, each shown in the room where it was given: UC Berkeley, Université Paris-Saclay, VivaTech and Société Générale. Then 29 AI credentials.">
+<title>Four Rooms · Loqmann Benhaddya</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap">
+<style>
+/* Shared frame: paper + ink, Newsreader / Archivo, one yellow light, one violet dot, the dark stage.
+   This chapter (variant E): each award is shown in the room where it was given. The place, then who was in it, then the award.
+   Berkeley replays its day against the clock; the three others are lighter. Without script, or with reduced motion, everything is simply laid out and readable. */
+:root{
+  --paper:#FFFFFF; --ink:#111214; --muted:#5C5F66; --stage:#0B0B0D; --onstage:#F4F4F1; --dim:#A3A6AE; --soft:#D2D4D9; --rule:rgba(244,244,241,.18); --light:#FFE600; --live:#9B7CFF;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif; --ui:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif; --black:'Archivo Black','Archivo',Impact,sans-serif; --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --mast:49px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--mast) + 8px)}
+body{margin:0;background:var(--stage);color:var(--onstage);font:400 16px/1.55 var(--ui);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{display:block;max-width:100%}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mast{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;height:calc(var(--mast) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--rule);background:rgba(11,11,13,.88);backdrop-filter:blur(8px)}
+.logo{font:400 17px/1 var(--black);text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.logo b{color:var(--live);font-weight:400}
+.sec{font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.mast .sp{flex:1}
+.ghost{font:500 13.5px var(--ui);color:var(--dim);padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.ghost:hover{color:var(--onstage);background:rgba(255,255,255,.08)}
+:focus-visible{outline:2px solid var(--light);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto}
+.kick{font:700 11.5px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--live);display:flex;gap:8px;align-items:center;margin:0 0 14px}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--live);flex:none}
+h1{font:500 clamp(38px,5.6vw,66px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+h2{font:500 clamp(30px,4.2vw,50px)/1.04 var(--serif);letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
+.stand{font:400 clamp(17px,1.5vw,20px)/1.5 var(--serif);color:var(--soft);margin:0;max-width:50ch}
+/* ---- intro ---- */
+.intro{padding-block:clamp(40px,7vw,84px) clamp(34px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:end}
+.tally{list-style:none;margin:26px 0 0;padding:0;display:flex;gap:clamp(18px,3vw,36px);flex-wrap:wrap}
+.tally li{display:grid;font:600 11.5px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.tally b{font:500 clamp(38px,4.6vw,56px)/.95 var(--serif);letter-spacing:-.02em;color:var(--onstage)}
+.tally li:first-child b{color:var(--light)}
+.index{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.index a{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule);text-decoration:none;transition:padding .18s}
+.index a:hover{padding-left:8px}
+.index .y{font:400 12.5px var(--mono);color:var(--dim)}
+.index b{font:500 clamp(18px,1.8vw,22px)/1.15 var(--serif)}
+.index span:last-child{font-size:13px;color:var(--dim);text-align:right}
+/* ---- shared pieces: slate, card, framed photo ---- */
+.slate{display:grid;gap:6px}
+.slate .where{font:600 12px var(--ui);letter-spacing:.2em;text-transform:uppercase;color:var(--light)}
+.slate .venue{font:500 clamp(26px,3.2vw,40px)/1.06 var(--serif);letter-spacing:-.015em;text-wrap:balance}
+.slate .what{font-size:15px;color:var(--soft);max-width:44ch}
+.slate .what em{font:italic 400 16px var(--serif)}
+.card{background:var(--paper);color:var(--ink);border-radius:6px;padding:22px 24px;display:grid;gap:7px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+.card .y{font:500 12.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.card h3{font:500 clamp(26px,3.2vw,40px)/1.04 var(--serif);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.card h3 mark{background:linear-gradient(transparent 62%,var(--light) 62% 92%,transparent 92%);color:inherit;padding:0 .08em}
+.card p{margin:0;font:500 14px/1.4 var(--ui);color:var(--muted)}
+.goes{font:600 11.5px var(--ui);letter-spacing:.32em;text-transform:uppercase}
+.shot{margin:0;position:relative}
+.shot img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 24px 70px rgba(0,0,0,.55)}
+.shot figcaption{font-size:12.5px;color:var(--dim);margin-top:8px}
+.rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.rows li{padding:11px 0;border-bottom:1px solid var(--rule);font:400 clamp(17px,1.7vw,20px)/1.25 var(--serif)}
+.room{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.room li{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule)}
+.room b{font:500 clamp(16px,1.5vw,18.5px)/1.25 var(--serif)}
+.room span{font-size:13.5px;color:var(--dim);text-align:right}
+.lab{font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+/* ---- scene 1: Berkeley, the day against the clock ---- */
+.day{position:relative;border-top:1px solid var(--rule)}
+.day .frame{position:relative;overflow:hidden}
+.day .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;transform:scale(var(--zoom,1.04));will-change:transform}
+.day .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.95) 0%,rgba(11,11,13,.9) 44%,rgba(11,11,13,.72) 100%)}
+.day .scrim::after{content:"";position:absolute;inset:0;background:rgba(11,11,13,.55);opacity:var(--night,0)}
+.day .grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,5vw,72px);padding-block:clamp(36px,5vw,64px)}
+.day .left{display:grid;gap:26px;align-content:start;min-width:0}
+.clock{display:grid;gap:2px}
+.clock b{font:500 clamp(54px,7.4vw,96px)/.9 var(--serif);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.clock span{font:600 11.5px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.lectern{margin:0;display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:center;max-width:430px}
+.lectern img{aspect-ratio:3/2;object-fit:cover;object-position:60% 30%;border-radius:6px;box-shadow:0 0 0 1px rgba(255,255,255,.16)}
+.lectern figcaption{font-size:14px;color:var(--soft);line-height:1.4}
+.order{list-style:none;margin:0;padding:0;min-width:0}
+.order li{display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;align-items:baseline;padding:11px 12px;border-bottom:1px solid var(--rule);border-radius:4px}
+.order time{font:500 13px var(--mono);color:var(--dim);font-variant-numeric:tabular-nums}
+.order b{display:block;font:500 clamp(17px,1.6vw,20px)/1.2 var(--serif)}
+.order span{display:block;font-size:13px;color:var(--dim);margin-top:2px}
+.order li.me b{color:var(--light)}
+.order li.me span{color:var(--soft);margin-top:4px}
+.finale{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(22px,4vw,56px);align-items:center;padding-block:10px clamp(40px,6vw,72px)}
+.finale .side{display:grid;gap:18px}
+.src{font-size:12.5px;color:var(--dim);margin:0}
+/* live mode (script on, motion allowed): the frame pins and the day plays as you scroll */
+.day.live{height:300vh}
+.day.live .frame{position:sticky;top:calc(var(--mast) + env(safe-area-inset-top,0px));height:calc(100vh - var(--mast) - env(safe-area-inset-top,0px));height:calc(100dvh - var(--mast) - env(safe-area-inset-top,0px))}
+.day.live .wrap{height:100%;position:relative}
+.day.live .grid{height:100%;align-items:center;padding-block:28px;transition:opacity .25s}
+.day.live .window{height:min(62vh,540px);overflow:hidden;background:rgba(11,11,13,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:10px;padding-inline:8px;-webkit-mask:linear-gradient(transparent,#000 16%,#000 84%,transparent);mask:linear-gradient(transparent,#000 16%,#000 84%,transparent)}
+.day.live .order{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.day.live .order li{opacity:.34;transition:opacity .35s,background .35s}
+.day.live .order li.past{opacity:.5}
+.day.live .order li.on{opacity:1;background:rgba(244,244,241,.1)}
+.day.live .order li.me:not(.on):not(.past) b{color:inherit}
+.day.live .order li.me.past{opacity:.8}
+.day.live .lectern{opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s}
+.day.live .lectern.on{opacity:1;transform:none}
+.day.live .finale{position:absolute;inset:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px));padding:28px 0;opacity:0;pointer-events:none;transition:opacity .3s}
+.day.live .finale .card,.day.live .finale .shot{transform:translateY(calc((1 - var(--f,0)) * 26px))}
+.day.live .cue{position:absolute;left:0;bottom:16px;font:600 11.5px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);transition:opacity .3s}
+.cue{display:none}.day.live .cue{display:block}
+/* ---- scenes 2 to 4: the room in colour, the photo, the award ---- */
+.scene{position:relative;overflow:hidden;border-top:1px solid var(--rule)}
+.amb{position:absolute;inset:-6%;background:var(--img) center/cover;filter:saturate(1.15);transform:scale(1.1)}
+.amb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.5),rgba(11,11,13,.8))}
+.scene .grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:clamp(56px,9vw,120px)}
+.scene.flip .grid > :first-child{order:2}
+.scene .text{display:grid;gap:26px;min-width:0}
+.scene .media{position:relative;min-width:0;padding-bottom:138px}
+.scene .media .card{position:absolute;left:clamp(-28px,-2vw,-12px);bottom:0;width:min(400px,88%)}
+.scene.flip .media .card{left:auto;right:clamp(-28px,-2vw,-12px)}
+.scene.light .grid{padding-block:clamp(44px,6vw,80px)}
+.scene.light .card h3{font-size:clamp(22px,2.5vw,30px)}
+.road{border-top:1px solid var(--rule);padding-block:clamp(50px,7vw,90px) clamp(34px,5vw,56px)}
+.funnel{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--rule)}
+.funnel li{padding:16px 14px 0 0;display:grid;gap:4px;position:relative}
+.funnel li + li{padding-left:16px;border-left:1px solid var(--rule)}
+.funnel b{font:500 clamp(40px,5.4vw,72px)/.95 var(--serif);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.funnel span{font:600 11.5px/1.35 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.funnel li.me b,.funnel li.me span{color:var(--light)}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.pair .scene .grid{grid-template-columns:1fr;gap:26px;padding-inline:clamp(20px,3vw,44px);align-items:start}
+.pair .scene + .scene{border-left:1px solid var(--rule)}
+.pair .scene .media .card{left:auto;right:14px;width:min(360px,86%)}
+.wide img{aspect-ratio:16/9}
+/* reveal on entry (only when the script says motion is welcome) */
+.rv .road .funnel li{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;transition-delay:calc(var(--n) * 140ms)}
+.rv .road.in .funnel li{opacity:1;transform:none}
+.rv .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0) * 90ms)}
+.rv .in .reveal{opacity:1;transform:none}
+/* ---- credits ---- */
+.credits{position:relative;border-top:1px solid var(--rule);padding-block:clamp(50px,8vw,100px) 40px}
+.credits header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;margin-bottom:clamp(36px,6vw,64px)}
+.issuers{list-style:none;margin:0;padding:0;display:flex;gap:22px;flex-wrap:wrap}
+.issuers li{display:grid;font:600 11px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.issuers b{font:500 30px/1 var(--serif);color:var(--onstage)}
+.roll{max-width:900px;margin:0 auto;display:grid;gap:clamp(30px,4.5vw,50px)}
+.grp{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(18px,4vw,44px);align-items:baseline}
+.grp .who{text-align:right;font:700 12px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.grp .who b{display:block;font:400 clamp(19px,2.2vw,26px)/1.1 var(--black);letter-spacing:0;color:var(--onstage);margin-bottom:4px}
+.grp .who{display:flex;justify-content:flex-end;align-items:flex-start;gap:14px}
+.grp .who .logo{flex:none;width:44px;height:44px;margin-top:-2px;border-radius:10px;background:#fff;padding:8px;object-fit:contain}
+.grp .who .more{display:inline-block;margin-top:10px;padding:3px 0;font:600 12.5px var(--ui);letter-spacing:.02em;text-transform:none;color:var(--soft);background:none;border:0;border-bottom:1px solid var(--rule);cursor:pointer}
+.grp .who .more:hover{color:var(--light);border-color:var(--light)}
+.shelf{width:min(900px,calc(100vw - 32px));max-height:min(84vh,780px);overflow:auto;padding:0;border:1px solid var(--rule);border-radius:14px;background:#151517;color:var(--onstage);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.shelf.one{width:min(600px,calc(100vw - 32px))}
+.shelf::backdrop{background:rgba(6,6,8,.74);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.shelf .top{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 20px;background:#151517;border-bottom:1px solid var(--rule)}
+.shelf .top b{font:400 17px/1.1 var(--black);text-transform:uppercase}
+.shelf .top span{display:block;margin-top:3px;font:600 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.shelf .x{flex:none;font:600 13px var(--ui);color:var(--onstage);background:rgba(255,255,255,.08);border:0;border-radius:99px;padding:8px 14px;cursor:pointer}
+.shelf .x:hover{background:rgba(255,255,255,.16)}
+.shelf .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:24px 18px;padding:24px 20px 28px}
+.shelf.mid .tiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.shelf.wide .tiles{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.shelf.one .tiles{grid-template-columns:1fr}
+.shelf figure{margin:0}
+.shelf img{display:block;width:100%;height:auto;border-radius:8px}
+.shelf img.round{border-radius:50%}
+.shelf figcaption{margin-top:9px;font:500 13px/1.3 var(--ui);color:var(--soft)}
+.shelf .certs{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));padding-bottom:4px}
+.shelf .discs figcaption{text-align:center}
+.grp ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font:400 clamp(17px,1.9vw,21px)/1.25 var(--serif)}
+.end{text-align:center;margin-top:clamp(50px,8vw,90px);display:grid;gap:14px;justify-items:center}
+.end p{margin:0;font:italic 400 20px var(--serif);color:var(--soft)}
+.btn{display:inline-block;font:600 13.5px var(--ui);text-decoration:none;background:var(--light);color:var(--stage);padding:10px 16px;border-radius:99px}
+@media (max-width:920px){
+  .sec{display:none}.logo{font-size:14px}
+  .intro,.day .grid,.finale,.scene .grid,.credits header,.grp{grid-template-columns:1fr}
+  .scene.flip .grid > :first-child{order:0}
+  .pair{grid-template-columns:1fr}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:14px}
+  .funnel li:nth-child(odd){padding-left:0;border-left:0}
+  .room li{grid-template-columns:1fr;gap:2px}.room span{text-align:left}
+  .pair .scene + .scene{border-left:0}
+  .pair .scene .grid{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .grp{gap:10px}.grp .who{text-align:left}.grp .who{flex-direction:row-reverse}
+  .scene .media .card,.scene.flip .media .card,.pair .scene .media .card{left:10px;right:auto}
+  .day .scrim{background:rgba(11,11,13,.82)}
+  .day.live .grid{align-items:start;align-content:start;gap:18px;padding-block:18px}
+  .day.live .left{gap:14px}
+  .day.live .slate .what{display:none}
+  .day.live .lectern{grid-template-columns:92px minmax(0,1fr);gap:10px;position:absolute;left:max(20px,env(safe-area-inset-left,0px));right:max(20px,env(safe-area-inset-right,0px));bottom:14px;background:rgba(11,11,13,.82);padding:8px;border-radius:8px;max-width:none}
+  .day.live .lectern figcaption{font-size:13px}
+  .day.live .window{height:40vh}
+  .day.live .finale{align-content:center;gap:16px;padding:14px 0}
+  .day.live .finale .shot img{aspect-ratio:16/9}
+  .day.live .finale .shot figcaption,.day.live .finale .src{display:none}
+  .clock b{font-size:54px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+.after{border-top:1px solid var(--rule);padding-block:clamp(50px,8vw,100px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(24px,5vw,72px);align-items:center}
+.after .doc{display:inline-block;margin-top:20px;font:600 14px var(--ui);color:var(--light);text-underline-offset:3px}
+.after .shot img{aspect-ratio:auto;height:auto}
+@media (max-width:860px){.after{grid-template-columns:1fr}}
+</style>
+<link rel="alternate" hreflang="en" href="https://skezu.github.io/awards.html"><link rel="alternate" hreflang="fr" href="https://skezu.github.io/fr/awards.html"><link rel="alternate" hreflang="x-default" href="https://skezu.github.io/awards.html">
+<script>
+/* First visit from outside the site, in a browser set to French: go to the French page.
+   A choice made with the FR / EN switch is remembered and always wins. */
+(function () {
+  try {
+    var pick = localStorage.getItem('lb-lang');
+    var ref = document.referrer && new URL(document.referrer).origin === location.origin;
+    var fr = (navigator.languages && navigator.languages[0] || navigator.language || '').toLowerCase().indexOf('fr') === 0;
+    if (!pick && !ref && fr) location.replace('fr/' + (location.pathname.split('/').pop() || 'index.html') + location.search + location.hash);
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-lang]');
+    if (a) try { localStorage.setItem('lb-lang', a.dataset.lang); } catch (x) {}
+  });
+})();
+</script>
+<style>
+/* The band, the next-story block and the footer: the same on every page, in a light and a dark tone.
+   Names start with lb- so they never collide with a chapter's own styles. */
+.lb-mast{--v:#6F2CF5;--c:#111214;--bg:rgba(255,255,255,.92);--ln:rgba(17,18,20,.14);position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;height:calc(49px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--ln);background:var(--bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--c);transition:background .3s,color .3s,border-color .3s}
+.lb-mast[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:rgba(11,11,13,.88);--ln:rgba(244,244,241,.18)}
+.lb-logo{font:400 17px/1 'Archivo Black','Archivo',Impact,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:inherit}
+.lb-logo b{color:var(--v);font-weight:400}
+.lb-logo .s{display:none}
+.lb-sp{flex:1}
+.lb-rail{display:flex;gap:2px;min-width:0;font:600 12.5px/1 'Archivo',system-ui,sans-serif;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.lb-rail::-webkit-scrollbar{display:none}
+.lb-rail a{padding:7px 9px;border-radius:99px;color:inherit;opacity:.66;text-decoration:none;transition:opacity .15s}
+.lb-rail a:hover{opacity:1}
+.lb-rail a[aria-current]{background:#FFE600;color:#111214;opacity:1}
+.lb-link[aria-current]{color:#111214}
+/* the yellow marker as its own layer (placed by the script after the band); without the script the word keeps its own background */
+.lb-pill{position:absolute;z-index:0;left:0;top:0;width:0;height:0;border-radius:99px;background:#FFE600;opacity:0;pointer-events:none;view-transition-name:lb-pill}
+.lb-rail,.lb-link,.lb-logo{position:relative;z-index:1}
+.lb-mast.pilled a[aria-current]{background:none}
+.lb-link{font:500 13.5px/1 'Archivo',system-ui,sans-serif;color:inherit;opacity:.7;padding:8px 9px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.lb-link:hover,.lb-link[aria-current]{opacity:1}
+.lb-mast:not(.pilled) .lb-link[aria-current]{background:#FFE600;border-radius:99px}
+.lb-mast a:focus-visible,.lb-next a:focus-visible,.lb-foot a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:6px}
+@media (max-width:900px){.lb-logo .f{display:none}.lb-logo .s{display:inline}}
+@media (max-width:600px){.lb-link.opt{display:none}.lb-rail a{padding:7px 8px}.lb-rail{padding-right:20px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}.lb-link{padding:8px 10px}}   /* on a phone the chapter words scroll sideways (their right edge fades to say so); Contact always stays in view */
+@media (max-width:400px){.lb-mast{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:6px}.lb-rail{font-size:12px}.lb-rail a{padding:7px 6px}}
+
+.lb-next{--v:#6F2CF5;--c:#111214;--bg:#FFFFFF;--mu:#5C5F66;--ln:rgba(17,18,20,.14);--hv:#F4F4F1;background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font-family:'Archivo',system-ui,sans-serif}
+.lb-next[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:#0B0B0D;--mu:#A3A6AE;--ln:rgba(244,244,241,.18);--hv:#17171A}
+.lb-next .in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.lb-next a{text-decoration:none;color:inherit;padding:clamp(22px,3.4vw,38px) max(20px,clamp(18px,3vw,34px))}
+.lb-next .back{display:flex;align-items:flex-end;font:600 12px 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-right:1px solid var(--ln);white-space:nowrap}
+.lb-next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.lb-next .go:hover{background:var(--hv)}
+.lb-next .k{grid-column:1/-1;font:700 11px 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--v)}
+.lb-next b{font:500 clamp(28px,4.4vw,56px)/1 'Newsreader',Georgia,serif;letter-spacing:-.02em}
+.lb-next .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 'Newsreader',Georgia,serif;color:var(--mu)}
+.lb-next .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 'Newsreader',Georgia,serif;transition:transform .25s}
+.lb-next .go:hover .ar{transform:translateX(6px)}
+@media (max-width:640px){.lb-next .in{grid-template-columns:1fr}.lb-next .back{border-right:0;border-bottom:1px solid var(--ln);padding-block:14px}}
+
+.lb-foot{--c:#5C5F66;--bg:#FFFFFF;--ln:rgba(17,18,20,.14);background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font:500 13px/1.4 'Archivo',system-ui,sans-serif}
+.lb-foot[data-tone=dark]{--c:#A3A6AE;--bg:#0B0B0D;--ln:rgba(244,244,241,.18)}
+.lb-foot .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding:18px max(20px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lb-foot span:first-child{margin-right:auto}
+.lb-foot .mail{user-select:all;overflow-wrap:anywhere}
+.lb-foot a{color:inherit;text-underline-offset:3px}
+.lb-foot a:hover{color:inherit;text-decoration-thickness:2px}
+@media (prefers-reduced-motion:reduce){.lb-mast,.lb-next .go,.lb-next .ar{transition:none}}
+
+/* ---------- from one page to the next ----------
+   A "shared axis" change of page: the old page fades out first while it starts to move, then the new one fades in as it settles,
+   both sliding 30px in the direction of travel. The two are never on screen together, so text never overlaps.
+   The band stays still and the yellow marker glides from the old word to the new one. 0.32 s in all, one easing curve for everything. */
+@view-transition{navigation:auto}
+html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
+:root{--lb-ease:cubic-bezier(.4,0,.2,1);--lb-t:.32s}
+:root[data-dir=fwd]{--lb-d:1}:root[data-dir=back]{--lb-d:-1}
+.lb-mast{view-transition-name:lb-mast}
+.lb-rail{view-transition-name:lb-rail}
+:root[data-nav]::view-transition-old(root){animation:lb-out var(--lb-t) var(--lb-ease) both}
+:root[data-nav]::view-transition-new(root){animation:lb-in var(--lb-t) var(--lb-ease) both}
+@keyframes lb-out{0%{opacity:1;transform:none}30%{opacity:0}100%{opacity:0;transform:translateX(calc(var(--lb-d,0) * -30px))}}
+@keyframes lb-in{0%{opacity:0;transform:translateX(calc(var(--lb-d,0) * 30px))}30%{opacity:0}100%{opacity:1;transform:none}}
+::view-transition-group(lb-mast){animation:none;z-index:3}
+::view-transition-old(lb-mast),::view-transition-new(lb-mast){animation-duration:.2s;height:100%}
+::view-transition-group(lb-pill){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:4}
+::view-transition-old(lb-pill),::view-transition-new(lb-pill){height:100%}
+::view-transition-group(lb-rail){animation:none;z-index:5}
+/* the words do not cross-fade (that makes them flicker): the old set is swapped for the new one half-way through the band's own fade */
+::view-transition-old(lb-rail),::view-transition-new(lb-rail){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-rail){animation:lb-off .2s linear both}
+::view-transition-new(lb-rail){animation:lb-on .2s linear both}
+/* Press and Contact sit outside the row of chapters: they get the same treatment, so their word stays readable on top of the marker */
+.lb-link[href="press.html"]{view-transition-name:lb-press}
+.lb-link[href="contact.html"]{view-transition-name:lb-contact}
+::view-transition-group(lb-press),::view-transition-group(lb-contact){animation:none;z-index:5}
+::view-transition-old(lb-press),::view-transition-new(lb-press),::view-transition-old(lb-contact),::view-transition-new(lb-contact){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-press),::view-transition-old(lb-contact){animation:lb-off .2s linear both}
+::view-transition-new(lb-press),::view-transition-new(lb-contact){animation:lb-on .2s linear both}
+@keyframes lb-off{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes lb-on{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+/* contact → internship notice: the address block stays where it is and the small notice card unfolds into the full notice.
+   The snapshots keep their real size (no stretching): the box grows and uncovers the new content from the top. */
+::view-transition-group(ct-addr){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:2}
+::view-transition-group(ct-notice){animation-duration:.42s;animation-timing-function:var(--lb-ease);overflow:clip;z-index:2}
+::view-transition-old(ct-notice),::view-transition-new(ct-notice){height:100%;width:100%;object-fit:none;object-position:0 0;mix-blend-mode:normal}
+::view-transition-old(ct-notice){animation:lb-hide .42s both}
+::view-transition-new(ct-notice){animation:lb-show .42s both}
+:root[data-dir=back]::view-transition-old(ct-notice){animation-name:lb-show}   /* going back, the full notice folds up: the taller one is always the one shown */
+:root[data-dir=back]::view-transition-new(ct-notice){animation-name:lb-hide}
+@keyframes lb-show{from,to{opacity:1}}
+@keyframes lb-hide{from,to{opacity:0}}
+.lb-novt body{animation:lb-fade .3s ease-out both}
+@keyframes lb-fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  :root{--lb-t:.16s;--lb-d:0!important}
+  ::view-transition-group(lb-pill),::view-transition-group(ct-addr),::view-transition-group(ct-notice){animation-duration:.01s}
+  .lb-novt body{animation:none}
+}
+
+/* FR / EN switch, at the end of the band. Small and quiet: a reader who needs it looks for it there. */
+.lb-link.lb-lang{font:700 11.5px/1 'Archivo',system-ui,sans-serif;letter-spacing:.06em;padding:7px 8px;margin-left:2px;border:1px solid currentColor;border-radius:99px;opacity:.55}
+.lb-link.lb-lang:hover,.lb-link.lb-lang:focus-visible{opacity:1}
+@media (max-width:600px){.lb-link.lb-lang{padding:6px 7px;font-size:11px}}
+</style>
+<script>
+/* Runs in <head>, before the first paint.
+   1. Works out which way the reader is moving (chapters are an ordered row: front page, videos, agents, teams, teaching, vision, awards, press, contact, internship),
+      so the page change can slide the right way.
+   2. Makes a fresh arrival land at the top of the chapter, or on the anchor in the link. Back, forward and reload keep the browser's own position. */
+(function () {
+  var ORDER = ['index', 'videos', 'agents', 'teams', 'teaching', 'vision', 'awards', 'press', 'contact', 'internship'];
+  var root = document.documentElement;
+  function key(u) { try { var p = new URL(u, location.href).pathname.split('/').pop().replace(/\.html$/, ''); return p || 'index'; } catch (e) { return ''; } }
+  function dir() {
+    var from = '';
+    try { from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || document.referrer || ''; } catch (e) {}
+    if (!from) return 'none';
+    try { if (new URL(from, location.href).origin !== location.origin) return 'none'; } catch (e) { return 'none'; }
+    var a = ORDER.indexOf(key(from)), b = ORDER.indexOf(key(location.href));
+    return a < 0 || b < 0 || a === b ? 'none' : b > a ? 'fwd' : 'back';
+  }
+  function arm() {                       /* the slide only applies to a change of page, never to a transition inside a page */
+    root.dataset.dir = dir(); root.dataset.nav = '1';
+    clearTimeout(arm.t); arm.t = setTimeout(function () { delete root.dataset.nav; }, 900);
+  }
+  arm();
+  addEventListener('pagereveal', function (e) {
+    arm();
+    if (e.viewTransition) {            /* a transition is running: keep the flag until it has finished, however long the page took to arrive */
+      clearTimeout(arm.t);
+      e.viewTransition.finished.then(function () { delete root.dataset.nav; }, function () { delete root.dataset.nav; });
+    }
+  });
+  if (!('CSSViewTransitionRule' in window)) root.classList.add('lb-novt');   /* no page transitions here: fade the page in instead */
+
+  var nav = (performance.getEntriesByType('navigation')[0] || {}).type;
+  if (nav !== 'back_forward' && nav !== 'reload') {
+    var moved = false;
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+    var land = function () {
+      if (moved) return;
+      var id = decodeURIComponent(location.hash.slice(1)), t = id && document.getElementById(id);
+      if (t) t.scrollIntoView({ block: 'start' });
+      else { scrollTo(0, 0); var m = document.getElementById('lb-mast'); if (m && m.getBoundingClientRect().top < 0) m.scrollIntoView({ block: 'start' }); }
+    };
+    addEventListener('DOMContentLoaded', land);
+    addEventListener('load', land);
+  }
+})();
+</script>
+<script type="speculationrules">{"prerender":[{"where":{"selector_matches":"a[href$='.html'],a[href*='.html#']"},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+<header class="lb-mast" data-tone="dark" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, front page"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapters"><a href="videos.html">videos</a><a href="agents.html">agents</a><a href="teams.html">teams</a><a href="teaching.html">teaching</a><a href="vision.html">vision</a><a href="awards.html" aria-current="page">awards</a></nav><a class="lb-link opt" href="press.html">Press</a><a class="lb-link" href="contact.html">Contact</a><a class="lb-link lb-lang" href="fr/awards.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="Lire en français">FR</a></header><script>
+/* Runs right after the band. Puts the yellow marker behind the current word, as its own layer,
+   so that on a change of page the browser can slide it from one word to the next. */
+(function () {
+  var m = document.getElementById('lb-mast'), p = m.querySelector('.lb-pill'), a = m.querySelector('[aria-current]'), rail = m.querySelector('.lb-rail');
+  function place() {
+    if (!a || !a.offsetParent) { p.style.opacity = 0; return; }
+    var r = a.getBoundingClientRect(), b = m.getBoundingClientRect();
+    p.style.cssText = 'opacity:1;left:' + (r.left - b.left) + 'px;top:' + (r.top - b.top) + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+  }
+  if (a && rail.contains(a)) rail.scrollLeft = a.offsetLeft - (rail.clientWidth - a.offsetWidth) / 2;   /* keep the current word in view on a narrow phone */
+  m.classList.add('pilled'); place();
+  addEventListener('resize', place); rail.addEventListener('scroll', place, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+
+<main>
+  <section class="intro wrap gut">
+    <div>
+      <p class="kick"><i></i>Chapter 06 · Awards</p>
+      <h1>Four awards. Four rooms.</h1>
+      <p class="stand">An award means more when you know the room it was given in. Here are the four, starting with UC Berkeley: the place, the day, and who was there.</p>
+      <ul class="tally"><li><b>4</b>awards</li><li><b>29</b>AI credentials</li><li><b>5</b>issuers</li></ul>
+    </div>
+    <ol class="index">
+      <li><a href="#berkeley"><span class="y">2023</span><b>Young Talent of the Year</b><span>UC Berkeley, California</span></a></li>
+      <li><a href="#saclay"><span class="y">2025</span><b>Talent Award</b><span>Paris-Saclay</span></a></li>
+      <li><a href="#paris"><span class="y">2023</span><b>Startup Pitch winner</b><span>VivaTech, Paris</span></a></li>
+      <li><a href="#paris"><span class="y">2023</span><b>National winner, KESK'IA</b><span>La Défense</span></a></li>
+    </ol>
+  </section>
+
+  <!-- Scene 1: Berkeley -->
+  <section class="day" id="berkeley" aria-label="Young Talent of the Year, UC Berkeley">
+    <div class="frame">
+      <img class="bgimg" src="photos/berkeley-room.jpg" alt="A wood-panelled conference hall, Spieker Forum, with the summit screen and the attendees gathered in front of it">
+      <div class="scrim"></div>
+      <div class="wrap gut">
+        <div class="grid" id="daygrid">
+          <div class="left">
+            <div class="slate">
+              <span class="where">Berkeley, California · Thursday 14 December 2023</span>
+              <span class="venue">Spieker Forum, Haas School of Business</span>
+              <span class="what">2023 Berkeley Business Analytics &amp; AI Summit, hosted by Gauthier Vasseur, Executive Director of the Fisher Center for Business Analytics. Theme of the day: <em>Analytics, AI, and Society: Towards a Wiser World?</em></span>
+            </div>
+            <div class="clock"><b id="clk">8:30 AM</b><span id="blk">Doors open</span></div>
+            <figure class="lectern" id="lect"><img src="photos/berkeley-lectern.jpg" alt="Loqmann at the Berkeley Haas lectern" loading="lazy"><figcaption>4:30 PM. I take the lectern to present C du Propre.</figcaption></figure>
+          </div>
+          <div class="window">
+            <ol class="order" id="order">
+              <li data-t="510" data-b="Doors open"><time>8:30 AM</time><div><b>Welcome</b><span>Executive Director, Fisher Center for Business Analytics</span></div></li>
+              <li data-t="540" data-b="Research sessions"><time>9:00 AM</time><div><b>Data for Peace and Human Rights</b><span>A 2022 Nobel Peace Prize laureate</span></div></li>
+              <li data-t="560" data-b="Research sessions"><time>9:20 AM</time><div><b>GPT for Market Research</b><span>Faculty Director, Fisher Center for Business Analytics</span></div></li>
+              <li data-t="585" data-b="Research sessions"><time>9:45 AM</time><div><b>Mental Health &amp; AI</b><span>Professor of Bioethics, UC Berkeley School of Public Health</span></div></li>
+              <li data-t="650" data-b="Applied cases"><time>10:50 AM</time><div><b>Transforming the State of California</b><span>Chief Technology Officer, State of California</span></div></li>
+              <li data-t="675" data-b="Applied cases"><time>11:15 AM</time><div><b>Nissan: Smarter People at Work</b><span>SVP Finance and IT, Nissan Motor Corporation</span></div></li>
+              <li data-t="725" data-b="AI &amp; society"><time>12:05 PM</time><div><b>Cognitive Development in the AI Era</b><span>Chief Scientist, everyone.AI</span></div></li>
+              <li data-t="950" data-b="Project presentations"><time>3:50 PM</time><div><b>AI at Asana's Work Innovation Lab</b><span>Head of the Work Innovation Lab, Asana</span></div></li>
+              <li class="me" data-t="990" data-b="Project presentations" id="mine"><time>4:30 PM</time><div><b>KESK'IA: C du Propre</b><span>Loqmann Benhaddya and the OSM'OZ co-founders</span></div></li>
+              <li data-t="1025" data-b="Closing keynotes"><time>5:05 PM</time><div><b>Berkeley NASA for AI, Society, Space and Beyond</b><span>Associate Provost, UC Berkeley</span></div></li>
+              <li data-t="1075" data-b="Closing keynotes"><time>5:55 PM</time><div><b>GenAI Everywhere? And What Now for Business!</b><span>Grégory Renard, Head of Applied AI</span></div></li>
+              <li class="me" data-t="1100" data-b="Awards ceremony"><time>6:20 PM</time><div><b>2023 Berkeley World Business Analytics Awards</b><span>The ceremony</span></div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="finale" id="fin">
+          <figure class="shot"><img src="photos/berkeley-stage.jpg" alt="Loqmann on stage holding his certificate, under the screen reading 2023 Berkeley World Business Analytics Awards" loading="lazy"><figcaption>6:20 PM. On stage at the 2023 Berkeley World Business Analytics Awards.</figcaption></figure>
+          <div class="side">
+            <div class="goes">And the award goes to</div>
+            <article class="card"><span class="y">2023</span><h3><mark>Young Talent</mark> of the Year</h3><p>2023 Berkeley World Business Analytics Awards · Fisher Center for Business Analytics, UC Berkeley Haas</p><p>Awarded for <a href="vision.html">C du Propre</a>, a computer-vision system that spots litter in cities, built with my OSM'OZ co-founders.</p></article>
+            <p class="src">Running order from the summit's published programme.</p>
+          </div>
+        </div>
+        <div class="cue" id="cue">Scroll to run the day ↓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scene 2: Paris-Saclay -->
+  <section class="scene flip" id="saclay" style="--img:url(photos/saclay-amb.jpg)" aria-label="Talent Award, Paris-Saclay">
+    <div class="amb"></div>
+    <div class="wrap gut"><div class="grid">
+      <div class="text">
+        <div class="slate reveal">
+          <span class="where">Gif-sur-Yvette, France · Friday 27 June 2025</span>
+          <span class="venue">Lumen, Université Paris-Saclay</span>
+          <span class="what">Annual assembly of CFA numiA, on the Saclay plateau. That morning the university's foundation and the CFA sign a partnership. Then come the #RéussiteAlternance Trophies.</span>
+        </div>
+        <div class="reveal" style="--i:1">
+          <div class="lab">In the room</div>
+          <ol class="room">
+            <li><b>Université Paris-Saclay</b><span>its president and leadership</span></li>
+            <li><b>CFA numiA</b><span>its president and directors</span></li>
+            <li><b>Invited schools</b><span>their directors</span></li>
+            <li><b>BUT faculty</b><span>the professors and researchers who run each cohort</span></li>
+            <li><b>Industry</b><span>a jury from companies, and company tutors</span></li>
+            <li><b>Apprentices</b><span>from the other cohorts</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="media reveal" style="--i:2">
+        <figure class="shot"><img src="photos/saclay.jpg" alt="Loqmann holding a wooden trophy shaped like the letter A, next to other award winners, in front of a screen reading Prix du Talent" loading="lazy"></figure>
+        <article class="card"><span class="y">2025</span><h3><mark>Talent Award</mark></h3><p>Prix du Talent 2025, best apprentice of my BUT cohort · CFA numiA × Université Paris-Saclay</p></article>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Scenes 3 and 4: Paris, June 2023 -->
+  <section class="road" id="paris" aria-label="KESK'IA 2023">
+    <div class="wrap gut">
+      <p class="kick"><i></i>Paris · June 2023</p>
+      <h2>From 500 applicants to one team.</h2>
+      <p class="stand">KESK'IA is a national AI programme for young people from working-class neighbourhoods, run by the start-up Evolukid with eight large companies. Its first edition ended in two rooms, six days apart.</p>
+      <ol class="funnel">
+        <li style="--n:0"><b>500</b><span>applicants</span></li>
+        <li style="--n:1"><b>100</b><span>trained, in 7 cities</span></li>
+        <li style="--n:2"><b>22</b><span>teams at VivaTech</span></li>
+        <li style="--n:3"><b>3</b><span>in the final</span></li>
+        <li class="me" style="--n:4"><b>1</b><span>winner: C du Propre</span></li>
+      </ol>
+    </div>
+  </section>
+  <div class="pair">
+    <section class="scene light" style="--img:url(photos/vivatech-amb.jpg)" aria-label="Startup Pitch winner, VivaTech">
+      <div class="amb"></div>
+      <div class="grid">
+        <div class="slate reveal">
+          <span class="where">Paris · Saturday 17 June 2023</span>
+          <span class="venue">Viva Technology</span>
+          <span class="what">The semi-final. Twenty-two teams from seven cities pitch on stage, in front of several hundred people. Three win and go through to the final.</span>
+        </div>
+        <div class="media reveal" style="--i:1">
+          <figure class="shot"><img src="photos/vivatech.jpg" alt="Loqmann and his teammates holding a trophy on the VivaTech stage" loading="lazy"></figure>
+          <article class="card"><span class="y">2023</span><h3><mark>Startup Pitch</mark> winner</h3><p>VivaTech, with C du Propre (GreenAI). One of the three winning teams out of 22.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="scene light" style="--img:url(photos/keskia-amb.jpg)" aria-label="National winner, KESK'IA">
+      <div class="amb"></div>
+      <div class="grid">
+        <div class="slate reveal">
+          <span class="where">La Défense · Friday 23 June 2023</span>
+          <span class="venue">Société Générale headquarters</span>
+          <span class="what">The national final. Three prototypes left. The slide behind us reads <em>Annonce du vainqueur</em>.</span>
+        </div>
+        <div class="media reveal" style="--i:1">
+          <figure class="shot wide"><img src="photos/keskia.jpg" alt="A crowd celebrating on stage in front of a screen reading Kesk'IA, annonce du vainqueur" loading="lazy"></figure>
+          <article class="card"><span class="y">2023</span><h3><mark>National winner</mark>, KESK'IA</h3><p>First edition of the national AI programme. Of the three teams on the podium, ours takes first place.</p></article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="after wrap gut" aria-label="The prize: a trip to California">
+    <div>
+      <p class="kick"><i></i>The prize · California</p>
+      <h2>Then the prize: Silicon Valley.</h2>
+      <p class="stand">Winning the final came with a trip to California. We visited the campuses of Google, Apple, Microsoft and Salesforce, walked through Berkeley, and met professors at Stanford. Banlieusard Nouveau followed us with a camera and made a documentary of it.</p>
+      <a class="doc" href="https://youtu.be/22DuQTz1Zc8" rel="noopener">Watch "De Trappes à la Silicon Valley" ↗</a>
+    </div>
+    <figure class="shot"><img src="photos/stanford-group.jpg" alt="A large group of young people posing in front of the sandstone arches of Stanford's Main Quad" width="1500" height="934" loading="lazy"><figcaption>Main Quad, Stanford University. The KESK'IA group.</figcaption></figure>
+  </section>
+
+  <section class="credits wrap gut">
+    <header>
+      <div><p class="kick"><i></i>Credits</p><h2>And 29 credentials, in order of appearance.</h2></div>
+      <ul class="issuers"><li><b>14</b>OpenAI Academy</li><li><b>8</b>Claude Academy</li><li><b>4</b>Google Cloud</li><li><b>1</b>Hugging Face</li><li><b>2</b>AWS</li></ul>
+    </header>
+    <div class="roll">
+      <div class="grp"><div class="who"><div><b>OpenAI Academy</b>14 credentials<br><button class="more" type="button" popovertarget="shelf-openai">View certificates and badges</button></div><img class="logo" src="logos/openai.svg" alt="" width="44" height="44"></div><ul><li>Build with AI: OpenAI API, pathway</li><li>Build with AI: Codex, pathway</li><li>Apply AI at Work, pathway</li><li>Design and Build Agentic Systems</li><li>Build with Retrieval-Augmented Generation</li><li>Evaluate AI Applications</li><li>Optimize AI Application Performance</li><li>Scope AI Solutions</li><li>Agents and Workflows</li><li>Get Started with Codex</li><li>Extend Codex Workflows</li><li>Scale Codex Across Teams and Systems</li><li>Applied AI Foundations</li><li>AI Leadership</li></ul></div>
+      <div class="grp"><div class="who"><div><b>Anthropic Claude Academy</b>8 credentials<br><button class="more" type="button" popovertarget="shelf-claude">View 8 badges</button></div><img class="logo" src="logos/anthropic.svg" alt="" width="44" height="44"></div><ul><li>Building with the Claude API</li><li>Tool use with the Messages API</li><li>Introduction to MCP</li><li>MCP: Advanced topics</li><li>Introduction to evals</li><li>Building effective human-agent teams</li><li>AI Fluency: Framework and foundations</li><li>AI capabilities and limitations</li></ul></div>
+      <div class="grp"><div class="who"><div><b>Google Cloud</b>4 credentials<br><button class="more" type="button" popovertarget="shelf-google">View 4 badges</button></div><img class="logo" src="logos/google-cloud.svg" alt="" width="44" height="44"></div><ul><li>Use Agent Skills with Multi-Agent Systems</li><li>Build Agents with ADK</li><li>MLOps for Generative AI</li><li>MLOps with Agent Platform: Model Evaluation</li></ul></div>
+      <div class="grp"><div class="who"><div><b>Hugging Face</b>1 credential<br><button class="more" type="button" popovertarget="shelf-hf">View the certificate</button></div><img class="logo" src="logos/hugging-face.svg" alt="" width="44" height="44"></div><ul><li>Agents Course: Fundamentals of Agents</li></ul></div>
+      <div class="grp"><div class="who"><div><b>Amazon Web Services</b>2 credentials<br><button class="more" type="button" popovertarget="shelf-aws">View 2 certificates</button></div><img class="logo" src="logos/aws.svg" alt="" width="44" height="44"></div><ul><li>Generative AI for Executives</li><li>Introduction to Generative AI: Art of the Possible</li></ul></div>
+    </div>
+    <div class="end"><p>Fin.</p></div>
+  </section>
+<div class="shelf" id="shelf-openai" popover aria-label="OpenAI Academy, 3 pathway certificates, 11 course badges"><div class="top"><div><b>OpenAI Academy</b><span>3 pathway certificates, 11 course badges</span></div><button class="x" type="button" popovertarget="shelf-openai" popovertargetaction="hide">Close</button></div><div class="tiles certs"><figure><img src="badges/openai-pathway-openai-api.jpg" alt="Certificate: Build with AI: OpenAI API, pathway" width="640" height="497" loading="lazy"><figcaption>Build with AI: OpenAI API, pathway</figcaption></figure><figure><img src="badges/openai-pathway-codex.jpg" alt="Certificate: Build with AI: Codex, pathway" width="640" height="497" loading="lazy"><figcaption>Build with AI: Codex, pathway</figcaption></figure><figure><img src="badges/openai-pathway-apply-ai-at-work.jpg" alt="Certificate: Apply AI at Work, pathway" width="640" height="497" loading="lazy"><figcaption>Apply AI at Work, pathway</figcaption></figure></div><div class="tiles discs"><figure><img class="round" src="badges/openai-12.jpg" alt="Badge: Design and Build Agentic Systems" width="280" height="280" loading="lazy"><figcaption>Design and Build Agentic Systems</figcaption></figure><figure><img class="round" src="badges/openai-11.jpg" alt="Badge: Build with Retrieval-Augmented Generation" width="280" height="280" loading="lazy"><figcaption>Build with Retrieval-Augmented Generation</figcaption></figure><figure><img class="round" src="badges/openai-10.jpg" alt="Badge: Evaluate AI Applications" width="280" height="280" loading="lazy"><figcaption>Evaluate AI Applications</figcaption></figure><figure><img class="round" src="badges/openai-09.jpg" alt="Badge: Optimize AI Application Performance" width="280" height="280" loading="lazy"><figcaption>Optimize AI Application Performance</figcaption></figure><figure><img class="round" src="badges/openai-08.jpg" alt="Badge: Scope AI Solutions" width="280" height="280" loading="lazy"><figcaption>Scope AI Solutions</figcaption></figure><figure><img class="round" src="badges/openai-04.jpg" alt="Badge: Agents and Workflows" width="280" height="280" loading="lazy"><figcaption>Agents and Workflows</figcaption></figure><figure><img class="round" src="badges/openai-07.jpg" alt="Badge: Get Started with Codex" width="280" height="280" loading="lazy"><figcaption>Get Started with Codex</figcaption></figure><figure><img class="round" src="badges/openai-06.jpg" alt="Badge: Extend Codex Workflows" width="280" height="280" loading="lazy"><figcaption>Extend Codex Workflows</figcaption></figure><figure><img class="round" src="badges/openai-05.jpg" alt="Badge: Scale Codex Across Teams and Systems" width="280" height="280" loading="lazy"><figcaption>Scale Codex Across Teams and Systems</figcaption></figure><figure><img class="round" src="badges/openai-03.jpg" alt="Badge: Applied AI Foundations" width="280" height="280" loading="lazy"><figcaption>Applied AI Foundations</figcaption></figure><figure><img class="round" src="badges/openai-02.jpg" alt="Badge: AI Leadership" width="280" height="280" loading="lazy"><figcaption>AI Leadership</figcaption></figure></div></div>
+<div class="shelf mid" id="shelf-claude" popover aria-label="Anthropic Claude Academy, 8 badges"><div class="top"><div><b>Anthropic Claude Academy</b><span>8 badges</span></div><button class="x" type="button" popovertarget="shelf-claude" popovertargetaction="hide">Close</button></div><div class="tiles"><figure><img src="badges/claude-building-with-the-claude-api.jpg" alt="Badge: Building with the Claude API" width="640" height="419" loading="lazy"><figcaption>Building with the Claude API</figcaption></figure><figure><img src="badges/claude-tool-use-with-the-messages-api.jpg" alt="Badge: Tool use with the Messages API" width="640" height="419" loading="lazy"><figcaption>Tool use with the Messages API</figcaption></figure><figure><img src="badges/claude-introduction-to-mcp.jpg" alt="Badge: Introduction to MCP" width="640" height="419" loading="lazy"><figcaption>Introduction to MCP</figcaption></figure><figure><img src="badges/claude-mcp-advanced-topics.jpg" alt="Badge: MCP: Advanced topics" width="640" height="419" loading="lazy"><figcaption>MCP: Advanced topics</figcaption></figure><figure><img src="badges/claude-introduction-to-evals.jpg" alt="Badge: Introduction to evals" width="640" height="419" loading="lazy"><figcaption>Introduction to evals</figcaption></figure><figure><img src="badges/claude-building-effective-human-agent-teams.jpg" alt="Badge: Building effective human-agent teams" width="640" height="437" loading="lazy"><figcaption>Building effective human-agent teams</figcaption></figure><figure><img src="badges/claude-ai-fluency-framework-and-foundations.jpg" alt="Badge: AI Fluency: Framework and foundations" width="640" height="437" loading="lazy"><figcaption>AI Fluency: Framework and foundations</figcaption></figure><figure><img src="badges/claude-ai-capabilities-and-limitations.jpg" alt="Badge: AI capabilities and limitations" width="640" height="437" loading="lazy"><figcaption>AI capabilities and limitations</figcaption></figure></div></div>
+<div class="shelf mid" id="shelf-google" popover aria-label="Google Cloud, 4 badges"><div class="top"><div><b>Google Cloud</b><span>4 badges</span></div><button class="x" type="button" popovertarget="shelf-google" popovertargetaction="hide">Close</button></div><div class="tiles"><figure><img src="badges/google-use-agent-skills-multi-agent-systems.jpg" alt="Badge: Use Agent Skills with Multi-Agent Systems" width="480" height="312" loading="lazy"><figcaption>Use Agent Skills with Multi-Agent Systems</figcaption></figure><figure><img src="badges/google-build-agents-with-adk.jpg" alt="Badge: Build Agents with ADK" width="480" height="436" loading="lazy"><figcaption>Build Agents with ADK</figcaption></figure><figure><img src="badges/google-mlops-for-generative-ai.jpg" alt="Badge: MLOps for Generative AI" width="480" height="436" loading="lazy"><figcaption>MLOps for Generative AI</figcaption></figure><figure><img src="badges/google-mlops-model-evaluation.jpg" alt="Badge: MLOps with Agent Platform: Model Evaluation" width="480" height="436" loading="lazy"><figcaption>MLOps with Agent Platform: Model Evaluation</figcaption></figure></div></div>
+<div class="shelf one" id="shelf-hf" popover aria-label="Hugging Face, 1 certificate"><div class="top"><div><b>Hugging Face</b><span>1 certificate</span></div><button class="x" type="button" popovertarget="shelf-hf" popovertargetaction="hide">Close</button></div><div class="tiles"><figure><img src="badges/hf-fundamentals-of-agents.jpg" alt="Certificate: Agents Course: Fundamentals of Agents" width="760" height="537" loading="lazy"><figcaption>Agents Course: Fundamentals of Agents</figcaption></figure></div></div>
+<div class="shelf wide" id="shelf-aws" popover aria-label="Amazon Web Services, 2 certificates"><div class="top"><div><b>Amazon Web Services</b><span>2 certificates</span></div><button class="x" type="button" popovertarget="shelf-aws" popovertargetaction="hide">Close</button></div><div class="tiles"><figure><img src="badges/aws-generative-ai-for-executives.jpg" alt="Certificate: Generative AI for Executives" width="760" height="537" loading="lazy"><figcaption>Generative AI for Executives</figcaption></figure><figure><img src="badges/aws-intro-generative-ai-art-of-the-possible.jpg" alt="Certificate: Introduction to Generative AI: Art of the Possible" width="760" height="537" loading="lazy"><figcaption>Introduction to Generative AI: Art of the Possible</figcaption></figure></div></div>
+</main>
+<nav class="lb-next" data-tone="dark" aria-label="Next"><div class="in"><a class="back" href="index.html">← Front page</a><a class="go" href="press.html"><span class="k">After the stories</span><b>In the Press</b><span class="d">Television, radio and print, since 2023.</span><span class="ar" aria-hidden="true">→</span></a></div></nav>
+<footer class="lb-foot" data-tone="dark"><div class="in"><span>Loqmann Benhaddya · Paris</span><span class="mail">loqmannbenhaddya.pro@gmail.com</span><a href="https://www.linkedin.com/in/loqmann-benhaddya" rel="noopener">LinkedIn</a><a href="https://github.com/skezu" rel="noopener">GitHub</a><a href="press.html">Press</a><a href="cv/Loqmann-Benhaddya-CV-EN.pdf">CV (PDF)</a></div></footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;                        // the page is already complete as plain HTML
+
+  /* scenes 2 to 4: a soft reveal when each one comes into view */
+  document.documentElement.classList.add('rv');
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .22 });
+  document.querySelectorAll('.scene, .road').forEach(s => io.observe(s));
+
+  /* scene 1: the frame pins and the day's running order plays against the clock */
+  const day = document.getElementById('berkeley'), order = document.getElementById('order'), win = order.parentElement;
+  const rows = [...order.children], T = rows.map(r => +r.dataset.t);
+  const clk = document.getElementById('clk'), blk = document.getElementById('blk'), lect = document.getElementById('lect');
+  const grid = document.getElementById('daygrid'), fin = document.getElementById('fin'), cue = document.getElementById('cue');
+  const mine = rows.indexOf(document.getElementById('mine'));
+  day.classList.add('live');
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const ease = x => x * x * (3 - 2 * x);
+  const fmt = m => { m = Math.round(m / 5) * 5; const h = Math.floor(m / 60), mm = m % 60; return ((h + 11) % 12 + 1) + ':' + String(mm).padStart(2, '0') + (h < 12 ? ' AM' : ' PM'); };
+  let last = -1, ticking = false;
+  function update() {
+    ticking = false;
+    const total = day.offsetHeight - innerHeight;
+    const p = clamp((scrollY - day.offsetTop) / total);
+    // 0 to .06: the place. .06 to .74: the day runs. .76 to .83: the programme leaves. .84 to .94: the award.
+    const t = clamp((p - .06) / .68), x = t * (rows.length - 1), i = Math.min(rows.length - 1, Math.floor(x + .0001)), f = x - i;
+    clk.textContent = fmt(i < rows.length - 1 ? T[i] + (T[i + 1] - T[i]) * f : T[i]);
+    if (i !== last) {
+      last = i; blk.innerHTML = rows[i].dataset.b;
+      rows.forEach((r, j) => { r.classList.toggle('on', j === i); r.classList.toggle('past', j < i); });
+      lect.classList.toggle('on', i === mine);
+      const r = rows[i], y = r.offsetTop + r.offsetHeight / 2 - win.clientHeight / 2;
+      order.style.transform = 'translateY(' + -Math.max(-win.clientHeight * .18, Math.min(order.scrollHeight - win.clientHeight * .82, y)) + 'px)';
+    }
+    const gone = ease(clamp((p - .76) / .07)), fz = ease(clamp((p - .84) / .1));
+    grid.style.opacity = 1 - gone; grid.style.pointerEvents = gone > .5 ? 'none' : '';
+    fin.style.opacity = fz; fin.style.pointerEvents = fz > .5 ? 'auto' : 'none'; fin.style.setProperty('--f', fz);
+    day.style.setProperty('--zoom', (1.06 - .06 * p).toFixed(4));
+    day.style.setProperty('--night', (t * .55 + fz * .35).toFixed(3));     // the hall gets darker as the evening comes
+    cue.style.opacity = 1 - clamp(p / .05);
+  }
+  const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  addEventListener('scroll', req, { passive: true }); addEventListener('resize', () => { last = -1; req(); });
+  document.fonts && document.fonts.ready.then(() => { last = -1; update(); });
+  update();
+})();
+</script>
+</body>
+</html>

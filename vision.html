@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Litter Detector · Loqmann Benhaddya</title>
+<meta name="description" content="C du Propre (GreenAI): a computer-vision model that finds and names litter in a street photo, built end to end by a team of five in 2023, from the dataset to the Android app.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap">
+<style>
+/* The common frame, shared by the home page and every chapter.
+   Paper and ink, the dark stage, one yellow highlighter, one violet dot. Newsreader for headlines, Archivo for the interface. */
+:root{
+  --paper:#FFFFFF; --ink:#111214; --muted:#5C5F66; --hair:rgba(17,18,20,.14); --wash:#F4F4F1;
+  --stage:#0B0B0D; --onstage:#F4F4F1; --dim:#A3A6AE; --soft:#D2D4D9; --rule:rgba(244,244,241,.18);
+  --light:#FFE600; --live:#6F2CF5;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif; --ui:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --black:'Archivo Black','Archivo',Impact,sans-serif; --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --mast:49px;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--mast) + 8px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--ui);-webkit-font-smoothing:antialiased}
+body.dark{background:var(--stage);color:var(--onstage)}
+a{color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.dark :focus-visible,.stage :focus-visible{outline-color:var(--light)}
+
+/* masthead: the same band on every page */
+.mast{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;height:calc(var(--mast) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--hair);background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.dark .mast{border-color:var(--rule);background:rgba(11,11,13,.88)}
+.logo{font:400 17px/1 var(--black);text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.logo b{color:var(--live);font-weight:400}
+.sec{font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dark .sec{color:var(--dim)}
+.mast .sp{flex:1}
+.ghost{font:500 13.5px var(--ui);color:var(--muted);padding:6px 10px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.ghost:hover{color:var(--ink);background:rgba(17,18,20,.06)}
+.dark .ghost{color:var(--dim)}.dark .ghost:hover{color:var(--onstage);background:rgba(255,255,255,.08)}
+
+/* type */
+.kick{font:700 11.5px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--live);display:flex;gap:8px;align-items:center;margin:0 0 14px}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--live);flex:none}
+h1{font:500 clamp(38px,5.6vw,68px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+h2{font:500 clamp(28px,3.8vw,46px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+h3{font:500 clamp(20px,2vw,25px)/1.15 var(--serif);letter-spacing:-.01em;margin:0 0 6px}
+.stand{font:400 clamp(17px,1.5vw,20px)/1.5 var(--serif);color:var(--muted);margin:0;max-width:54ch}
+.dark .stand,.stage .stand{color:var(--soft)}
+.lab{font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.dark .lab,.stage .lab{color:var(--dim)}
+mark{background:linear-gradient(transparent 58%,var(--light) 58% 92%,transparent 92%);color:inherit;padding:0 .06em}
+.num{font:400 12.5px var(--mono);color:var(--muted)}
+
+/* buttons and contact row */
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 13.5px var(--ui);text-decoration:none;background:var(--ink);color:var(--paper);padding:11px 17px;border-radius:99px;border:0;cursor:pointer}
+.btn:hover{background:#000}
+.btn.y{background:var(--light);color:var(--stage)}
+.btn.line{background:none;color:inherit;box-shadow:inset 0 0 0 1px var(--hair)}
+.btn.line:hover{box-shadow:inset 0 0 0 1px currentColor}
+.dark .btn.line,.stage .btn.line{box-shadow:inset 0 0 0 1px var(--rule)}
+.reach{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* the dark stage, when a page uses it for a section; the violet gets a lighter tint there so small labels stay readable */
+.stage{background:var(--stage);color:var(--onstage)}
+.stage,body.dark{--live:#9B7CFF}
+
+/* what closes every chapter: where you are, and the next one */
+.next{display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid var(--hair)}
+.next a{text-decoration:none;padding:clamp(22px,3.4vw,38px) clamp(18px,3vw,34px)}
+.next .back{display:flex;align-items:flex-end;font:600 12px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--hair)}
+.next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.next .go:hover{background:var(--wash)}
+.next .go .k{grid-column:1/-1;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--live)}
+.next .go b{font:500 clamp(28px,4.4vw,56px)/1 var(--serif);letter-spacing:-.02em}
+.next .go .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 var(--serif);color:var(--muted)}
+.next .go .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 var(--serif);transition:transform .25s}
+.next .go:hover .ar{transform:translateX(6px)}
+
+/* a labelled frame for the parts of a preview that only explain the preview */
+.demo{border:1px dashed var(--hair);border-radius:14px;overflow:hidden}
+.demo>.tag{display:block;padding:9px 14px;font:600 11px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px dashed var(--hair);background:var(--wash)}
+
+/* page to page: the browser cross-fades and carries shared elements over, where it can */
+
+a:not([href]){cursor:default}
+@media (max-width:480px){.mast .opt{display:none}}
+@media (max-width:640px){
+  .sec{display:none}
+  .next{grid-template-columns:1fr}.next .back{border-right:0;border-bottom:1px solid var(--hair);padding-block:14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+</style>
+<style>
+/* Chapter 05. The product first (a real screenshot in a phone), then the seven steps behind it on the dark stage,
+   then the one experiment that mattered, with its real scores. */
+figure{margin:0}
+figcaption{margin-top:10px;font:500 12.5px/1.4 var(--ui);color:var(--muted)}
+
+/* opening: the article on the left, the phone on the right */
+.top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(28px,5vw,80px);align-items:center;padding-block:clamp(36px,6vw,76px) clamp(30px,5vw,60px)}
+.by{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;padding-top:14px;border-top:1px solid var(--hair);font:600 11.5px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.phone{justify-self:center;width:min(100%,300px)}
+.phone .dev{position:relative;padding:9px;border-radius:38px;background:var(--ink);box-shadow:0 30px 60px -28px rgba(17,18,20,.5)}
+.phone img{width:100%;height:auto;border-radius:30px}
+.phone figcaption{text-align:center}
+
+/* what the screen shows: three plain observations */
+.reads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:3px double var(--ink);border-bottom:1px solid var(--ink)}
+.reads div{padding:clamp(18px,2.6vw,30px) clamp(16px,2.4vw,30px) clamp(20px,2.8vw,34px) 0}
+.reads div+div{padding-left:clamp(16px,2.4vw,30px);border-left:1px solid var(--hair)}
+.reads b{display:block;font:500 clamp(24px,2.6vw,32px)/1.1 var(--serif);letter-spacing:-.01em;margin-bottom:6px}
+.reads p{margin:0;font:400 15.5px/1.5 var(--ui);color:var(--muted);max-width:36ch}
+.reads q{quotes:none;font-weight:600;color:var(--ink)}
+
+/* the seven steps */
+.path{padding-block:clamp(50px,8vw,100px)}
+.steps{list-style:none;margin:clamp(22px,3.4vw,40px) 0 0;padding:0;border-top:1px solid var(--rule)}
+.steps li{display:grid;grid-template-columns:54px minmax(0,.8fr) minmax(0,1.5fr) 236px;gap:6px 26px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--rule)}
+.steps .n{font:400 12.5px var(--mono);color:var(--live)}
+.steps h3{margin:0}
+.steps p{margin:0;font:400 clamp(15.5px,1.3vw,17px)/1.55 var(--ui);color:var(--soft);max-width:60ch}
+.steps .tool{font:400 12px var(--mono);color:var(--dim);white-space:nowrap;text-align:right}
+.js .steps li{opacity:0;transform:translateY(14px);transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1)}
+.js .steps li.on{opacity:1;transform:none}
+
+/* the experiment */
+.exp{padding-block:clamp(50px,8vw,100px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(30px,6vw,90px);align-items:start}
+.exp .copy{margin:0 0 14px;font:400 clamp(17px,1.45vw,19.5px)/1.55 var(--serif);max-width:44ch}
+.sets{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--ink)}
+.sets li{display:grid;grid-template-columns:74px minmax(0,1fr);gap:4px 18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair)}
+.sets b{font:500 clamp(34px,4vw,48px)/1 var(--serif);letter-spacing:-.03em}
+.sets .dots{display:flex;flex-wrap:wrap;gap:4px}
+.sets .dots i{width:9px;height:9px;border-radius:2px;background:var(--ink);opacity:.22}
+.sets li.keep .dots i{opacity:1;background:var(--live)}
+.sets small{grid-column:2;font:400 14px/1.4 var(--ui);color:var(--muted)}
+.score{border-top:3px double var(--ink);padding-top:16px}
+.bars{list-style:none;margin:14px 0 0;padding:0}
+.bars li{display:grid;grid-template-columns:104px minmax(0,1fr) 40px;gap:12px;align-items:center;padding:7px 0;font:500 14px var(--ui)}
+.bars .tr{height:14px;background:var(--wash);border-radius:2px;overflow:hidden}
+.bars .tr i{display:block;height:100%;width:calc(var(--v) * 100%);background:var(--ink);border-radius:2px;transform-origin:left;transition:transform .8s cubic-bezier(.3,.7,.2,1)}
+.js .bars:not(.on) .tr i{transform:scaleX(0)}
+.bars .hi .tr i{background:var(--live)}
+.bars .v{font:400 12.5px var(--mono);color:var(--muted);text-align:right}
+.bars .all{margin-top:6px;padding-top:12px;border-top:1px solid var(--hair);font-weight:700}
+.score .note{margin:14px 0 0;font:400 13.5px/1.5 var(--ui);color:var(--muted);max-width:60ch}
+.then{margin:26px 0 0;padding:0;list-style:none;border-top:1px solid var(--ink)}
+.then li{padding:11px 0;border-bottom:1px solid var(--hair);font:400 15px/1.45 var(--ui);color:var(--muted)}
+.then li b{color:var(--ink);font-weight:600}
+
+/* what came of it */
+.after{background:var(--wash)}
+.after .in{padding-block:clamp(44px,7vw,90px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(26px,5vw,70px);align-items:start}
+.after .copy{margin:0 0 14px;font:400 clamp(17px,1.45vw,19.5px)/1.55 var(--serif);max-width:48ch}
+.after .more{display:inline-block;margin-top:10px;font:600 14px var(--ui);text-underline-offset:3px}
+.after dl{margin:0;border-top:1px solid var(--ink)}
+.after dl div{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--hair)}
+.after dt{font:700 11px/1.7 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.after dd{margin:0;font:400 15px/1.5 var(--ui)}
+
+@media (max-width:860px){
+  .top,.exp,.after .in{grid-template-columns:1fr}
+  .phone{width:min(78%,290px)}
+  .reads{grid-template-columns:1fr}
+  .reads div{padding-right:0}.reads div+div{padding-left:0;border-left:0;border-top:1px solid var(--hair)}
+  .steps li{grid-template-columns:34px minmax(0,1fr)}
+  .steps p,.steps .tool{grid-column:2}.steps .tool{text-align:left;white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){.js .steps li{opacity:1;transform:none}.js .bars:not(.on) .tr i{transform:none}}
+</style>
+<link rel="alternate" hreflang="en" href="https://skezu.github.io/vision.html"><link rel="alternate" hreflang="fr" href="https://skezu.github.io/fr/vision.html"><link rel="alternate" hreflang="x-default" href="https://skezu.github.io/vision.html">
+<script>
+/* First visit from outside the site, in a browser set to French: go to the French page.
+   A choice made with the FR / EN switch is remembered and always wins. */
+(function () {
+  try {
+    var pick = localStorage.getItem('lb-lang');
+    var ref = document.referrer && new URL(document.referrer).origin === location.origin;
+    var fr = (navigator.languages && navigator.languages[0] || navigator.language || '').toLowerCase().indexOf('fr') === 0;
+    if (!pick && !ref && fr) location.replace('fr/' + (location.pathname.split('/').pop() || 'index.html') + location.search + location.hash);
+  } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-lang]');
+    if (a) try { localStorage.setItem('lb-lang', a.dataset.lang); } catch (x) {}
+  });
+})();
+</script>
+<style>
+/* The band, the next-story block and the footer: the same on every page, in a light and a dark tone.
+   Names start with lb- so they never collide with a chapter's own styles. */
+.lb-mast{--v:#6F2CF5;--c:#111214;--bg:rgba(255,255,255,.92);--ln:rgba(17,18,20,.14);position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;height:calc(49px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--ln);background:var(--bg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--c);transition:background .3s,color .3s,border-color .3s}
+.lb-mast[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:rgba(11,11,13,.88);--ln:rgba(244,244,241,.18)}
+.lb-logo{font:400 17px/1 'Archivo Black','Archivo',Impact,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:inherit}
+.lb-logo b{color:var(--v);font-weight:400}
+.lb-logo .s{display:none}
+.lb-sp{flex:1}
+.lb-rail{display:flex;gap:2px;min-width:0;font:600 12.5px/1 'Archivo',system-ui,sans-serif;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.lb-rail::-webkit-scrollbar{display:none}
+.lb-rail a{padding:7px 9px;border-radius:99px;color:inherit;opacity:.66;text-decoration:none;transition:opacity .15s}
+.lb-rail a:hover{opacity:1}
+.lb-rail a[aria-current]{background:#FFE600;color:#111214;opacity:1}
+.lb-link[aria-current]{color:#111214}
+/* the yellow marker as its own layer (placed by the script after the band); without the script the word keeps its own background */
+.lb-pill{position:absolute;z-index:0;left:0;top:0;width:0;height:0;border-radius:99px;background:#FFE600;opacity:0;pointer-events:none;view-transition-name:lb-pill}
+.lb-rail,.lb-link,.lb-logo{position:relative;z-index:1}
+.lb-mast.pilled a[aria-current]{background:none}
+.lb-link{font:500 13.5px/1 'Archivo',system-ui,sans-serif;color:inherit;opacity:.7;padding:8px 9px;border-radius:8px;text-decoration:none;white-space:nowrap}
+.lb-link:hover,.lb-link[aria-current]{opacity:1}
+.lb-mast:not(.pilled) .lb-link[aria-current]{background:#FFE600;border-radius:99px}
+.lb-mast a:focus-visible,.lb-next a:focus-visible,.lb-foot a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:6px}
+@media (max-width:900px){.lb-logo .f{display:none}.lb-logo .s{display:inline}}
+@media (max-width:600px){.lb-link.opt{display:none}.lb-rail a{padding:7px 8px}.lb-rail{padding-right:20px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}.lb-link{padding:8px 10px}}   /* on a phone the chapter words scroll sideways (their right edge fades to say so); Contact always stays in view */
+@media (max-width:400px){.lb-mast{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:6px}.lb-rail{font-size:12px}.lb-rail a{padding:7px 6px}}
+
+.lb-next{--v:#6F2CF5;--c:#111214;--bg:#FFFFFF;--mu:#5C5F66;--ln:rgba(17,18,20,.14);--hv:#F4F4F1;background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font-family:'Archivo',system-ui,sans-serif}
+.lb-next[data-tone=dark]{--v:#9B7CFF;--c:#F4F4F1;--bg:#0B0B0D;--mu:#A3A6AE;--ln:rgba(244,244,241,.18);--hv:#17171A}
+.lb-next .in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.lb-next a{text-decoration:none;color:inherit;padding:clamp(22px,3.4vw,38px) max(20px,clamp(18px,3vw,34px))}
+.lb-next .back{display:flex;align-items:flex-end;font:600 12px 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-right:1px solid var(--ln);white-space:nowrap}
+.lb-next .go{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;align-items:end;transition:background .2s}
+.lb-next .go:hover{background:var(--hv)}
+.lb-next .k{grid-column:1/-1;font:700 11px 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--v)}
+.lb-next b{font:500 clamp(28px,4.4vw,56px)/1 'Newsreader',Georgia,serif;letter-spacing:-.02em}
+.lb-next .d{grid-column:1;font:400 clamp(15px,1.4vw,18px)/1.4 'Newsreader',Georgia,serif;color:var(--mu)}
+.lb-next .ar{grid-row:2/4;grid-column:2;font:400 clamp(28px,4vw,48px)/1 'Newsreader',Georgia,serif;transition:transform .25s}
+.lb-next .go:hover .ar{transform:translateX(6px)}
+@media (max-width:640px){.lb-next .in{grid-template-columns:1fr}.lb-next .back{border-right:0;border-bottom:1px solid var(--ln);padding-block:14px}}
+
+.lb-foot{--c:#5C5F66;--bg:#FFFFFF;--ln:rgba(17,18,20,.14);background:var(--bg);color:var(--c);border-top:1px solid var(--ln);font:500 13px/1.4 'Archivo',system-ui,sans-serif}
+.lb-foot[data-tone=dark]{--c:#A3A6AE;--bg:#0B0B0D;--ln:rgba(244,244,241,.18)}
+.lb-foot .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding:18px max(20px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lb-foot span:first-child{margin-right:auto}
+.lb-foot .mail{user-select:all;overflow-wrap:anywhere}
+.lb-foot a{color:inherit;text-underline-offset:3px}
+.lb-foot a:hover{color:inherit;text-decoration-thickness:2px}
+@media (prefers-reduced-motion:reduce){.lb-mast,.lb-next .go,.lb-next .ar{transition:none}}
+
+/* ---------- from one page to the next ----------
+   A "shared axis" change of page: the old page fades out first while it starts to move, then the new one fades in as it settles,
+   both sliding 30px in the direction of travel. The two are never on screen together, so text never overlaps.
+   The band stays still and the yellow marker glides from the old word to the new one. 0.32 s in all, one easing curve for everything. */
+@view-transition{navigation:auto}
+html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
+:root{--lb-ease:cubic-bezier(.4,0,.2,1);--lb-t:.32s}
+:root[data-dir=fwd]{--lb-d:1}:root[data-dir=back]{--lb-d:-1}
+.lb-mast{view-transition-name:lb-mast}
+.lb-rail{view-transition-name:lb-rail}
+:root[data-nav]::view-transition-old(root){animation:lb-out var(--lb-t) var(--lb-ease) both}
+:root[data-nav]::view-transition-new(root){animation:lb-in var(--lb-t) var(--lb-ease) both}
+@keyframes lb-out{0%{opacity:1;transform:none}30%{opacity:0}100%{opacity:0;transform:translateX(calc(var(--lb-d,0) * -30px))}}
+@keyframes lb-in{0%{opacity:0;transform:translateX(calc(var(--lb-d,0) * 30px))}30%{opacity:0}100%{opacity:1;transform:none}}
+::view-transition-group(lb-mast){animation:none;z-index:3}
+::view-transition-old(lb-mast),::view-transition-new(lb-mast){animation-duration:.2s;height:100%}
+::view-transition-group(lb-pill){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:4}
+::view-transition-old(lb-pill),::view-transition-new(lb-pill){height:100%}
+::view-transition-group(lb-rail){animation:none;z-index:5}
+/* the words do not cross-fade (that makes them flicker): the old set is swapped for the new one half-way through the band's own fade */
+::view-transition-old(lb-rail),::view-transition-new(lb-rail){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-rail){animation:lb-off .2s linear both}
+::view-transition-new(lb-rail){animation:lb-on .2s linear both}
+/* Press and Contact sit outside the row of chapters: they get the same treatment, so their word stays readable on top of the marker */
+.lb-link[href="press.html"]{view-transition-name:lb-press}
+.lb-link[href="contact.html"]{view-transition-name:lb-contact}
+::view-transition-group(lb-press),::view-transition-group(lb-contact){animation:none;z-index:5}
+::view-transition-old(lb-press),::view-transition-new(lb-press),::view-transition-old(lb-contact),::view-transition-new(lb-contact){height:100%;mix-blend-mode:normal}
+::view-transition-old(lb-press),::view-transition-old(lb-contact){animation:lb-off .2s linear both}
+::view-transition-new(lb-press),::view-transition-new(lb-contact){animation:lb-on .2s linear both}
+@keyframes lb-off{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes lb-on{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+/* contact → internship notice: the address block stays where it is and the small notice card unfolds into the full notice.
+   The snapshots keep their real size (no stretching): the box grows and uncovers the new content from the top. */
+::view-transition-group(ct-addr){animation-duration:var(--lb-t);animation-timing-function:var(--lb-ease);z-index:2}
+::view-transition-group(ct-notice){animation-duration:.42s;animation-timing-function:var(--lb-ease);overflow:clip;z-index:2}
+::view-transition-old(ct-notice),::view-transition-new(ct-notice){height:100%;width:100%;object-fit:none;object-position:0 0;mix-blend-mode:normal}
+::view-transition-old(ct-notice){animation:lb-hide .42s both}
+::view-transition-new(ct-notice){animation:lb-show .42s both}
+:root[data-dir=back]::view-transition-old(ct-notice){animation-name:lb-show}   /* going back, the full notice folds up: the taller one is always the one shown */
+:root[data-dir=back]::view-transition-new(ct-notice){animation-name:lb-hide}
+@keyframes lb-show{from,to{opacity:1}}
+@keyframes lb-hide{from,to{opacity:0}}
+.lb-novt body{animation:lb-fade .3s ease-out both}
+@keyframes lb-fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  :root{--lb-t:.16s;--lb-d:0!important}
+  ::view-transition-group(lb-pill),::view-transition-group(ct-addr),::view-transition-group(ct-notice){animation-duration:.01s}
+  .lb-novt body{animation:none}
+}
+
+/* FR / EN switch, at the end of the band. Small and quiet: a reader who needs it looks for it there. */
+.lb-link.lb-lang{font:700 11.5px/1 'Archivo',system-ui,sans-serif;letter-spacing:.06em;padding:7px 8px;margin-left:2px;border:1px solid currentColor;border-radius:99px;opacity:.55}
+.lb-link.lb-lang:hover,.lb-link.lb-lang:focus-visible{opacity:1}
+@media (max-width:600px){.lb-link.lb-lang{padding:6px 7px;font-size:11px}}
+</style>
+<script>
+/* Runs in <head>, before the first paint.
+   1. Works out which way the reader is moving (chapters are an ordered row: front page, videos, agents, teams, teaching, vision, awards, press, contact, internship),
+      so the page change can slide the right way.
+   2. Makes a fresh arrival land at the top of the chapter, or on the anchor in the link. Back, forward and reload keep the browser's own position. */
+(function () {
+  var ORDER = ['index', 'videos', 'agents', 'teams', 'teaching', 'vision', 'awards', 'press', 'contact', 'internship'];
+  var root = document.documentElement;
+  function key(u) { try { var p = new URL(u, location.href).pathname.split('/').pop().replace(/\.html$/, ''); return p || 'index'; } catch (e) { return ''; } }
+  function dir() {
+    var from = '';
+    try { from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || document.referrer || ''; } catch (e) {}
+    if (!from) return 'none';
+    try { if (new URL(from, location.href).origin !== location.origin) return 'none'; } catch (e) { return 'none'; }
+    var a = ORDER.indexOf(key(from)), b = ORDER.indexOf(key(location.href));
+    return a < 0 || b < 0 || a === b ? 'none' : b > a ? 'fwd' : 'back';
+  }
+  function arm() {                       /* the slide only applies to a change of page, never to a transition inside a page */
+    root.dataset.dir = dir(); root.dataset.nav = '1';
+    clearTimeout(arm.t); arm.t = setTimeout(function () { delete root.dataset.nav; }, 900);
+  }
+  arm();
+  addEventListener('pagereveal', function (e) {
+    arm();
+    if (e.viewTransition) {            /* a transition is running: keep the flag until it has finished, however long the page took to arrive */
+      clearTimeout(arm.t);
+      e.viewTransition.finished.then(function () { delete root.dataset.nav; }, function () { delete root.dataset.nav; });
+    }
+  });
+  if (!('CSSViewTransitionRule' in window)) root.classList.add('lb-novt');   /* no page transitions here: fade the page in instead */
+
+  var nav = (performance.getEntriesByType('navigation')[0] || {}).type;
+  if (nav !== 'back_forward' && nav !== 'reload') {
+    var moved = false;
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (t) { addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+    var land = function () {
+      if (moved) return;
+      var id = decodeURIComponent(location.hash.slice(1)), t = id && document.getElementById(id);
+      if (t) t.scrollIntoView({ block: 'start' });
+      else { scrollTo(0, 0); var m = document.getElementById('lb-mast'); if (m && m.getBoundingClientRect().top < 0) m.scrollIntoView({ block: 'start' }); }
+    };
+    addEventListener('DOMContentLoaded', land);
+    addEventListener('load', land);
+  }
+})();
+</script>
+<script type="speculationrules">{"prerender":[{"where":{"selector_matches":"a[href$='.html'],a[href*='.html#']"},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+<header class="lb-mast" data-tone="light" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, front page"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapters"><a href="videos.html">videos</a><a href="agents.html">agents</a><a href="teams.html">teams</a><a href="teaching.html">teaching</a><a href="vision.html" aria-current="page">vision</a><a href="awards.html">awards</a></nav><a class="lb-link opt" href="press.html">Press</a><a class="lb-link" href="contact.html">Contact</a><a class="lb-link lb-lang" href="fr/vision.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="Lire en français">FR</a></header><script>
+/* Runs right after the band. Puts the yellow marker behind the current word, as its own layer,
+   so that on a change of page the browser can slide it from one word to the next. */
+(function () {
+  var m = document.getElementById('lb-mast'), p = m.querySelector('.lb-pill'), a = m.querySelector('[aria-current]'), rail = m.querySelector('.lb-rail');
+  function place() {
+    if (!a || !a.offsetParent) { p.style.opacity = 0; return; }
+    var r = a.getBoundingClientRect(), b = m.getBoundingClientRect();
+    p.style.cssText = 'opacity:1;left:' + (r.left - b.left) + 'px;top:' + (r.top - b.top) + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+  }
+  if (a && rail.contains(a)) rail.scrollLeft = a.offsetLeft - (rail.clientWidth - a.offsetWidth) / 2;   /* keep the current word in view on a narrow phone */
+  m.classList.add('pilled'); place();
+  addEventListener('resize', place); rail.addEventListener('scroll', place, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+</script>
+
+<main>
+  <section class="wrap gut top">
+    <div>
+      <p class="kick"><i></i>Chapter 05 · Computer vision</p>
+      <h1>An AI that <mark>spots litter</mark> in a street photo, built from the dataset to the phone app.</h1>
+      <p class="stand">C du Propre lets a resident photograph litter in the street. A model finds each item and names it, the resident confirms, and the report goes to the town with its location. Five of us built it in spring 2023, during the KESK'IA programme. I worked on every stage: the data, the training, the API in Docker and the Android app.</p>
+      <p class="by"><span>Team of five</span><span>Trappes, France</span><span>Spring 2023</span><span>National winner, KESK'IA</span></p>
+    </div>
+    <figure class="phone">
+      <div class="dev"><img src="photos/greenai-app.jpg" alt="The GreenAI app on a phone. A photo of a floor with a paper bag, two plastic bottles and a bottle cap; the model has drawn a box around each one and named it. Below, the buttons Confirm and Close." width="720" height="1504"></div>
+      <figcaption>GreenAI 1.0, the Android app. A real screenshot from my phone.</figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap gut" aria-label="What the screen shows">
+    <div class="reads">
+      <div><b>It finds.</b><p>Four items in one photo, each in its own box, down to a bottle cap a few centimetres wide.</p></div>
+      <div><b>It names.</b><p>Two clear plastic bottles and a bottle cap, correctly. It calls the paper bag <q>Other carton</q>: close, not right.</p></div>
+      <div><b>It asks.</b><p>That is why the screen ends on <q>Confirm</q>. The resident checks the answer before anything is sent.</p></div>
+    </div>
+  </section>
+
+  <section class="stage path" id="steps">
+    <div class="wrap gut">
+      <p class="kick"><i></i>End to end</p>
+      <h2>Seven steps, from an open dataset to a phone.</h2>
+      <p class="stand">KESK'IA gave each team a brief, a public dataset, starter notebooks and mentors. Its plan ended on a web dashboard. We also built the phone app, because the person who sees the litter is standing in the street.</p>
+      <ol class="steps">
+        <li><span class="n">01</span><h3>Start from open data</h3><p>We began with TACO, an open dataset of litter photographed in streets, woods and on beaches: 1,500 photos and about 4,800 labelled items, in 60 categories.</p><span class="tool">TACO</span></li>
+        <li><span class="n">02</span><h3>Read the data first</h3><p>Before any training, I counted the labels in each category. Cigarette butts and "unlabelled litter" dominated. Several categories had one or two examples, and one had none. A model cannot learn something it has seen twice.</p><span class="tool">Python · notebooks</span></li>
+        <li><span class="n">03</span><h3>Prepare it</h3><p>I converted the labels to the format the model expects, one text file per photo. Every image was resized to 640 pixels, then rotated, blurred and re-exposed to triple the training set, to about 3,600 images.</p><span class="tool">pycocotools · Roboflow</span></li>
+        <li><span class="n">04</span><h3>Fine-tune a model</h3><p>We fine-tuned YOLOv5, a pretrained detection model with about 21 million parameters, on a cloud GPU. One run of 60 passes over the data took under two hours.</p><span class="tool">PyTorch · YOLOv5 · AWS SageMaker</span></li>
+        <li><span class="n">05</span><h3>Go outside</h3><p>The dataset's photos come from all over the world. Our mentors pushed us to add our own, so we photographed litter in the streets of Trappes, with French packaging on French pavements, and labelled it.</p><span class="tool">Field photos</span></li>
+        <li><span class="n">06</span><h3>Serve it</h3><p>The trained model sits behind a small web API: a photo goes in, the boxes and names come back. It is packaged in a Docker image and deployed as a serverless service.</p><span class="tool">Flask · Docker · Cloud Run</span></li>
+        <li><span class="n">07</span><h3>Put it in a hand</h3><p>GreenAI, the Android app at the top of this page: take a photo, see what the model found, confirm, send.</p><span class="tool">Android</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap gut exp" aria-label="The experiment that mattered">
+    <div>
+      <p class="kick"><i></i>What we learned</p>
+      <h2>Fewer categories, a better model.</h2>
+      <p class="copy">With 60 categories and so few examples of most of them, the first model mostly guessed. So we merged the look-alikes and dropped what the data could not support. The score improved as the list got shorter.</p>
+      <ul class="sets" aria-label="Number of categories in each version">
+        <li><b>60</b><span class="dots" data-n="60"></span><small>The dataset as published.</small></li>
+        <li><b>28</b><span class="dots" data-n="28"></span><small>Grouped by family, the rarest ones removed.</small></li>
+        <li class="keep"><b>13</b><span class="dots" data-n="13"></span><small>Bottle, can, carton, cup, cigarette and eight more.</small></li>
+      </ul>
+    </div>
+    <div class="score">
+      <p class="lab">How well it finds each category</p>
+      <ul class="bars" id="bars">
+        <li class="hi"><span>Bottle cap</span><span class="tr"><i style="--v:.66"></i></span><span class="v">0.66</span></li>
+        <li><span>Can</span><span class="tr"><i style="--v:.54"></i></span><span class="v">0.54</span></li>
+        <li><span>Carton</span><span class="tr"><i style="--v:.37"></i></span><span class="v">0.37</span></li>
+        <li><span>Bottle</span><span class="tr"><i style="--v:.36"></i></span><span class="v">0.36</span></li>
+        <li><span>Cup</span><span class="tr"><i style="--v:.30"></i></span><span class="v">0.30</span></li>
+        <li><span>Other litter</span><span class="tr"><i style="--v:.21"></i></span><span class="v">0.21</span></li>
+        <li><span>Cigarette</span><span class="tr"><i style="--v:.13"></i></span><span class="v">0.13</span></li>
+        <li class="all"><span>All 13</span><span class="tr"><i style="--v:.26"></i></span><span class="v">0.26</span></li>
+      </ul>
+      <p class="note">Average precision at 0.5 overlap, from 0 to 1, on 150 photos the model had never seen. A 13-category run from late April 2023, half-way through the project. Seven of the thirteen categories are shown.</p>
+      <ul class="then" aria-label="What these scores told us to do next">
+        <li><b>Rigid shapes work.</b> Caps and cans look the same everywhere.</li>
+        <li><b>Cigarette butts do not, yet.</b> Most likely because they shrink to a few pixels once the photo is resized.</li>
+        <li><b>What we planned from it:</b> more street photos, some photos with no litter at all to cut false alarms, and longer training.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="after" aria-label="What came of it">
+    <div class="wrap gut in">
+      <div>
+        <p class="kick"><i></i>June 2023</p>
+        <h2>Then we took it on stage.</h2>
+        <p class="copy">C du Propre was one of three projects picked out of 22 at VivaTech, then won the KESK'IA national final at Société Générale a week later. In December it took me to UC Berkeley.</p>
+        <p class="copy">The team stayed together: we went on to found <a href="teaching.html">OSMOZ</a>, to open AI to young people in Trappes.</p>
+        <a class="more" href="awards.html">The four rooms where it was rewarded →</a>
+      </div>
+      <dl>
+        <div><dt>Team</dt><dd>Omar, Zeineb, Sakina, Nora and me.</dd></div>
+        <div><dt>Support</dt><dd>Mentors from TCS. Course material from Blent.</dd></div>
+        <div><dt>Tools</dt><dd>Python, PyTorch, YOLOv5, Roboflow, AWS SageMaker, Flask, Docker, Cloud Run, Android.</dd></div>
+        <div><dt>Press</dt><dd><a href="press.html">The 2023 pieces cover this project →</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+<nav class="lb-next" data-tone="light" aria-label="Next"><div class="in"><a class="back" href="index.html">← Front page</a><a class="go" href="awards.html"><span class="k">Next story · 06 of 06</span><b>Four Rooms</b><span class="d">Four awards, in the rooms where they were given.</span><span class="ar" aria-hidden="true">→</span></a></div></nav>
+<footer class="lb-foot" data-tone="light"><div class="in"><span>Loqmann Benhaddya · Paris</span><span class="mail">loqmannbenhaddya.pro@gmail.com</span><a href="https://www.linkedin.com/in/loqmann-benhaddya" rel="noopener">LinkedIn</a><a href="https://github.com/skezu" rel="noopener">GitHub</a><a href="press.html">Press</a><a href="cv/Loqmann-Benhaddya-CV-EN.pdf">CV (PDF)</a></div></footer>
+<script>
+/* Draws the category dots, and lets the steps and the bars appear as they come into view. Without this script everything is simply visible. */
+(function () {
+  document.querySelectorAll('.dots').forEach(function (d) { var s = ''; for (var i = 0; i < +d.dataset.n; i++) s += '<i></i>'; d.innerHTML = s; });
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  document.documentElement.classList.add('js');
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.steps li, #bars').forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
