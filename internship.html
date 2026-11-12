@@ -250,6 +250,14 @@ html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
 .lb-link.lb-lang{font:700 11.5px/1 'Archivo',system-ui,sans-serif;letter-spacing:.06em;padding:7px 8px;margin-left:2px;border:1px solid currentColor;border-radius:99px;opacity:.55}
 .lb-link.lb-lang:hover,.lb-link.lb-lang:focus-visible{opacity:1}
 @media (max-width:600px){.lb-link.lb-lang{padding:6px 7px;font-size:11px}}
+
+/* Chapters start with a capital, like Press and Contact. A short hairline between the two groups says they are not the same kind of link,
+   and Press and Contact drop to the rail's size and weight so the band reads as one line. */
+.lb-rail a{text-transform:capitalize}
+.lb-sep{flex:none;width:1px;height:14px;margin:0 6px 0 4px;background:currentColor;opacity:.22}
+.lb-link{font-size:12.5px}
+.lb-link:not(.lb-lang){font-weight:500}
+@media (max-width:600px){.lb-sep{margin:0 2px}}
 </style>
 <script>
 /* Runs in <head>, before the first paint.
@@ -300,7 +308,7 @@ html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
 <script type="speculationrules">{"prerender":[{"where":{"selector_matches":"a[href$='.html'],a[href*='.html#']"},"eagerness":"moderate"}]}</script>
 </head>
 <body>
-<header class="lb-mast" data-tone="light" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, front page"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapters"><a href="videos.html">videos</a><a href="agents.html">agents</a><a href="teams.html">teams</a><a href="teaching.html">teaching</a><a href="vision.html">vision</a><a href="awards.html">awards</a></nav><a class="lb-link opt" href="press.html">Press</a><a class="lb-link" href="contact.html" aria-current="page">Contact</a><a class="lb-link lb-lang" href="fr/internship.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="Lire en français">FR</a></header><script>
+<header class="lb-mast" data-tone="light" id="lb-mast"><a class="lb-logo" href="index.html" aria-label="Loqmann Benhaddya, front page"><span class="f">Loqmann<b>.</b>Benhaddya</span><span class="s">L<b>.</b>B</span></a><span class="lb-sp"></span><span class="lb-pill" aria-hidden="true"></span><nav class="lb-rail" aria-label="Chapters"><a href="videos.html">videos</a><a href="agents.html">agents</a><a href="teams.html">teams</a><a href="teaching.html">teaching</a><a href="vision.html">vision</a><a href="awards.html">awards</a></nav><span class="lb-sep" aria-hidden="true"></span><a class="lb-link opt" href="press.html">Press</a><a class="lb-link" href="contact.html" aria-current="page">Contact</a><a class="lb-link lb-lang" href="fr/internship.html" hreflang="fr" lang="fr" data-lang="fr" aria-label="Lire en français">FR</a></header><script>
 /* Runs right after the band. Puts the yellow marker behind the current word, as its own layer,
    so that on a change of page the browser can slide it from one word to the next. */
 (function () {
@@ -321,7 +329,6 @@ html{scroll-padding-top:calc(57px + env(safe-area-inset-top,0px))}
   <section class="wrap gut top">
     <div>
       <a class="backto" href="contact.html">← Contact</a>
-      <p class="kick"><i></i>Contact · Internship</p>
       <h1>Write to me about an <mark>internship in 2027</mark>.</h1>
       <p class="stand">I am looking for an AI or ML engineering internship abroad, for three to five months. If your team builds products with AI, I would like to hear from you.</p>
       <div class="box">
